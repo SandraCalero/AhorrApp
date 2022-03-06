@@ -1,0 +1,12 @@
+version: "3"
+services:
+  flask-app:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+    volumes:
+      - ./Back_End:/Back_End:ro
+      - /Back_End/venv
