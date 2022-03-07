@@ -1,12 +1,21 @@
-version: "3"
+version: '3.5'
+
 services:
-  flask-app:
-    build:
-      context: .
-    ports:
-      - "5000:5000"
-    environment:
-      - PORT=5000
+  api:
+    build: ./Back_End
     volumes:
       - ./Back_End:/Back_End:ro
-      - /Back_End/venv
+    working_dir: /Back_End
+    environment:
+      - FLASK_APP=./api/v1/app.py
+      - FLASK_DEBUG=1
+    command: flask run --host=0.0.0.0
+
+  webserver:
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx/default.d/:/etc/nginx/conf.d/
+    depends_on:
+      - api
