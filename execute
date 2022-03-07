@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+echo killing old docker processes
+# docker rm $(docker ps -aq) -f
+sudo docker-compose down
+sudo docker stop '$(docker ps -aq)'
+sudo docker-compose rm -fs
+
+echo building docker containers
+sudo docker-compose up --build -d
+
+echo Killing none images
+sudo docker images | grep none | awk '{ print ; }' | xargs docker rmi --force
