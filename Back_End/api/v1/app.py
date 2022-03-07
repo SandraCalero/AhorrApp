@@ -9,8 +9,14 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def index_route():
     """This is only a test index route"""
-    return "This is a super basic flask app"
+    return "This is a super basic flask app."
+
+
+@app.route('/api/', strict_slashes=False)
+def users():
+    """This is only a test api index route"""
+    return "This is a test route :)"
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', debug=True)
+    app.run(port=5000)
