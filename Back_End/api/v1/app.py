@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def index_route():
     """This is only a test index route"""
-    return "This is a super basic flask app :)..."
+    return "This is a super basic flask app"
 
 
 if __name__ == '__main__':
