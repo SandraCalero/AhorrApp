@@ -1,0 +1,23 @@
+.btn {
+  border-radius: 15px;
+  width: 130px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 19px;
+  color: white;
+  border: none;
+}
+
+.btn.shadow {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.7);
+}
+
+.btn.Income {
+  background: #009d10;
+}
+
+.btn.Expense {
+  background: #ff250f;
+}

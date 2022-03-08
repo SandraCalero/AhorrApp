@@ -1,0 +1,15 @@
+.linkFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.linkFooter.Dashboard {
+  color: #0e4da4;
+}
+
+/* footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
