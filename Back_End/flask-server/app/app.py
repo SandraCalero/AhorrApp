@@ -27,7 +27,7 @@ def index():
     Base.metadata.create_all(engine)
 
     lst = []
-    for instance in session.query(Transactions).order_by(Transactions.user_id):
+    for instance in session.query(Transactions).order_by(Transactions.value):
         # print(f"{instance.id}: {instance.name}")
         lst.append(instance.name)
 
