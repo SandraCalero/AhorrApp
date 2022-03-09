@@ -1,0 +1,83 @@
+// servicio user
+//Endpoint: GET /user/<user_id>
+{
+  "username": "username"
+}
+
+// servicio expenses
+// Endpoint: GET /user/<user_id>/transactions?initialdate=date1&finaldate=date2
+{
+    "expenses":
+        {
+            "categories":
+            {
+                "rent": "500",
+                "utilities": "400",
+                "transport": "500",
+                "restaurant": "400"
+            },
+            "totalExpenses": "1800",
+        }
+}
+
+//Ya existe una transacción y se quiere actualizar
+// Endpoint: GET /transactions/<transaction_id>
+
+{
+    "amount": "500",
+    "category": "Rent",
+    "date": "jan 21 2022",
+    "description": "Rent home"
+}
+
+// Lista de categorías de los expenses para desplegar en el modal
+// End point: GET /users/<user_id>/categories
+{
+    "expenses":
+        {
+            "categories": ["Rent", "Utilities", "Transport", "Restaurant"]
+        },
+    "income":
+        {
+            "categories": ["Salary", "Gift", "Investment"]
+        }
+}
+
+//Historico de transacciones
+
+{
+    "history":
+        {
+            "8-march-2022":
+                [
+                    {
+                        "amount": "500",
+                        "category": "Rent",
+                        "transactionType": "expense",
+                        "description": "Rent home"
+                    },
+                    {
+                        "amount": "50",
+                        "category": "Restaurant",
+                        "transactionType": "expense",
+                        "description": "Birthday Dinner"
+                    }
+                ],
+            "1-march-2022":
+                [
+                    {
+                        "amount": "500",
+                        "category": "Rent",
+                        "transactionType": "expense",
+                        "description": "Rent home"
+                    },
+                    {
+                        "amount": "500",
+                        "category": "Rent",
+                        "transactionType": "expense",
+                        "description": "Rent home"
+                    }
+                ]
+        },
+    "after": "idLastTransaction"
+}
