@@ -3,16 +3,19 @@
     and an instance Base = declarative_base():
 """
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from datetime import datetime
 Base = declarative_base()
 
 
 class Transactions(Base):
     """ Class for Category inherited from Base
     """
-    __tablename__ = 'category'
-    category_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(String(45), ForeignKey('user.user_id'), nullable=False)
-    transaction_type_id = Column(String(45), ForeignKey(
-        'transaction_type.transaction_type_id'), nullable=False)
+    __tablename__ = 'transaction'
+    transaction_id = Column(Integer, primary_key=True, autoincrement=True)
+    description = Column(String(60), nullable=False)
+    date = Column(DateTime, default=datetime.now)
+    value = Column(Integer, nullable=False, default=0)
+    category_id = Column(String(45), ForeignKey(
+        'category.category_id'), nullable=False)
     name = Column(String(45), nullable=False)
