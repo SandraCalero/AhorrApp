@@ -12,5 +12,5 @@ FROM base AS prod
 COPY ./app ./app
 COPY ./model ./model
 
-CMD ['gunicorn', '--bind', '0.0.0.0:5000', 'app.app:app']	
+CMD ['gunicorn', '--bind', '0.0.0.0:5000', 'app.app:app']
 

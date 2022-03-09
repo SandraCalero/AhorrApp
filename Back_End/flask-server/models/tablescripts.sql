@@ -44,17 +44,17 @@ CONSTRAINT FK_166 FOREIGN KEY FK_168 (user_id) REFERENCES user (user_id) ON DELE
 ) AUTO_INCREMENT=1;
 
 
--- ************************************** transaction
+-- -- ************************************** transactions
 
-CREATE TABLE IF NOT EXISTS transaction
+CREATE TABLE IF NOT EXISTS transactions
 (
- movement_id integer NOT NULL AUTO_INCREMENT ,
- description varchar(60) NOT NULL ,
- date        date NOT NULL ,
- Value       decimal(15,2) NOT NULL ,
- category_id integer NOT NULL ,
+ transaction_id integer NOT NULL AUTO_INCREMENT ,
+ description    varchar(60) NOT NULL ,
+ date           date NOT NULL ,
+ Value          decimal(15,2) NOT NULL ,
+ category_id    integer NOT NULL ,
 
-PRIMARY KEY (movement_id)
+PRIMARY KEY (transaction_id)
 ) AUTO_INCREMENT=1;
 
 
@@ -79,6 +79,7 @@ CONSTRAINT FK_152 FOREIGN KEY FK_154 (category_id) REFERENCES category (category
 
 INSERT INTO user (first_name, last_name, email) VALUES ("Mateo", "Garcia", "mateog91@gmail.com");
 
+INSERT INTO user (first_name, last_name, email) VALUES ("Sandra", "Calero", "sandra@gmail.com");
 INSERT INTO transaction_type (type) VALUES ("income");
 INSERT INTO transaction_type (type) VALUES ("expense");
 
@@ -86,8 +87,8 @@ INSERT INTO category (transaction_type_id, user_id,  name) VALUES (2,1 ,"Restaur
 INSERT INTO category (transaction_type_id, user_id,  name) VALUES (2, 1,"Transportation");
 INSERT INTO category (transaction_type_id, user_id,  name) VALUES (2,1 ,"Public Services");
 
-INSERT INTO transaction (description, date, Value, category_id) VALUES ("comida con Dani", NOW(), 150000, 1);
-INSERT INTO transaction (description, date, Value, category_id) VALUES ("pago del agua", NOW(), 100000, 3);
+INSERT INTO transactions (description, date, Value, category_id) VALUES ("comida con Dani", NOW(), 150000, 1);
+INSERT INTO transactions (description, date, Value, category_id) VALUES ("pago del agua", NOW(), 100000, 3);
 
 
 
