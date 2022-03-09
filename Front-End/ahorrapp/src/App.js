@@ -4,6 +4,7 @@ import { Button } from "./components/atoms/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faHome, faUsd } from "@fortawesome/free-solid-svg-icons";
 import { LinkButton } from "./components/molecules/LinkButton/LinkButton";
+import { Title } from "./components/atoms/Title/Title";
 
 function App() {
   const homeIcon = <FontAwesomeIcon icon={faHome} />;
@@ -11,6 +12,11 @@ function App() {
   const settingIcon = <FontAwesomeIcon icon={faGear} />;
   return (
     <React.Fragment>
+      <Title text="Hi" userName=" Sebastián!" />
+      <Title text="Add transaction" />
+      <Title text="Update transaction" />
+      <Title text="Categories" />
+      <Title text="Transaction" />
       <div>
         <Button text="Income" variant="btn shadow Income" />
         <Button text="Expense" variant="btn shadow Expense" />
