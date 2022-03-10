@@ -2,13 +2,14 @@
 """contains the class definition of a State
     and an instance Base = declarative_base():
 """
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from datetime import datetime
-Base = declarative_base()
+from models import Base
+
+# Base = declarative_base()
 
 
-class Transactions(Base):
+class Transaction(Base):
     """ Class for Category inherited from Base
     """
     __tablename__ = 'transactions'
