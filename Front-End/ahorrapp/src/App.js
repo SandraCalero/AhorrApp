@@ -1,15 +1,23 @@
 import React from "react";
 import "./App.css";
-import { Button } from "./components/atoms/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faHome, faUsd } from "@fortawesome/free-solid-svg-icons";
-import { LinkButton } from "./components/molecules/LinkButton/LinkButton";
+import {
+  faHome,
+  faMoneyBill,
+  faCalendar,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
 import { Title } from "./components/atoms/Title/Title";
+import { Footer } from "./components/molecules/Footer/Footer";
+import { DivButtons } from "./components/molecules/DivButtons/DivButtons";
+import TextArea from "./components/atoms/TextArea/TextArea";
+import Box from "./components/atoms/Box/Box";
 
 function App() {
+  const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
+  const categoryIcon = <FontAwesomeIcon icon={faList} />;
+  const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
   const homeIcon = <FontAwesomeIcon icon={faHome} />;
-  const transIcon = <FontAwesomeIcon icon={faUsd} />;
-  const settingIcon = <FontAwesomeIcon icon={faGear} />;
   return (
     <React.Fragment>
       <Title text="Hi" userName=" Sebastián!" />
@@ -17,27 +25,17 @@ function App() {
       <Title text="Update transaction" />
       <Title text="Categories" />
       <Title text="Transaction" />
-      <div>
-        <Button text="Income" variant="btn shadow Income" />
-        <Button text="Expense" variant="btn shadow Expense" />
-      </div>
-      <footer>
-        <LinkButton
-          text="Dashboard"
-          variant="linkFooter Dashboard"
-          icon={homeIcon}
-        />
-        <LinkButton
-          text="Transactions"
-          variant="linkFooter Transactions"
-          icon={transIcon}
-        />
-        <LinkButton
-          text="Settings"
-          variant="linkFooter Settings"
-          icon={settingIcon}
-        />
-      </footer>
+      <DivButtons transactionType="true" />
+
+      <Box
+        variant="box iconIncome"
+        transactionType="Income"
+        amount="$1.800.000"
+        icon={homeIcon}
+      />
+      <TextArea />
+      <DivButtons action="true" />
+      <Footer />
     </React.Fragment>
   );
 }

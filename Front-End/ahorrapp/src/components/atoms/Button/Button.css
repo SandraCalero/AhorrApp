@@ -15,9 +15,22 @@
 }
 
 .btn.Income {
-  background: #009d10;
+  background: #62a856;
 }
 
 .btn.Expense {
-  background: #ff250f;
+  background: #f47265;
+}
+
+.btn.Budget {
+  background: #58f3f5;
+}
+
+.btn.Add {
+  background: #0e4da4;
+}
+
+.btn.Cancel {
+  background: #c4c4c4;
+  color: #3a3636;
 }

@@ -6,16 +6,10 @@
   justify-content: center;
   align-items: center;
   width: calc(100vw / 3);
+  border: none;
+  color: #3a3636;
 }
 
 .linkFooter.Dashboard {
   color: #0e4da4;
-}
-
-footer {
-  display: flex;
-  width: 100vw;
-  height: 60px;
-  bottom: 0;
-  position: fixed;
 }
