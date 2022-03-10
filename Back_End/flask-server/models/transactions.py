@@ -11,11 +11,11 @@ Base = declarative_base()
 class Transactions(Base):
     """ Class for Category inherited from Base
     """
-    __tablename__ = 'transaction'
+    __tablename__ = 'transactions'
     transaction_id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(60), nullable=False)
     date = Column(DateTime, default=datetime.now)
     value = Column(Integer, nullable=False, default=0)
     category_id = Column(String(45), ForeignKey(
         'category.category_id'), nullable=False)
-    name = Column(String(45), nullable=False)
+
