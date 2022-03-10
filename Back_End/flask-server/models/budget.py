@@ -3,15 +3,19 @@
     and an instance Base = declarative_base():
 """
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from datetime import datetime
+from models import Base
+# Base = declarative_base()
 
 
-class User(Base):
+class Budget(Base):
     """ Class for State inherited from Base
     """
-    __tablename__ = 'user'
+    __tablename__ = 'budgets'
     budget_id = Column(Integer, primary_key=True, autoincrement=True)
-    first_name = Column(String(45), nullable=False)
-    last_name = Column(String(45), nullable=False)
-    email = Column(String(45), nullable=False)
+    date = Column(DateTime, default=datetime.now)
+    value = Column(Integer, nullable=False, default=0)
+    category_id = Column(String(45), ForeignKey(
+        'category.category_id'), nullable=False)
+

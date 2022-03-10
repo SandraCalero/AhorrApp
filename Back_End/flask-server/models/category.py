@@ -4,15 +4,16 @@
 """
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
-Base = declarative_base()
+from models import Base
+# Base = declarative_base()
 
 
 class Category(Base):
     """ Class for Category inherited from Base
     """
-    __tablename__ = 'category'
+    __tablename__ = 'categories'
     category_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(String(45), ForeignKey('user.user_id'), nullable=False)
+    user_id = Column(String(45), ForeignKey('users.user_id'), nullable=False)
     transaction_type_id = Column(String(45), ForeignKey(
-        'transaction_type.transaction_type_id'), nullable=False)
+        'transaction_types.transaction_type_id'), nullable=False)
     name = Column(String(45), nullable=False)
