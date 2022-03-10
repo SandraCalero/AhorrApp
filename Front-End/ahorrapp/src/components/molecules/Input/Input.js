@@ -1,17 +1,18 @@
-import React from 'react';
+import React from "react";
 import "./Input.css";
+import { InputButton } from "../../atoms/InputButton/InputButton";
+import { InputText } from "../../atoms/InputText/InputText";
 
 function Input(props) {
-  var today = new Date();
-  var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
   return (
     <div className={props.variant}>
-      {props.icon} {props.text}
-      { props.isinput && <input name='amount' type="text" placeholder='$ Enter amount'/> }
-      { props.isbutton && <button>Category</button>}
-      { props.isdate && <button>{date}</button>}
+      <span className="iconInput">{props.icon}</span>
+      <p className="textInput">{props.text}</p>
+      {props.isinput && <InputText />}
+      {props.isbutton && <InputButton text="Select Category" />}
+      {props.isdate && <InputButton date="yes" />}
     </div>
-  )
+  );
 }
 
-export {Input};
+export { Input };

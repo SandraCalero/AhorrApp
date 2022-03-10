@@ -1,15 +1,24 @@
-.inputbtn {
+.input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  width: 340px;
+  width: 220px;
   height: 35px;
-  color: #ff250f;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.inputbtn input {
+.input input {
   border-radius: 10px;
+}
+
+.iconInput {
+  color: #e38787;
+  font-size: 22px;
+}
+
+.textInput {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }

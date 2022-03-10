@@ -4,10 +4,11 @@ import "./Box.css";
 function Box(props) {
   return (
     <div className="box">
-      {props.transactionType} {props.amount}{" "}
+      <p className="transactionTypeBox">{props.transactionType}</p>
+      <p className="totalAmount">{props.amount}</p>
       <span className={props.variant}>{props.icon}</span>
     </div>
   );
 }
 
-export default Box;
+export { Box };

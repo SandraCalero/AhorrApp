@@ -43,7 +43,7 @@
         }
 }
 
-//Historico de transacciones
+//Historico de transacciones límite 20 o paginación
 
 {
     "history":
@@ -79,5 +79,4 @@
                     }
                 ]
         },
-    "after": "idLastTransaction"
 }

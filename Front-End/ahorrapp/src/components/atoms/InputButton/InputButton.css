@@ -1,0 +1,15 @@
+.inputbtn {
+  margin-left: auto;
+  background: none;
+  height: 35px;
+  width: 110px;
+  border: solid 1px;
+  border-radius: 9px;
+  color: #c1ced6;
+}
+
+.inputbtn span {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}

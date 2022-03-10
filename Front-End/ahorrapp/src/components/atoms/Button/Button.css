@@ -32,5 +32,17 @@
 
 .btn.Cancel {
   background: #c4c4c4;
-  color: #3a3636;
+  color: #565e64;
+}
+
+.btn.btnNo {
+  background-color: #0b5ed7;
+  height: 20px;
+  width: 100px;
+}
+
+.btn.btnYes {
+  background-color: #5c636a;
+  height: 20px;
+  width: 100px;
 }
