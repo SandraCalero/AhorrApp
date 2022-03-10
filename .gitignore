@@ -1,7 +1,8 @@
 # back end
 venv/
 __pycache__
-
+Back_End/mysql-db/*
 # front end
 
 node_modules/
+
