@@ -90,5 +90,5 @@ INSERT INTO category (transaction_type_id, user_id,  name) VALUES (2,1 ,"Public 
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("comida con Dani", NOW(), 150000, 1);
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("pago del agua", NOW(), 100000, 3);
 
-
+INSERT INTO transactions (description, date, Value, category_id) VALUES ("cine", "2022-03-01", 300000, 1);
 
