@@ -28,7 +28,7 @@ services:
       HBNB_MYSQL_HOST: 'mysql'
       HBNB_MYSQL_DB:  'test_mysql_db'
       FLASK_DEBUG: '1'
-    command: python3 saveapp.py
+    command: bash -c "while true; do sleep 2s; done"
 
   # nginx:
   #   image: nginx

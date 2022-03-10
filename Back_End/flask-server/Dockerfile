@@ -11,6 +11,7 @@ FROM base AS prod
 
 COPY ./app ./app
 COPY ./model ./model
+COPY saveapp.py saveapp.py
 
-CMD ['gunicorn', '--bind', '0.0.0.0:5000', 'app.app:app']
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "saveapp:app"]
 
