@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
   faCalendar,
@@ -13,16 +13,17 @@ import {
   // faArrowCircleUp,
   // faArrowCircleDown,
   // faBalanceScale,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 // import { Title } from "./components/atoms/Title/Title";
 // import { Footer } from "./components/molecules/Footer/Footer";
 // import { DivButtons } from "./components/molecules/DivButtons/DivButtons";
 // import { TextArea } from "./components/atoms/TextArea/TextArea";
 // import { Box } from "./components/atoms/Box/Box";
-import { Input } from './components/molecules/Input/Input';
+import { Input } from "./components/molecules/Input/Input";
 // import { Button } from './components/atoms/Button/Button';
 // import {ButtonList} from './components/molecules/ButtonList/ButtonList'
-import { LinkButton } from './components/molecules/LinkButton/LinkButton';
+import { LinkButton } from "./components/molecules/LinkButton/LinkButton";
+import { BarChart } from "./components/atoms/BarChart/BarChart";
 
 function App() {
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
@@ -53,9 +54,8 @@ function App() {
       <Button icon={deleteButton} variant="btnEdit"/> */}
       {/* <Button icon={userIcon} variant='navIcon' />
       <Button icon={menuIcon} variant='navIcon' /> */}
-      <LinkButton variant="addTrans" text="Add Transaction" icon={plusIcon}/>
+      <LinkButton variant="addTrans" text="Add Transaction" icon={plusIcon} />
 
-      
       <Input variant="input" icon={amountIcon} text="Amount" isinput="true" />
       <Input
         variant="input"
@@ -88,7 +88,7 @@ function App() {
       {/* <TextArea label="Description" /> */}
       {/* <ButtonList categoryList={categoryList}/> */}
 
-
+      <BarChart />
       {/* <Footer /> */}
     </React.Fragment>
   );
