@@ -1,7 +1,13 @@
 .inputText {
-  width: 110px;
+  width: 120px;
   height: 35px;
   margin-left: auto;
-  border: solid 1px;
+  border: 1px solid #c4c4c4;
   box-sizing: border-box;
+  font-family: inherit;
+}
+
+.inputText:focus {
+  outline: none;
+  border: 1px solid blue
 }

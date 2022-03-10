@@ -5,14 +5,16 @@ import { Button } from "../../atoms/Button/Button";
 function DivButtons(props) {
   return (
     <div className="divButtons">
-      {props.transactionType && (
+      {props.type === "transaction" &&(
         <Button text="Income" variant="btn shadow Income" />
       )}
-      {props.transactionType && (
+      {props.type === "transaction" &&(
         <Button text="Expense" variant="btn shadow Expense" />
       )}
-      {props.action && <Button text="Add" variant="btn Add" />}
-      {props.action && <Button text="Cancel" variant="btn Cancel" />}
+      {props.type === "action" && <Button text="Add" variant="btn Add" />}
+      {props.type === "action" && <Button text="Cancel" variant="btn Cancel" />}
+      {props.type === "confirmation" && <Button text="No" variant="btn confirmation btnNo" />}
+      {props.type === "confirmation" && <Button text="Yes" variant="btn confirmation btnYes" />}
     </div>
   );
 }

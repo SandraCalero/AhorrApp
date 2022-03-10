@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
-import { InputButton } from "../../atoms/InputButton/InputButton";
 import { InputText } from "../../atoms/InputText/InputText";
+import {Button} from '../../atoms/Button/Button'
 
 function Input(props) {
   return (
@@ -9,8 +9,8 @@ function Input(props) {
       <span className="iconInput">{props.icon}</span>
       <p className="textInput">{props.text}</p>
       {props.isinput && <InputText />}
-      {props.isbutton && <InputButton text="Select Category" />}
-      {props.isdate && <InputButton date="yes" />}
+      {props.isbutton && <Button variant = 'inputbtn' text="Select Category" />}
+      {props.isdate && <Button variant='inputbtn date' />}
     </div>
   );
 }

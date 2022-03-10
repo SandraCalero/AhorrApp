@@ -1,29 +1,42 @@
-import React from "react";
-import "./App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMoneyBill,
   faCalendar,
   faList,
+  // faEdit,
+  // faTrash,
+  // faUserCircle,
+  // faBars,
+  faPlusCircle,
   // faArrowCircleUp,
   // faArrowCircleDown,
   // faBalanceScale,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 // import { Title } from "./components/atoms/Title/Title";
 // import { Footer } from "./components/molecules/Footer/Footer";
 // import { DivButtons } from "./components/molecules/DivButtons/DivButtons";
 // import { TextArea } from "./components/atoms/TextArea/TextArea";
 // import { Box } from "./components/atoms/Box/Box";
-import { Input } from "./components/molecules/Input/Input";
-import { Button } from "./components/atoms/Button/Button";
+import { Input } from './components/molecules/Input/Input';
+// import { Button } from './components/atoms/Button/Button';
+// import {ButtonList} from './components/molecules/ButtonList/ButtonList'
+import { LinkButton } from './components/molecules/LinkButton/LinkButton';
 
 function App() {
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
+  // const editButton = <FontAwesomeIcon icon={faEdit} />;
+  // const deleteButton = <FontAwesomeIcon icon={faTrash} />;
+  // const userIcon = <FontAwesomeIcon icon={faUserCircle} />;
+  // const menuIcon = <FontAwesomeIcon icon={faBars} />;
+  const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />;
   // const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   // const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
   // const balanceIcon = <FontAwesomeIcon icon={faBalanceScale} />;
+  // const categoryList = ["Rent", "Utilities", "Transport", "Restaurant"]
   return (
     <React.Fragment>
       {/* <Title text="Hi" userName=" Sebastián!" />
@@ -31,7 +44,18 @@ function App() {
       <Title text="Update transaction" />
       <Title text="Categories" />
       <Title text="Transaction" /> */}
-      {/* <DivButtons transactionType="true" /> */}
+      {/* <DivButtons type="transaction" /> */}
+      {/* <DivButtons type="action" /> */}
+      {/* <DivButtons type="confirmation" /> */}
+      {/* <Button variant='inputbtn date'/>
+      <Button variant='inputbtn' text='Select Category' />
+      <Button icon={editButton} variant="btnEdit"/>
+      <Button icon={deleteButton} variant="btnEdit"/> */}
+      {/* <Button icon={userIcon} variant='navIcon' />
+      <Button icon={menuIcon} variant='navIcon' /> */}
+      <LinkButton variant="addTrans" text="Add Transaction" icon={plusIcon}/>
+
+      
       <Input variant="input" icon={amountIcon} text="Amount" isinput="true" />
       <Input
         variant="input"
@@ -60,11 +84,11 @@ function App() {
           icon={balanceIcon}
         />
       </div> */}
-      <Button text="No" variant="btn btnNo" />
-      <Button text="Yes" variant="btn btnYes" />
 
       {/* <TextArea label="Description" /> */}
-      {/* <DivButtons action="true" /> */}
+      {/* <ButtonList categoryList={categoryList}/> */}
+
+
       {/* <Footer /> */}
     </React.Fragment>
   );
