@@ -1,15 +1,17 @@
 from flask import Flask
 from fastapi import FastAPI
+from models import storage
 # from debug_toolbar.middleware import DebugToolbarMiddleware
 import uvicorn
 
 app = FastAPI(debug=True)
 # app.add_middleware(DebugToolbarMiddleware)
+print("esto aqui")
 
 
 @app.get('/')
 async def index():
-    return "Hello Sebastian joder"
+    return "Hello Sebastian joder tio"
 
 #     lst = []
 #     for instance in session.query(Transactions).order_by(Transactions.date.desc()):
