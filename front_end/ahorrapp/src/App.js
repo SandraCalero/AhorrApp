@@ -1,5 +1,6 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
+import AllTransactions from './components/templates/AllTransactions/AllTransactions';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
 // faArrowCircleUp,
@@ -13,13 +14,16 @@ import "./App.css";
 // import { ConfirmationModal } from "./components/molecules/ConfirmationModal/ConfirmationModal";
 // import { CategoryModal } from "./components/organisms/CategoryModal/CategoryModal";
 // import { Form } from "./components/organisms/Form/Form";
-import { Dashboard } from "./components/templates/Dashboard/Dashboard";
+import { Dashboard } from './components/templates/Dashboard/Dashboard';
+import Transaction from './components/templates/Transaction/Transaction';
 
 function App() {
   // const categoryList = ["Rent", "Utilities", "Transport", "Restaurant"]
   return (
     <React.Fragment>
-      <Dashboard />
+      {/* <Transaction /> */}
+      <AllTransactions />
+      {/* <Dashboard /> */}
       {/* <CategoryModal /> */}
       {/* <Form /> */}
       {/* <ConfirmationModal /> */}
@@ -30,10 +34,6 @@ function App() {
       {/* <DivButtons type="confirmation" /> */}
       {/* <Button variant='inputbtn date'/>
       <Button variant='inputbtn' text='Select Category' />*/}
-
-      {/* <TransactionCard variant="IncomeCard" icon={incomeIcon} /> */}
-
-      {/* <TransactionCard variant="ExpenseCard" icon={expenseIcon} /> */}
     </React.Fragment>
   );
 }
