@@ -1,14 +1,14 @@
-import React from 'react';
-import { Input } from '../../molecules/Input/Input';
-import { TextArea } from '../../atoms/TextArea/TextArea';
-import { DivButtons } from '../../molecules/DivButtons/DivButtons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { Input } from "../../molecules/Input/Input";
+import { TextArea } from "../../atoms/TextArea/TextArea";
+import { DivButtons } from "../../molecules/DivButtons/DivButtons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
   faCalendar,
   faList,
-} from '@fortawesome/free-solid-svg-icons';
-import './Form.css';
+} from "@fortawesome/free-solid-svg-icons";
+import "./Form.css";
 
 function Form() {
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
@@ -16,14 +16,9 @@ function Form() {
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
   return (
     <form className="form">
-      <Input variant="input" icon={amountIcon} text="Amount" isinput="true" />
-      <Input
-        variant="input"
-        icon={categoryIcon}
-        text="Category"
-        isbutton="true"
-      />
-      <Input variant="input" icon={dateIcon} text="Date" isdate="true" />
+      <Input variant="input" icon={amountIcon} text="Amount" />
+      <Input variant="button" icon={categoryIcon} text="Category" />
+      <Input variant="date" icon={dateIcon} text="Date" />
       <TextArea label="Description" />
       <DivButtons type="action" />
     </form>

@@ -8,6 +8,7 @@
   line-height: 19px;
   color: white;
   border: none;
+  margin: 10px;
 }
 
 .btn.shadow {
@@ -66,12 +67,12 @@
 }
 
 .inputbtn {
-  margin-left: auto;
   background: none;
-  height: 35px;
-  width: 120px;
+  height: 40px;
+  width: 150px;
   border: 1px solid #c4c4c4;
-  border-radius: 9px;
+  border-radius: 10px;
+  font-family: inherit;
   color: #797979;
 }
 

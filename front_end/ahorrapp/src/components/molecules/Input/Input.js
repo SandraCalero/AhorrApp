@@ -1,16 +1,20 @@
 import React from "react";
 import "./Input.css";
 import { InputText } from "../../atoms/InputText/InputText";
-import {Button} from '../../atoms/Button/Button'
+import { Button } from "../../atoms/Button/Button";
 
 function Input(props) {
   return (
-    <div className={props.variant}>
-      <span className="iconInput">{props.icon}</span>
-      <p className="textInput">{props.text}</p>
-      {props.isinput && <InputText />}
-      {props.isbutton && <Button variant = 'inputbtn' text="Select Category" />}
-      {props.isdate && <Button variant='inputbtn date' />}
+    <div className="input">
+      <div className="iconText">
+        <span className="iconInput">{props.icon}</span>
+        <span className="textInput">{props.text}</span>
+      </div>
+      {props.variant === "input" && <InputText />}
+      {props.variant === "button" && (
+        <Button variant="inputbtn" text="Select Category" />
+      )}
+      {props.variant === "date" && <Button variant="inputbtn date" />}
     </div>
   );
 }

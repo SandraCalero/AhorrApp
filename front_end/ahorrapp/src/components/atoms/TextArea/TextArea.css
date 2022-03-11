@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .iconTextArea {
@@ -17,8 +19,8 @@
   border: 1px solid #c4c4c4;
   border-radius: 2px;
   height: 60px;
-  width: 300px;
-  margin-top: 3px;
+  min-width: 280px;
+  margin-top: 8px;
   font-family: inherit;
 }
 

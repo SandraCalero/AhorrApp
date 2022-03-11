@@ -1,9 +1,8 @@
-import React from 'react';
-import './ConfirmationModal.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '../../atoms/Button/Button';
-import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import React from "react";
+import "./ConfirmationModal.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 
 function ConfirmationModal() {
   const warningIcon = <FontAwesomeIcon icon={faWarning} />;
