@@ -1,0 +1,91 @@
+.transactionCard {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+/*date and card + icon*/
+.transactionCard.IncomeCard .date {
+  align-self: flex-start;
+  font-size: 12px;
+  color: #3a3636;
+}
+
+.transactionCard.IncomeCard .rowCard {
+  justify-content: flex-start;
+}
+
+.transactionCard.ExpenseCard .date {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #3a3636;
+}
+.transactionCard.ExpenseCard .rowCard {
+  justify-content: flex-end;
+}
+
+.transactionCard .rowCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* icon card*/
+
+.transactionCard .IncomeCard {
+  color: #62a856;
+  font-size: 24px;
+  width: 42px;
+  text-align: center;
+  order: 2;
+}
+
+.transactionCard .IncomeCard + .transactionBody {
+  order: 1;
+}
+
+.transactionCard .ExpenseCard {
+  color: #f47265;
+  font-size: 24px;
+  width: 42px;
+  text-align: center;
+  order: 1;
+}
+
+.transactionCard .ExpenseCard + .transactionBody {
+  order: 2;
+}
+
+/*Card body*/
+
+.transactionCard .transactionBody {
+  display: flex;
+  border: 1px solid #c4c4c4;
+  align-items: center;
+}
+
+.transactionCard .transactionBody .descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 6px;
+}
+
+.transactionCard .transactionBody .amount {
+  font-size: 13px;
+  color: #3a3636;
+  padding: 0px 6px;
+}
+
+.transactionCard .transactionBody .descriptionContainer .descriptionCard {
+  font-size: 14px;
+  color: #3a3636;
+}
+.transactionCard .transactionBody .descriptionContainer .categoryCard {
+  font-size: 12px;
+  color: #3a3636;
+}
+
+.transactionCard .transactionBody .descriptionContainer .descriptionCard,
+.transactionCard .transactionBody .descriptionContainer .categoryCard {
+  margin: 0;
+}

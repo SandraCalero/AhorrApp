@@ -1,10 +1,11 @@
-import React from "react";
-import "./Title.css";
+import React from 'react';
+import './Title.css';
 
 function Title(props) {
   return (
     <section className="titleContainer">
       <h1 className="Title">
+        {props.icon && <span className="iconTitle">{props.icon}</span>}
         {props.text}
         {props.userName && props.userName}
       </h1>
