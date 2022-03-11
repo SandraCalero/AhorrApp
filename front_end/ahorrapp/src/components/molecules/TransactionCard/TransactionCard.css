@@ -58,11 +58,22 @@
 
 /*Card body*/
 
+.transactionCard.IncomeCard .transactionBody {
+  border-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+}
+
+.transactionCard.ExpenseCard .transactionBody {
+  border-radius: 0.5rem;
+  border-bottom-right-radius: 0;
+}
+
 .transactionCard .transactionBody {
   display: flex;
   border: 1px solid #c4c4c4;
   align-items: center;
   background-color: white;
+  min-height: 60px;
 }
 
 .transactionCard .transactionBody .descriptionContainer {
@@ -72,17 +83,17 @@
 }
 
 .transactionCard .transactionBody .amount {
-  font-size: 13px;
+  font-size: 1rem;
   color: #3a3636;
   padding: 0px 6px;
 }
 
 .transactionCard .transactionBody .descriptionContainer .descriptionCard {
-  font-size: 14px;
+  font-size: 1.1rem;
   color: #3a3636;
 }
 .transactionCard .transactionBody .descriptionContainer .categoryCard {
-  font-size: 12px;
+  font-size: 1rem;
   color: #3a3636;
 }
 

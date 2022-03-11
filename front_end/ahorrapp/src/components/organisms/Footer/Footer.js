@@ -19,7 +19,7 @@ function Footer(props) {
         icon={homeIcon}
       />
       <LinkButton
-        route="/Transactions"
+        route="/AllTransactions"
         text="Transactions"
         variant="linkFooter Transactions"
         icon={transIcon}
