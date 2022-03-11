@@ -6,6 +6,8 @@ from models import Base
 from models.user import User
 from models.transaction_type import TransactionType
 from models.category import Category
+from models.transaction import Transaction
+from models.budget import Budget
 
 # Import Enviormental variables
 HBNB_MYSQL_USER = os.getenv('HBNB_MYSQL_USER')
@@ -31,5 +33,5 @@ session = Session()
 #     last_name = Column(String(45), nullable=False)
 #     email = Column(String(45), nullable=False) 
 
-Base.metadata.create_all(engine)
-# Base.metadata.drop_all(engine)
+Base.metadata.drop_all(engine)
+# Base.metadata.create_all(engine)

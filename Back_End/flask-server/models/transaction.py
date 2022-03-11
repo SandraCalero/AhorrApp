@@ -2,7 +2,7 @@
 """contains the class definition of a State
     and an instance Base = declarative_base():
 """
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, DECIMAL
 from datetime import datetime
 from models import Base
 
@@ -15,8 +15,8 @@ class Transaction(Base):
     __tablename__ = 'transactions'
     transaction_id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(60), nullable=False)
-    date = Column(DateTime, default=datetime.now)
-    value = Column(Integer, nullable=False, default=0)
-    category_id = Column(String(45), ForeignKey(
-        'category.category_id'), nullable=False)
+    date = Column(DateTime, default=datetime.now(), nullable=False)
+    value = Column(DECIMAL(15,2), nullable=False, default=0.0)
+    category_id = Column(Integer, ForeignKey(
+        'categories.category_id'), nullable=False)
 
