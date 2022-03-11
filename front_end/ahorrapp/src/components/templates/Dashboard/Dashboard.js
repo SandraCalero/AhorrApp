@@ -1,6 +1,4 @@
 import React from "react";
-import { NavBar } from "../../molecules/NavBar/NavBar";
-import { Footer } from "../../molecules/Footer/Footer";
 import { Title } from "../../atoms/Title/Title";
 import { BarChart } from "../../atoms/BarChart/BarChart";
 import { Box } from "../../atoms/Box/Box";
@@ -12,6 +10,8 @@ import {
   faBalanceScale,
 } from "@fortawesome/free-solid-svg-icons";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
+import { NavBar } from "../../molecules/NavBar/NavBar";
+import { Footer } from "../../organisms/Footer/Footer";
 
 function Dashboard() {
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
@@ -48,6 +48,7 @@ function Dashboard() {
         </article>
         <article className="addTranBtn">
           <LinkButton
+            route="/Transaction"
             variant="addTrans"
             text="Add Transaction"
             icon={plusIcon}

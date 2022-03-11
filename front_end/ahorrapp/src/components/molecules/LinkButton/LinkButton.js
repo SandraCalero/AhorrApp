@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./LinkButton.css";
 
 function LinkButton(props) {
   return (
-    <button className={props.variant}>
+    <Link to={props.route} className={props.variant}>
       {props.icon && <span>{props.icon}</span>} {props.text}
-    </button>
+    </Link>
   );
 }
 
