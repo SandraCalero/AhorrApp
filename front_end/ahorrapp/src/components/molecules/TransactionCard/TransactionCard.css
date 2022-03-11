@@ -62,6 +62,7 @@
   display: flex;
   border: 1px solid #c4c4c4;
   align-items: center;
+  background-color: white;
 }
 
 .transactionCard .transactionBody .descriptionContainer {
