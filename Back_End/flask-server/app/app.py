@@ -3,8 +3,13 @@ from fastapi import FastAPI
 from models import storage
 # from debug_toolbar.middleware import DebugToolbarMiddleware
 import uvicorn
+# from app.routes import app_router
+from app.routes import transaction
 
-app = FastAPI(debug=True)
+
+app = FastAPI()
+
+app.include_router(transaction)
 # app.add_middleware(DebugToolbarMiddleware)
 print("esto aqui")
 

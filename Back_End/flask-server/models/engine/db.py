@@ -18,7 +18,7 @@ from models.budget import Budget
 class DBStorage:
     """interacts with the MySQL database"""
     __engine = None
-    __session = None
+    session = None
 
     def __init__(self):
         """Instantiate a DBStorage object"""
@@ -37,4 +37,4 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
-        self.__session = Session
+        self.session = Session

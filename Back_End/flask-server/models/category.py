@@ -19,5 +19,5 @@ class Category(Base):
     user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
     transaction_type_id = Column(Integer, ForeignKey(
         'transaction_types.transaction_type_id'), nullable=False)
-    transactions = relationship("Transaction", "categories")
+    transactions = relationship("Transaction", backref="categories")
     
