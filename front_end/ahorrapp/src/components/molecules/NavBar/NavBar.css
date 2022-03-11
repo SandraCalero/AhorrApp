@@ -1,8 +1,8 @@
 .navBar {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
-  padding-right: 30px;
+  padding: 4px 16px;
+  height: 52px;
   background-color: #fafafa;
   border-bottom: solid 1px #c4c4c4;
 }

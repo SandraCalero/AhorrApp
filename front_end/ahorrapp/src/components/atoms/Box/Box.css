@@ -1,47 +1,40 @@
-.boxes {
-  display: flex;
-  justify-content: space-evenly;
-}
 .box {
+  display: flex;
+  flex-grow: 1;
+  margin: 0.5rem;
+  align-items: center;
+  justify-content: space-evenly;
   font-family: inherit;
-  height: 40px;
-  width: 100px;
-  border-radius: 10px;
+  height: 64px;
+  min-width: 6.25rem;
+  border-radius: 1rem;
   border: 1px solid #c4c4c4;
   color: #3a3636;
-  position: relative;
 }
 
-.transactionTypeBox {
-  position: absolute;
-  font-size: medium;
-  top: 4px;
-  left: 8px;
+.box .text {
+  display: flex;
+  flex-direction: column;
+}
+
+.box .text .transactionTypeBox {
+  font-size: 1rem;
   margin: 0;
 }
 
-.totalAmount {
-  position: absolute;
-  font-size: small;
+.box .text .totalAmount {
+  font-size: 0.9rem;
   margin: 0;
-  bottom: 3px;
-  left: 9px;
 }
 
-.iconPosition {
-  position: absolute;
-  right: 3px;
-  bottom: 10px;
-  font-size: 16px;
-}
-.iconIncome {
+.box .iconIncome {
   color: #62a856;
 }
 
-.iconExpense {
+.box .iconExpense {
   color: #f47265;
 }
 
-.iconBalance {
+.box .iconBalance {
   color: #3a3636;
 }

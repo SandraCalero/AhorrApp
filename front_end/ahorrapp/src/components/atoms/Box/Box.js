@@ -4,8 +4,10 @@ import "./Box.css";
 function Box(props) {
   return (
     <div className="box">
-      <p className="transactionTypeBox">{props.transactionType}</p>
-      <p className="totalAmount">{props.amount}</p>
+      <div className="text">
+        <span className="transactionTypeBox">{props.transactionType}</span>
+        <span className="totalAmount">{props.amount}</span>
+      </div>
       <span className={props.variant}>{props.icon}</span>
     </div>
   );

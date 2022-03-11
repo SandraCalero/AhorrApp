@@ -24,6 +24,12 @@ Chart.register(
 function BarChart() {
   const options = {
     responsive: true,
+    layout: {
+      padding: {
+        left: 52,
+        right: 52,
+      },
+    },
     scales: {
       yAxis: {
         display: false,
