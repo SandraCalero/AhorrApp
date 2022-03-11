@@ -11,7 +11,7 @@ transaction = APIRouter()
 def get_transactions():
     lst = []
     for instance in storage.session.query(Transaction).order_by(Transaction.date.desc()):
-        lst.append(instance.date)
+        lst.append(instance.__dict__.copy())
 
     storage.session.commit()
     storage.session.close()
