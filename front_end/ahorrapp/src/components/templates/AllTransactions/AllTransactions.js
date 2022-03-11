@@ -11,7 +11,7 @@ import {
 import { Footer } from "../../organisms/Footer/Footer";
 import "./AllTransactions.css";
 
-// todo: Ravisar por qué navbar en esta vista se encoje y la sobreposición con el footer en horizontal en un dispositivo de 320 x 537
+// todo: Ravisar la sobreposición con el footer en horizontal en un dispositivo de 320 x 537
 function AllTransactions() {
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
