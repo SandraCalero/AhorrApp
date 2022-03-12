@@ -7,8 +7,6 @@ from schemas.transaction_type_schema import Transaction_type_schema
 
 transaction_type = APIRouter()
 
-# @transaction.get('/user/{user-id}/transactions/')
-
 
 @transaction_type.post('/transaction_types')
 def insert(transaction_type: Transaction_type_schema):
@@ -40,13 +38,22 @@ def get_one(id: str):
 @transaction_type.put('/transaction_type/{id}')
 def update(id: str, transaction_type: Transaction_type_schema):
     """Updates a transaction type"""
+    dictionary_to_update = {TransactionType.type: transaction_type.type}
     transaction_type_obj = storage.session.query(TransactionType).filter(
-        TransactionType.transaction_type_id == id).first()
+        TransactionType.transaction_type_id == id).update(dictionary_to_update)
+    # transaction_type_obj.type = transaction_type.type
 
-    return "updating"
+    return "El tipo de transacción no existe" if transaction_type_obj == 0 \
+        else "Tipo de transacción actualizado exitosamente"
 
 
 @transaction_type.delete('/transaction_type/{id}')
 def delete(id: str):
     """Deletes a transaction type"""
-    return "deleting"
+    transaction_type_obj = storage.session.query(TransactionType).filter(
+        TransactionType.transaction_type_id == id).first()
+    if transaction_type_obj is None:
+        return "El tipo de transacción no existe"
+    storage.session.delete(transaction_type_obj)
+    storage.session.commit()
+    return "Tipo de transaccion eleiminada exitosamente"
