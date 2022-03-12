@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
 import { InputText } from "../../atoms/InputText/InputText";
-import { Button } from "../../atoms/Button/Button";
+import { Label } from "../../atoms/Label/Label";
 
 function Input(props) {
   return (
@@ -12,9 +12,16 @@ function Input(props) {
       </div>
       {props.variant === "input" && <InputText />}
       {props.variant === "button" && (
-        <Button variant="inputbtn" text="Select Category" />
+        <Label variant="label" text="Select Category" />
       )}
-      {props.variant === "date" && <Button variant="inputbtn date" />}
+      {props.variant === "date" && (
+        <Label
+          variant="label date"
+          eventClick={() => {
+            alert("Hizo Clicken Date");
+          }}
+        />
+      )}
     </div>
   );
 }

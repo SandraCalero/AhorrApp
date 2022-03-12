@@ -5,11 +5,17 @@ import "./TextArea.css";
 
 function TextArea(props) {
   const descriptionIcon = <FontAwesomeIcon icon={faFileAlt} />;
+  const [textarea, setTextarea] = React.useState("");
+
+  const handleChange = (event) => {
+    setTextarea(event.target.value);
+    console.log(textarea);
+  };
   return (
     <div className="descriptionTextArea">
       <span>
         <span className="iconTextArea">{descriptionIcon}</span>
-        <label className="labelTextArea" for="description">
+        <label className="labelTextArea" htmlFor="description">
           {props.label}
         </label>
       </span>
@@ -17,6 +23,8 @@ function TextArea(props) {
         className="textArea"
         name="description"
         placeholder="Add a description here"
+        value={textarea}
+        onChange={handleChange}
       ></textarea>
     </div>
   );

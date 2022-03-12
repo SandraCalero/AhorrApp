@@ -24,7 +24,7 @@
 }
 
 .btn.Budget {
-  background: #58f3f5;
+  background: #4fb8ff;
 }
 
 .btn.Add {
@@ -65,16 +65,6 @@
   width: 190px;
   color: #3a3636;
   box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 50%);
-}
-
-.inputbtn {
-  background: none;
-  height: 40px;
-  width: 150px;
-  border: 1px solid #c4c4c4;
-  border-radius: 10px;
-  font-family: inherit;
-  color: #797979;
 }
 
 .navIcon {

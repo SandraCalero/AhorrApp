@@ -7,10 +7,12 @@
   align-items: center;
   width: calc(100vw / 3);
   border: none;
+  background: #e9e9e9;
+  padding: 4px 0;
   color: #3a3636;
 }
 
-.linkFooter.Dashboard {
+.linkFooter.active {
   color: #0e4da4;
 }
 

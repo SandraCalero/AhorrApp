@@ -19,4 +19,4 @@ function Transaction() {
   );
 }
 
-export default Transaction;
+export { Transaction };

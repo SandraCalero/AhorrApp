@@ -55,12 +55,12 @@ function BarChart() {
       {
         label: "Budget",
         data: [100, 200, 300, 500],
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        backgroundColor: "#4FB8FF",
       },
       {
         label: "Expenses",
         data: [500, 400, 300, 600],
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "#F47265",
       },
     ],
   };

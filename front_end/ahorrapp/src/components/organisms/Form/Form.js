@@ -16,8 +16,13 @@ function Form() {
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
   return (
     <form className="form">
-      <Input variant="input" icon={amountIcon} text="Amount" />
-      <Input variant="button" icon={categoryIcon} text="Category" />
+      <Input variant="input" icon={amountIcon} text="Amount" name="amount" />
+      <Input
+        variant="button"
+        icon={categoryIcon}
+        text="Category"
+        name="category"
+      />
       <Input variant="date" icon={dateIcon} text="Date" />
       <TextArea label="Description" />
       <DivButtons type="action" />
