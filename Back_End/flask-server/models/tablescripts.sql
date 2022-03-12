@@ -92,8 +92,17 @@ INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2,1 ,"Resta
 INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2, 1,"Transportation");
 INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2,1 ,"Public Services");
 
+
+
+
 INSERT INTO transactions (description, Value, category_id) VALUES ("comida con Dani", 150000, 1);
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("pago del agua", NOW(), 100000, 3);
 
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("cine", "2022-03-01", 300000, 1);
 
+
+--************** categories and movements for Sandra
+
+
+INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2, 2,"Transportation");
+INSERT INTO transactions (description, date, Value, category_id) VALUES ("ida zona america", "2022-03-12", 10000, 4);
