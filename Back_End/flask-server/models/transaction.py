@@ -4,7 +4,7 @@
 """
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, DECIMAL
 from datetime import datetime
-from models import Base
+from models.base_model import Base
 
 # Base = declarative_base()
 
@@ -16,7 +16,6 @@ class Transaction(Base):
     transaction_id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(60), nullable=False)
     date = Column(DateTime, default=datetime.now(), nullable=False)
-    value = Column(DECIMAL(15,2), nullable=False, default=0.0)
+    value = Column(DECIMAL(15, 2), nullable=False, default=0.0)
     category_id = Column(Integer, ForeignKey(
         'categories.category_id'), nullable=False)
-

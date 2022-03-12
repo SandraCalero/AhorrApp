@@ -33,7 +33,7 @@ class DBStorage:
 
     def reload(self):
         """reloads data from the database"""
-        from models import Base
+        from models.base_model import Base
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)

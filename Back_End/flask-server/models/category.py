@@ -5,7 +5,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models import Base
+from models.base_model import Base
 from models.user import User
 # Base = declarative_base()
 
@@ -20,4 +20,3 @@ class Category(Base):
     transaction_type_id = Column(Integer, ForeignKey(
         'transaction_types.transaction_type_id'), nullable=False)
     transactions = relationship("Transaction", backref="categories")
-    

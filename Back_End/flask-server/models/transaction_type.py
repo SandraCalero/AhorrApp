@@ -4,8 +4,7 @@
 """
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from models import Base
-
+from models.base_model import Base
 
 
 class TransactionType(Base):

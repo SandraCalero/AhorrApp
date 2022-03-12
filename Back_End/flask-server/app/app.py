@@ -1,34 +1,18 @@
-from flask import Flask
 from fastapi import FastAPI
 from models import storage
-# from debug_toolbar.middleware import DebugToolbarMiddleware
-import uvicorn
-# from app.routes import app_router
-from app.routes import transaction
 
+from app.routes import transaction
 
 app = FastAPI()
 
 app.include_router(transaction)
 # app.add_middleware(DebugToolbarMiddleware)
-print("esto aqui")
+print("esto aqui.")
 
 
 @app.get('/')
 async def index():
-    return "Hello Sebastian joder tio"
-
-#     lst = []
-#     for instance in session.query(Transactions).order_by(Transactions.date.desc()):
-#         lst.append(instance.date)
-
-#     session.commit()
-#     session.close()
-#     return session.query(Transactions).order_by(Transactions.date.desc())
-
+    return "Testing All datasfsf."
 
 if __name__ == '__main__':
     """ Main Function """
-    host = '0.0.0.0'
-    port = '5000'
-    uvicorn.run(app, host=host, port=port)

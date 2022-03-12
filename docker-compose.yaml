@@ -28,7 +28,10 @@ services:
       HBNB_MYSQL_HOST: 'mysql'
       HBNB_MYSQL_DB:  'test_mysql_db'
       FLASK_DEBUG: '1'
-    command: bash -c "while true; do sleep 2s; done"
+    # command: bash -c "while true; do sleep 2s; done"
+    command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000 --reload"
+    depends_on:
+      - mysql
 
   # nginx:
   #   image: nginx
