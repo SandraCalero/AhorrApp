@@ -14,6 +14,14 @@ from models.category import Category
 from models.transaction import Transaction
 from models.budget import Budget
 
+classes = {
+    "Category": Category,
+    "TransactionType": TransactionType,
+    "Transaction": Transaction,
+    "Budget": Budget,
+    "User": User
+}
+
 
 class DBStorage:
     """interacts with the MySQL database"""
@@ -38,3 +46,43 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.session = Session
+
+    def all(self, cls=None):
+        """query on the current database session"""
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.session.query(classes[clss]).all()
+                for obj in objs:
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                    new_dict[key] = obj
+        return (new_dict)
+
+    def new(self, obj):
+        """add the object to the current database session"""
+        self.session.add(obj)
+
+    def save(self):
+        """commit all changes of the current database session"""
+        self.session.commit()
+
+    def delete(self, obj=None):
+        """delete from the current database session obj if not None"""
+        if obj is not None:
+            self.session.delete(obj)
+
+    def close(self):
+        """call remove() method on the private session attribute"""
+        self.session.remove()
+
+    def get(self, cls, id):
+        """ retrieves one object """
+        if cls and id:
+            if type(cls) is str and cls in classes:
+                cls = classes[cls]
+                return self.session.query(cls).filter(cls.id == id).first()
+        return None
+
+    def count(self, cls=None):
+        """ number of objects in storage matching the given class. """
+        return (self.all(cls).__len__())

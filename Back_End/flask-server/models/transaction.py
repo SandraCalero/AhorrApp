@@ -4,18 +4,16 @@
 """
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, DECIMAL, Date
 from datetime import date
-from models.base_model import Base
+from models.base_model import Base, BaseModel
 
 # Base = declarative_base()
 
 
-class Transaction(Base):
+class Transaction(BaseModel, Base):
     """ Class for Category inherited from Base
     """
     __tablename__ = 'transactions'
-    transaction_id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(60), nullable=False)
-    date = Column(Date, default=date.today(), nullable=False)
     value = Column(DECIMAL(15, 2), nullable=False, default=0.0)
     category_id = Column(Integer, ForeignKey(
-        'categories.category_id'), nullable=False)
+        'categories.id'), nullable=False)
