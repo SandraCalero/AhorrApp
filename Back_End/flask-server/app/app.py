@@ -3,7 +3,15 @@ from models import storage
 
 from app.routes import transaction, transaction_type
 
-app = FastAPI()
+app = FastAPI(
+    title="AhorraApp API",
+    description="Rutas estructuradas para consumir",
+    version="0.0.1",
+    open_api_tags=[{
+        "name": "transaction_types",
+        "description": "transaction types routes"
+    }]
+)
 
 app.include_router(transaction)
 app.include_router(transaction_type)
