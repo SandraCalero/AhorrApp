@@ -1,5 +1,6 @@
 version: "3"
 services:
+
   mysql:
     image: mysql:8.0
     restart: always
@@ -10,9 +11,8 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'pwd'
       MYSQL_ROOT_PASSWORD: 'rootpassword'
-
     volumes:
-      - ./Back_End/mysql-db:/var/lib/mysql
+      - ./Back_End/mysql-db:/var/lib/mysql      
 
   flask-server:
     build:
@@ -32,6 +32,9 @@ services:
     command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000 --reload"
     depends_on:
       - mysql
+
+
+
 
   # nginx:
   #   image: nginx
