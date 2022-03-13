@@ -61,6 +61,7 @@ async def update(id: int, transaction_type: Transaction_type_schema_in):
     [setattr(transaction_type, key, value) for key, value in dictionary.items()
         if key not in ['id', 'created_at', 'updated_at']]
     transaction_type.save()
+    storage.save()
     return JSONResponse(transaction_type.to_dict(), status_code=201)
 
 
