@@ -7,10 +7,11 @@ from models.category import Category
 from models.transaction import Transaction
 from models.user import User
 from datetime import date
+from schemas.transaction_schema import TransactionSchema
 transaction = APIRouter()
 
 
-@transaction.get('/user/{user_id}/transaction')
+@transaction.get('/user/{user_id}/all-transactions')
 def get_transactions(
     user_id: int,
     i_date: Optional[date] = "1900-01-01",
@@ -40,3 +41,9 @@ def get_transactions(
     storage.session.commit()
     storage.session.close()
     return transactions
+
+@transaction.post('/user/{user_id}/transaction')
+def insert(transaction: TransactionSchema):
+    """Inserts one transaction"""
+    new_transaction = {"type": transaction.type}
+    storage.session.add(TransactionType(**new_transaction_type))
