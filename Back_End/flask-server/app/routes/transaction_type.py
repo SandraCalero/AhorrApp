@@ -3,7 +3,6 @@
 from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import JSONResponse
 from pprint import pprint
-from starlette.status import HTTP_204_NO_CONTENT
 from models import storage
 from models.transaction_type import TransactionType
 from schemas.transaction_type_schema import Transaction_type_schema_out
@@ -49,7 +48,7 @@ def get_one(id: int):
 
 
 @transaction_type.put('/transaction_type/{id}', tags=['transaction_types'], status_code=201)
-async def update(id: int, transaction_type: Transaction_type_schema_in):
+def update(id: int, transaction_type: Transaction_type_schema_in):
     """Updates a transaction type"""
     dictionary = transaction_type.dict()
     if dictionary is None:
