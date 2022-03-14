@@ -41,7 +41,9 @@ def get_all():
                       tags=['transaction_types'], status_code=200)
 def get_one(id: int):
     """Gets one transaction type by id"""
-    transaction_type = storage.get('TransactionType', id)
+    from models.transaction_type import TransactionType
+
+    transaction_type = storage.get(TransactionType, id)
     if transaction_type:
         return JSONResponse(transaction_type.to_dict())
     raise HTTPException(status_code=404, detail="Item not found")
