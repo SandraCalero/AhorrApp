@@ -1,0 +1,22 @@
+.body .container .transactionsBox {
+  display: flex;
+  min-height: 250px;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.body .container .transactionsBox .history {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #c4c4c4;
+  overflow-y: scroll;
+}
+
+.body .container .transactionsBox .history .transactionCard {
+  margin: 0.5rem 0;
+}

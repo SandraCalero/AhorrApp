@@ -1,0 +1,40 @@
+.box {
+  display: flex;
+  flex-grow: 1;
+  margin: 0.5rem;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: inherit;
+  height: 64px;
+  min-width: 6.25rem;
+  border-radius: 1rem;
+  border: 1px solid #c4c4c4;
+  color: #3a3636;
+}
+
+.box .text {
+  display: flex;
+  flex-direction: column;
+}
+
+.box .text .transactionTypeBox {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.box .text .totalAmount {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.box .iconIncome {
+  color: #62a856;
+}
+
+.box .iconExpense {
+  color: #f47265;
+}
+
+.box .iconBalance {
+  color: #3a3636;
+}

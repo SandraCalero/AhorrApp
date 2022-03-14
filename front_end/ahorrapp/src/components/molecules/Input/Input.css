@@ -1,0 +1,26 @@
+.input {
+  display: flex;
+  align-items: center;
+  min-width: 280px;
+  height: auto;
+  font-family: inherit;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.input .iconText {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+}
+
+.input .iconText .iconInput {
+  color: #e38787;
+  margin-right: 20px;
+  width: 22px;
+  font-size: 22px;
+}
+
+.input .iconText .textInput {
+  font-size: 16px;
+}

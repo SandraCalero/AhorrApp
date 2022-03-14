@@ -1,0 +1,19 @@
+.inputText {
+  height: 40px;
+  width: 150px;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  font-family: inherit;
+  border-radius: 10px;
+}
+
+.inputText:focus {
+  outline: none;
+  border: 1px solid blue;
+}
+
+.inputText::placeholder {
+  color: #797979;
+  font-family: inherit;
+  text-align: center;
+}
