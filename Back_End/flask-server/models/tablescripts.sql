@@ -82,7 +82,9 @@ CONSTRAINT FK_152 FOREIGN KEY FK_154 (category_id) REFERENCES categories (catego
 
 --******************************** INSERT DATA
 
-INSERT INTO users (first_name, last_name, email) VALUES ("Mateo", "Garcia", "mateog91@gmail.com");
+INSERT INTO users (created_at, updated_at, first_name, last_name, email) VALUES (NOW(), NOW() ,"Mateo", "Garcia", "mateog91@gmail.com");
+
+UPDATE users SET created_at=NOW(), updated_at=NOW() WHERE id=1;
 
 INSERT INTO users (first_name, last_name, email) VALUES ("Sandra", "Calero", "sandra@gmail.com");
 INSERT INTO transaction_types (type) VALUES ("income");
