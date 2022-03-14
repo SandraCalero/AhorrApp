@@ -23,8 +23,9 @@ def get_transactions(
     # create an end point for get categories
     # get categories from query filtered by the user_id
     categories = get_categories(user_id)
+    print(type(categories[0]), categories[0].name)
     # create a dictionary with category id : category name
-    print(type(categories[0]['created_at']))
+    # print(type(categories[0]['created_at']))
     # categories_ids = {
     #     category.category_id: category.name for category in categories}
 
@@ -59,6 +60,11 @@ def insert(transaction: TransactionSchema):
 @transaction.get('/user/{user_id}/categories')
 def get_categories(user_id: int):
     user = storage.get('User', user_id)
+    print(f"value is {user}")
+    if not user:
+        print("user is none")
+        raise HTTPException(status_code=400, detail="User not found")
+
     user_categories = user.categories
-    # print(user_categories[0].to_dict())
-    return [category.to_dict() for category in user_categories]
+
+    return [category for category in user_categories]
