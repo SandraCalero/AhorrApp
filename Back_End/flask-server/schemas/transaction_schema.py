@@ -8,3 +8,6 @@ class TransactionSchema(BaseModel):
     date: date
     value: float
 
+    class Config:
+        orm_mode = True
+
