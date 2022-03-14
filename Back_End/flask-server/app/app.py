@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from models import storage
 
-from app.routes import transaction, transaction_type
+from app.routes import category, transaction, transaction_type, user
+
 
 app = FastAPI(
     title="AhorraApp API",
@@ -15,8 +16,10 @@ app = FastAPI(
 
 app.include_router(transaction)
 app.include_router(transaction_type)
+app.include_router(category)
+app.include_router(user)
 # app.add_middleware(DebugToolbarMiddleware)
-print("esto aqui.")
+print("estoy aqui.")
 
 
 @app.get('/')
