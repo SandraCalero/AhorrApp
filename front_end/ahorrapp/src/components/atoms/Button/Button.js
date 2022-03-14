@@ -7,6 +7,7 @@ function Button(props) {
       className={props.variant}
       disabled={props.disabled}
       onClick={props.eventClick}
+      type={props.type}
     >
       {props.icon && <span>{props.icon}</span>} {props.text}
     </button>

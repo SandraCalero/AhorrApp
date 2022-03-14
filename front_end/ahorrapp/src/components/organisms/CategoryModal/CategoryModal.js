@@ -1,16 +1,24 @@
-import React from 'react';
-import './CategoryModal.css';
-import { Title } from '../../atoms/Title/Title';
-import { ButtonList } from '../../molecules/ButtonList/ButtonList';
-import { Button } from '../../atoms/Button/Button';
+import React from "react";
+import "./CategoryModal.css";
+import { Title } from "../../atoms/Title/Title";
+import { ButtonList } from "../../molecules/ButtonList/ButtonList";
+import { Button } from "../../atoms/Button/Button";
+import useCategoryModal from "./useCategoryModal";
 
-function CategoryModal() {
-  const categoryList = ['Rent', 'Utilities', 'Transport', 'Restaurant'];
+function CategoryModal({ categoryList, isOpen, closeModal, onClick }) {
+  const { wrapperClass } = useCategoryModal({ isOpen });
   return (
-    <div className="categoryModal">
-      <Title text="Categories" />
-      <ButtonList categoryList={categoryList} />
-      <Button text="Cancel" variant="btn Cancel" />
+    <div className={wrapperClass}>
+      <div className="categoryModal">
+        <Title text="Categories" />
+        <ButtonList categoryList={categoryList} onClick={onClick} />
+        <Button
+          text="Cancel"
+          variant="btn Cancel"
+          eventClick={closeModal}
+          type="button"
+        />
+      </div>
     </div>
   );
 }

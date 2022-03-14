@@ -34,6 +34,10 @@
 .btn.Cancel {
   background: #c4c4c4;
   color: #565e64;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn.confirmation {

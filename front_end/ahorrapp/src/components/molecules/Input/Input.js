@@ -12,16 +12,9 @@ function Input(props) {
       </div>
       {props.variant === "input" && <InputText />}
       {props.variant === "button" && (
-        <Label variant="label" text="Select Category" />
+        <Label variant="label" text={props.value} eventClick={props.onClick} />
       )}
-      {props.variant === "date" && (
-        <Label
-          variant="label date"
-          eventClick={() => {
-            alert("Hizo Clicken Date");
-          }}
-        />
-      )}
+      {props.variant === "date" && <Label variant="label date" />}
     </div>
   );
 }
