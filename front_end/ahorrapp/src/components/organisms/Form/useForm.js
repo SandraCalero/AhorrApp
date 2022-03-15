@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,13 +11,21 @@ function useForm({ isOpenForm }) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
   });
+  //icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
+
+  //category list
   const categoryList = ["Rent", "Utilities", "Transport", "Restaurant"];
+  // states
+  const amount = useRef("");
+  const setAmount = (value) => {
+    amount.current = value;
+  };
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-  const [categorySelected, setCategorySelected] = useState("Select Category");
+  const [categorySelected, setCategorySelected] = useState("");
   let today = new Date();
   const monthNames = [
     "Jan",
@@ -41,6 +49,9 @@ function useForm({ isOpenForm }) {
     today.getFullYear();
   const [date, setDate] = useState(dateToday);
 
+  const [textarea, setTextarea] = useState("");
+
+  //functions
   const openModal = () => {
     setIsOpen(true);
   };
@@ -71,22 +82,53 @@ function useForm({ isOpenForm }) {
     closeCalendar();
   };
 
+  const onValueChange = (values) => {
+    console.log(values.value);
+    setAmount(values.value);
+  };
+
+  const handleOnBlurTextArea = (event) => {
+    setTextarea(event.target.value);
+  };
+
+  const handleSubmitForm = () => {
+    const data = {
+      amount: amount.current,
+      category: categorySelected,
+      date,
+      textarea,
+    };
+    console.log("aquí va la petición post");
+    console.log(
+      "hacer que redireccione al dashboard o que renderice la misma pantalla?"
+    );
+    console.log(data);
+  };
+
+  const disabled = !amount.current || !categorySelected || !date;
+
   return {
     wrapperClass,
     amountIcon,
     categoryIcon,
+    amountValue: amount.current,
     dateIcon,
     categoryList,
     isOpen,
     categorySelected,
     date,
     isOpenCalendar,
+    disabled,
+    textarea,
+    onValueChange,
     openModal,
     closeModal,
     onClickCategory,
     onClickDate,
     openCalendar,
     closeCalendar,
+    handleOnBlurTextArea,
+    handleSubmitForm,
   };
 }
 

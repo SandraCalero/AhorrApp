@@ -21,7 +21,13 @@ function DivButtons(props) {
         />
       )}
       {props.type === "action" && (
-        <Button text="Add" variant="btn Add" type="button" />
+        <Button
+          text="Add"
+          variant="btn Add"
+          type="button"
+          disabled={props.disabledSubmit}
+          onClickButton={props.handleSubmitForm}
+        />
       )}
       {props.type === "action" && (
         <LinkButton

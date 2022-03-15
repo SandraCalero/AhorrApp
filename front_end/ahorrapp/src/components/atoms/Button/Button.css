@@ -31,6 +31,10 @@
   background: #0e4da4;
 }
 
+.btn.Add:disabled {
+  background: #0e4da44f;
+}
+
 .btn.Cancel {
   background: #c4c4c4;
   color: #565e64;

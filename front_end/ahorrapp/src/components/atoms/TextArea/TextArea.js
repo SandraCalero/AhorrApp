@@ -2,8 +2,8 @@ import React from "react";
 import "./TextArea.css";
 import { useTextArea } from "./useTextArea";
 
-function TextArea({ label }) {
-  const { descriptionIcon, textarea, handleOnBlur } = useTextArea();
+function TextArea({ label, handleOnBlurTextArea, value }) {
+  const { descriptionIcon } = useTextArea();
 
   return (
     <div className="descriptionTextArea">
@@ -17,8 +17,8 @@ function TextArea({ label }) {
         className="textArea"
         name="description"
         placeholder="Add a description here"
-        defaultValue={textarea}
-        onBlur={handleOnBlur}
+        defaultValue={value}
+        onBlur={handleOnBlurTextArea}
       ></textarea>
     </div>
   );

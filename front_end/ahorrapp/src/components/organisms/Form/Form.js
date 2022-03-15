@@ -18,11 +18,17 @@ function Form({ isOpenForm }) {
     categorySelected,
     date,
     isOpenCalendar,
+    amountValue,
+    textarea,
+    disabled,
+    onValueChange,
     openModal,
     closeModal,
     onClickCategory,
     onClickDate,
     openCalendar,
+    handleOnBlurTextArea,
+    handleSubmitForm,
   } = useForm({ isOpenForm });
   return (
     <form
@@ -32,13 +38,21 @@ function Form({ isOpenForm }) {
         console.log(value);
       }}
     >
-      <Input variant="input" icon={amountIcon} text="Amount" name="amount" />
+      <Input
+        variant="input"
+        icon={amountIcon}
+        value={amountValue}
+        text="Amount"
+        name="amount"
+        onValueChange={onValueChange}
+      />
       <Input
         variant="button"
         icon={categoryIcon}
         text="Category"
         name="category"
         value={categorySelected}
+        placeholder="Select category"
         onClick={openModal}
       />
       <Input
@@ -48,8 +62,16 @@ function Form({ isOpenForm }) {
         value={date}
         onClick={openCalendar}
       />
-      <TextArea label="Description" />
-      <DivButtons type="action" />
+      <TextArea
+        label="Description"
+        value={textarea}
+        handleOnBlurTextArea={handleOnBlurTextArea}
+      />
+      <DivButtons
+        type="action"
+        disabledSubmit={disabled}
+        handleSubmitForm={handleSubmitForm}
+      />
       <CategoryModal
         categoryList={categoryList}
         isOpen={isOpen}
