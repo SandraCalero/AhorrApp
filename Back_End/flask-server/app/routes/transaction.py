@@ -9,6 +9,7 @@ from models.transaction import Transaction
 from models.user import User
 from datetime import date
 from schemas.transaction_schema import TransactionSchema
+from app.routes.category import get_categories
 import json
 
 transaction = APIRouter()
@@ -57,14 +58,14 @@ def insert(transaction: TransactionSchema):
     # storage.session.add(TransactionType(**new_transaction_type))
 
 
-@transaction.get('/user/{user_id}/categories')
-def get_categories(user_id: int):
-    user = storage.get('User', user_id)
-    print(f"value is {user}")
-    if not user:
-        print("user is none")
-        raise HTTPException(status_code=400, detail="User not found")
+# @transaction.get('/user/{user_id}/categories')
+# def get_categories(user_id: int):
+#     user = storage.get('User', user_id)
+#     print(f"value is {user}")
+#     if not user:
+#         print("user is none")
+#         raise HTTPException(status_code=400, detail="User not found")
 
-    user_categories = user.categories
+#     user_categories = user.categories
 
-    return [category for category in user_categories]
+#     return [category for category in user_categories]
