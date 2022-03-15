@@ -18,10 +18,9 @@ def get_categories():
 
 @category.get('/user/{user_id}/categories', tags = ['categories'], status_code=200, response_model=List[CategorySchema])
 def get_categories(user_id: int):
-    user = storage.get('User', user_id)
-    print(user)
+    user = storage.get(User, user_id)
     if user is None:
-        HTTPException(status_code=400, detail="User not found")
+        raise HTTPException(status_code=400, detail="User not found")
 
     user_categories = user.categories
 

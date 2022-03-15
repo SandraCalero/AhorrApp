@@ -55,7 +55,7 @@ def update(id: int, transaction_type: Transaction_type_schema_in):
     dictionary = transaction_type.dict()
     if dictionary is None:
         raise HTTPException(status_code=400, detail="Not a JSON")
-    transaction_type = storage.get('TransactionType', id)
+    transaction_type = storage.get(TransactionType, id)
     if transaction_type is None:
         raise HTTPException(status_code=404, detail="Not found")
 
