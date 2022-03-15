@@ -7,17 +7,16 @@ import {
   faList,
 } from "@fortawesome/free-solid-svg-icons";
 
-function useForm({ isOpenForm }) {
+function useForm({ isOpenForm, variant }) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
+    [variant]: true,
   });
   //icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
 
-  //category list
-  const categoryList = ["Rent", "Utilities", "Transport", "Restaurant"];
   // states
   const amount = useRef("");
   const setAmount = (value) => {
@@ -113,7 +112,6 @@ function useForm({ isOpenForm }) {
     categoryIcon,
     amountValue: amount.current,
     dateIcon,
-    categoryList,
     isOpen,
     categorySelected,
     date,

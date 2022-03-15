@@ -10,14 +10,14 @@ function DivButtons(props) {
         <Button
           text="Income"
           variant="btn shadow Income"
-          onClickButton={props.onClick}
+          onClickButton={props.onClickLeft}
         />
       )}
       {props.type === "transaction" && (
         <Button
           text="Expense"
           variant="btn shadow Expense"
-          onClickButton={props.onClick}
+          onClickButton={props.onClickRight}
         />
       )}
       {props.type === "action" && (

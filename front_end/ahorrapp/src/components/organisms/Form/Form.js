@@ -7,13 +7,12 @@ import { useForm } from "./useForm";
 import { CategoryModal } from "../CategoryModal/CategoryModal";
 import { DateModal } from "../../molecules/DateModal/DateModal";
 
-function Form({ isOpenForm }) {
+function Form({ isOpenForm, categoryList, variant }) {
   const {
     wrapperClass,
     amountIcon,
     categoryIcon,
     dateIcon,
-    categoryList,
     isOpen,
     categorySelected,
     date,
@@ -29,7 +28,7 @@ function Form({ isOpenForm }) {
     openCalendar,
     handleOnBlurTextArea,
     handleSubmitForm,
-  } = useForm({ isOpenForm });
+  } = useForm({ isOpenForm, variant });
   return (
     <form
       className={wrapperClass}

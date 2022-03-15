@@ -11,3 +11,17 @@
 .form.show {
   display: flex;
 }
+
+.form.show.expense .input .iconText .iconInput {
+  color: #f47265;
+}
+.form.show.income .input .iconText .iconInput {
+  color: #62a856;
+}
+
+.form.show.expense .descriptionTextArea .iconTextArea {
+  color: #f47265;
+}
+.form.show.income .descriptionTextArea .iconTextArea {
+  color: #62a856;
+}
