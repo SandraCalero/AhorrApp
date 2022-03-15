@@ -23,7 +23,6 @@ function Form({ isOpenForm }) {
     onClickCategory,
     onClickDate,
     openCalendar,
-    closeCalendar,
   } = useForm({ isOpenForm });
   return (
     <form
