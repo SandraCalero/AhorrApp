@@ -1,4 +1,4 @@
-.inputText {
+.inputText input {
   height: 40px;
   width: 150px;
   border: 1px solid #c4c4c4;
@@ -7,12 +7,12 @@
   border-radius: 10px;
 }
 
-.inputText:focus {
+.inputText input:focus {
   outline: none;
   border: 1px solid blue;
 }
 
-.inputText::placeholder {
+.inputText input::placeholder {
   color: #797979;
   font-family: inherit;
   text-align: center;

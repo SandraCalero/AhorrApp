@@ -12,7 +12,30 @@ function useForm() {
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
   const categoryList = ["Rent", "Utilities", "Transport", "Restaurant"];
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [categorySelected, setCategorySelected] = useState("Select Category");
+  let today = new Date();
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let dateToday =
+    monthNames[today.getMonth()] +
+    " " +
+    today.getDate() +
+    "/" +
+    today.getFullYear();
+  const [date, setDate] = useState(dateToday);
 
   const openModal = () => {
     setIsOpen(true);
@@ -21,9 +44,27 @@ function useForm() {
     setIsOpen(false);
   };
 
+  const openCalendar = () => {
+    setIsOpenCalendar(true);
+  };
+  const closeCalendar = () => {
+    setIsOpenCalendar(false);
+  };
+
   const onClickCategory = (value) => {
     setCategorySelected(value);
     closeModal();
+  };
+
+  const onClickDate = (value) => {
+    dateToday =
+      monthNames[value.getMonth()] +
+      " " +
+      value.getDate() +
+      "/" +
+      value.getFullYear();
+    setDate(dateToday);
+    closeCalendar();
   };
 
   return {
@@ -33,9 +74,14 @@ function useForm() {
     categoryList,
     isOpen,
     categorySelected,
+    date,
+    isOpenCalendar,
     openModal,
     closeModal,
     onClickCategory,
+    onClickDate,
+    openCalendar,
+    closeCalendar,
   };
 }
 

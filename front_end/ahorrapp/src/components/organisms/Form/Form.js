@@ -5,6 +5,7 @@ import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import "./Form.css";
 import { useForm } from "./useForm";
 import { CategoryModal } from "../CategoryModal/CategoryModal";
+import { DateModal } from "../../molecules/DateModal/DateModal";
 
 function Form() {
   const {
@@ -14,9 +15,14 @@ function Form() {
     categoryList,
     isOpen,
     categorySelected,
+    date,
+    isOpenCalendar,
     openModal,
     closeModal,
     onClickCategory,
+    onClickDate,
+    openCalendar,
+    closeCalendar,
   } = useForm();
   return (
     <form
@@ -35,15 +41,22 @@ function Form() {
         value={categorySelected}
         onClick={openModal}
       />
-      <Input variant="date" icon={dateIcon} text="Date" />
+      <Input
+        variant="date"
+        icon={dateIcon}
+        text="Date"
+        value={date}
+        onClick={openCalendar}
+      />
       <TextArea label="Description" />
       <DivButtons type="action" />
       <CategoryModal
         categoryList={categoryList}
         isOpen={isOpen}
         closeModal={closeModal}
-        onClick={onClickCategory}
+        onClickCategory={onClickCategory}
       />
+      <DateModal isOpenCalendar={isOpenCalendar} onClickDate={onClickDate} />
     </form>
   );
 }

@@ -11,8 +11,8 @@ function ButtonList(props) {
             text={category}
             variant="btn btnCategory"
             type="button"
-            eventClick={() => {
-              props.onClick && props.onClick(category);
+            onClickButton={() => {
+              props.onClickCategory && props.onClickCategory(category);
             }}
           />
         </li>

@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 
-function useCategoryModal({ isOpen }) {
+function useDateModal({ isOpenCalendar }) {
   const wrapperClass = classNames("glass", {
-    show: isOpen,
+    show: isOpenCalendar,
   });
   return { wrapperClass };
 }
 
-export { useCategoryModal };
+export { useDateModal };
