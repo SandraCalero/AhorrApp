@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
@@ -6,7 +7,10 @@ import {
   faList,
 } from "@fortawesome/free-solid-svg-icons";
 
-function useForm() {
+function useForm({ isOpenForm }) {
+  const wrapperClass = classNames("form", {
+    show: isOpenForm,
+  });
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
@@ -68,6 +72,7 @@ function useForm() {
   };
 
   return {
+    wrapperClass,
     amountIcon,
     categoryIcon,
     dateIcon,

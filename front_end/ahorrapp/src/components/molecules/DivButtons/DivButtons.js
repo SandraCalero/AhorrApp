@@ -7,10 +7,18 @@ function DivButtons(props) {
   return (
     <div className="divButtons">
       {props.type === "transaction" && (
-        <Button text="Income" variant="btn shadow Income" />
+        <Button
+          text="Income"
+          variant="btn shadow Income"
+          onClickButton={props.onClick}
+        />
       )}
       {props.type === "transaction" && (
-        <Button text="Expense" variant="btn shadow Expense" />
+        <Button
+          text="Expense"
+          variant="btn shadow Expense"
+          onClickButton={props.onClick}
+        />
       )}
       {props.type === "action" && (
         <Button text="Add" variant="btn Add" type="button" />

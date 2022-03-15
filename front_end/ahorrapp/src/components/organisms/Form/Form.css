@@ -1,9 +1,13 @@
 .form {
-  display: flex;
+  display: none;
   flex-direction: column;
   height: 100%;
   min-width: 280px;
   padding: 20px;
   align-items: center;
   justify-content: space-between;
+}
+
+.form.show {
+  display: flex;
 }

@@ -7,8 +7,9 @@ import { useForm } from "./useForm";
 import { CategoryModal } from "../CategoryModal/CategoryModal";
 import { DateModal } from "../../molecules/DateModal/DateModal";
 
-function Form() {
+function Form({ isOpenForm }) {
   const {
+    wrapperClass,
     amountIcon,
     categoryIcon,
     dateIcon,
@@ -23,10 +24,10 @@ function Form() {
     onClickDate,
     openCalendar,
     closeCalendar,
-  } = useForm();
+  } = useForm({ isOpenForm });
   return (
     <form
-      className="form"
+      className={wrapperClass}
       method="post"
       onSubmitCapture={(value) => {
         console.log(value);
