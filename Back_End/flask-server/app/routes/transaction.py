@@ -9,7 +9,7 @@ from models.transaction import Transaction
 from models.user import User
 from datetime import date
 from schemas.transaction_schema import TransactionSchema
-from app.routes.category import get_categories
+from app.routes.category import get_all_categories
 import json
 
 transaction = APIRouter()
@@ -23,7 +23,7 @@ def get_transactions(
 ):
     # create an end point for get categories
     # get categories from query filtered by the user_id
-    categories = get_categories(user_id)
+    categories = get_all_categories(user_id)
     print(type(categories[0]), categories[0].name)
     # create a dictionary with category id : category name
     # print(type(categories[0]['created_at']))
@@ -32,9 +32,9 @@ def get_transactions(
 
     # ***********START TEST ************
 
-    # get_categories = storage.session.query(
+    # get_all_categories = storage.session.query(
     #     User).join(Category).first()
-    # print(type(get_categories.categories))
+    # print(type(get_all_categories.categories))
 
     # ***********END TEST ************
 
@@ -59,7 +59,7 @@ def insert(transaction: TransactionSchema):
 
 
 # @transaction.get('/user/{user_id}/categories')
-# def get_categories(user_id: int):
+# def get_all_categories(user_id: int):
 #     user = storage.get('User', user_id)
 #     print(f"value is {user}")
 #     if not user:

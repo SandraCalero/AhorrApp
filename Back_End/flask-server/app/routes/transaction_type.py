@@ -13,9 +13,13 @@ from fastapi.encoders import jsonable_encoder
 transaction_type = APIRouter()
 
 
-@transaction_type.post('/transaction_types',
-                       tags=['transaction_types'], status_code=201)
-def insert(transaction_type: Transaction_type_schema_in):
+@transaction_type.post(
+    '/transaction_types',
+    response_model=Transaction_type_schema_out,
+    tags=['transaction types'],
+    status_code=201
+)
+def insert_transaction_type(transaction_type: Transaction_type_schema_in):
     """Inserts one transaction type"""
     dictionary = transaction_type.dict()
     if dictionary is None:
@@ -27,9 +31,13 @@ def insert(transaction_type: Transaction_type_schema_in):
     return JSONResponse(transaction_type.to_dict(), status_code=201)
 
 
-@transaction_type.get('/transaction_types', response_model=List[Transaction_type_schema_out],
-                      tags=['transaction_types'], status_code=200)
-def get_all():
+@transaction_type.get(
+    '/transaction_types',
+    response_model=List[Transaction_type_schema_out],
+    tags=['transaction types'],
+    status_code=200
+)
+def get_all_transaction_types():
     """Gests all transaction_types"""
     transaction_types = storage.all(TransactionType)
     if transaction_types.__len__() == 0:
@@ -37,9 +45,13 @@ def get_all():
     return JSONResponse([value.to_dict() for value in transaction_types.values()])
 
 
-@transaction_type.get('/transaction_type/{id}', response_model=Transaction_type_schema_out,
-                      tags=['transaction_types'], status_code=200)
-def get_one(id: int):
+@transaction_type.get(
+    '/transaction_type/{id}',
+    response_model=Transaction_type_schema_out,
+    tags=['transaction types'],
+    status_code=200
+)
+def get_one_transaction_type(id: int):
     """Gets one transaction type by id"""
     from models.transaction_type import TransactionType
 
@@ -49,8 +61,16 @@ def get_one(id: int):
     raise HTTPException(status_code=404, detail="Item not found")
 
 
-@transaction_type.put('/transaction_type/{id}', tags=['transaction_types'], status_code=201)
-def update(id: int, transaction_type: Transaction_type_schema_in):
+@transaction_type.put(
+    '/transaction_type/{id}',
+    response_model=Transaction_type_schema_out,
+    tags=['transaction types'],
+    status_code=201
+)
+def update_transaction_type(
+    id: int,
+    transaction_type: Transaction_type_schema_in
+):
     """Updates a transaction type"""
     dictionary = transaction_type.dict()
     if dictionary is None:
@@ -66,10 +86,14 @@ def update(id: int, transaction_type: Transaction_type_schema_in):
     return JSONResponse(transaction_type.to_dict(), status_code=201)
 
 
-@transaction_type.delete('/transaction_type/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['transaction_types'])
-def delete(id: int):
+@transaction_type.delete(
+    '/transaction_type/{id}',
+    status_code=status.HTTP_204_NO_CONTENT,
+    tags=['transaction types']
+)
+def delete_transaction_type(id: int):
     """Deletes a transaction type"""
-    transaction_type = storage.get('TransactionType', id)
+    transaction_type = storage.get(TransactionType, id)
     if transaction_type is None:
         raise HTTPException(status_code=404, detail="Not found")
     transaction_type.delete()
