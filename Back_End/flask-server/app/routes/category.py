@@ -27,6 +27,8 @@ def insert_category(category: CategoryBase):
     dictionary = category.dict()
     if dictionary is None:
         HTTPException(status_code=400, detail="Not a JSON")
+
+    #extract values from dictionary and assignment to variables
     _, user_id, transaction_type_id = dictionary.values()
 
     user = storage.get(User, user_id)
