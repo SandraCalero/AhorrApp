@@ -1,0 +1,19 @@
+.login {
+  background-image: url("https://s3-alpha-sig.figma.com/img/b73d/d3b6/1a60cc260a98a4433a08c9243729c92d?Expires=1648425600&Signature=YnCwtOqThIv5jFfHi-BBiz53BKivr0yHZZvKdn0lNkvtB1B-BCv0XHhZg~C3SE7cJfXinS25Q9WHu-qUQgEwqWBHPtdHysP6OhLKPU64CxP3MvmgmVPx6xjhPZUf5XHS3blqj-GHTEaa55IziIuibrNkAwpBkrzNllDNJRsa1yaIpTZz5MVsMw85sBhGpAT-x869NHsLZp10IkzDn7FzwLW5kJzp8i0BYLPBlYM-pn5Jm57ksKJZGPN6pZDoNt1oHUVJSb7bdgAzyYcRh6jqltAojwNEc5lSTKTqceq09suEMWUG5OeeJxyCYyz5uephmKNKMY8JGOpGpxPFtt04bg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* .login .loginBtn {
+  width: 12.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.login .loginBtn button {
+} */

@@ -10,16 +10,22 @@ function Input(props) {
         <span className="iconInput">{props.icon}</span>
         <span className="textInput">{props.text}</span>
       </div>
-      {props.variant === "input" && <InputText />}
+      {props.variant === "input" && (
+        <InputText value={props.value} onValueChange={props.onValueChange} />
+      )}
       {props.variant === "button" && (
-        <Label variant="label" text="Select Category" />
+        <Label
+          variant="label"
+          text={props.value}
+          placeholder={props.placeholder}
+          onClick={props.onClick}
+        />
       )}
       {props.variant === "date" && (
         <Label
           variant="label date"
-          eventClick={() => {
-            alert("Hizo Clicken Date");
-          }}
+          text={props.value}
+          onClick={props.onClick}
         />
       )}
     </div>
