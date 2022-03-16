@@ -10,18 +10,18 @@ class TransactionBase(BaseModel):
     category_id: int
 
 
-class ItemCreate(BaseModel):
+class TransactionCreate(TransactionBase):
     pass
 
 
-class TransactionUpdate(BaseModel):
+class TransactionUpdate(TransactionCreate):
     description: Optional[str] = None
     date: Optional[date] = None
     value: Optional[float] = None
     category_id: Optional[int] = None
 
 
-class TransactionSchema(BaseModel):
+class TransactionSchema(TransactionBase):
     id: int
     created_at: datetime
     updated_at: datetime
