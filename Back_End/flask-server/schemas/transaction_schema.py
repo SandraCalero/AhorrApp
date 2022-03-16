@@ -27,5 +27,5 @@ class TransactionSchema(TransactionBase):
     updated_at: datetime
 
 
-class Config:
-    orm_mode = True
+    class Config:
+        orm_mode = True
