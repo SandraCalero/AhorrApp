@@ -1,54 +1,48 @@
-import React, { useRef, useState } from "react";
-import classNames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMoneyBill,
   faCalendar,
   faList,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { useFormState } from '../../../utils/states/useFormState';
 
 function useForm({ isOpenForm, variant }) {
-  const wrapperClass = classNames("form", {
+  const wrapperClass = classNames('form', {
     show: isOpenForm,
     [variant]: true,
   });
+  const [prevVariantForm, setPrevVariant] = useState('');
   //icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
-
+  // formstate
+  const {
+    amount,
+    categorySelected,
+    date,
+    textarea,
+    dateFormated,
+    onDateChange,
+    onAmoutChange,
+    onTextAreaChange,
+    onCategoryChange,
+    onClearData,
+  } = useFormState();
   // states
-  const amount = useRef("");
-  const setAmount = (value) => {
-    amount.current = value;
-  };
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-  const [categorySelected, setCategorySelected] = useState("");
-  let today = new Date();
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  let dateToday =
-    monthNames[today.getMonth()] +
-    " " +
-    today.getDate() +
-    "/" +
-    today.getFullYear();
-  const [date, setDate] = useState(dateToday);
 
-  const [textarea, setTextarea] = useState("");
+  useEffect(() => {
+    if (variant !== prevVariantForm) {
+      onClearData();
+      setPrevVariant(variant);
+    }
+  }, [variant, onClearData, prevVariantForm]);
 
   //functions
   const openModal = () => {
@@ -65,67 +59,64 @@ function useForm({ isOpenForm, variant }) {
     setIsOpenCalendar(false);
   };
 
-  const onClickCategory = (value) => {
-    setCategorySelected(value);
-    closeModal();
-  };
-
   const onClickDate = (value) => {
-    dateToday =
-      monthNames[value.getMonth()] +
-      " " +
-      value.getDate() +
-      "/" +
-      value.getFullYear();
-    setDate(dateToday);
+    onDateChange(value);
     closeCalendar();
   };
 
-  const onValueChange = (values) => {
-    console.log(values.value);
-    setAmount(values.value);
-  };
-
-  const handleOnBlurTextArea = (event) => {
-    setTextarea(event.target.value);
+  const onClickCategory = (value) => {
+    onCategoryChange(value);
+    closeModal();
   };
 
   const handleSubmitForm = () => {
-    const data = {
-      amount: amount.current,
-      category: categorySelected,
-      date,
-      textarea,
-    };
-    console.log("aquí va la petición post");
-    console.log(
-      "hacer que redireccione al dashboard o que renderice la misma pantalla?"
-    );
-    console.log(data);
+    setIsSubmitting(true);
+    axios({
+      method: 'post',
+      url: 'https://gorest.co.in/public/v2/users',
+      data: {
+        amount,
+        category: categorySelected.id,
+        date: dateFormated,
+        textarea,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        alert('Transaction added');
+        setIsSubmitting(false);
+        onClearData();
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Failed to add transaction');
+        setIsSubmitting(false);
+        onClearData();
+      });
   };
 
-  const disabled = !amount.current || !categorySelected || !date;
+  const disabled = !amount || !categorySelected || !date;
 
   return {
     wrapperClass,
+    isSubmitting,
     amountIcon,
     categoryIcon,
-    amountValue: amount.current,
+    amountValue: amount,
     dateIcon,
     isOpen,
-    categorySelected,
+    categorySelected: categorySelected ? categorySelected.name : '',
     date,
     isOpenCalendar,
     disabled,
     textarea,
-    onValueChange,
+    onValueChange: onAmoutChange,
     openModal,
     closeModal,
     onClickCategory,
     onClickDate,
     openCalendar,
-    closeCalendar,
-    handleOnBlurTextArea,
+    handleOnBlurTextArea: onTextAreaChange,
     handleSubmitForm,
   };
 }

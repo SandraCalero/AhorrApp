@@ -1,18 +1,19 @@
-import React from "react";
-import { Button } from "../../atoms/Button/Button";
-import "./ButtonList.css";
+import React from 'react';
+import { Button } from '../../atoms/Button/Button';
+import './ButtonList.css';
 
-function ButtonList(props) {
+function ButtonList({ categoryList, onClickCategory }) {
+  //console.log(categoryList);
   return (
     <ul className="ButtonList">
-      {props.categoryList.map((category, index) => (
-        <li key={index}>
+      {categoryList.map((categoryItem) => (
+        <li key={categoryItem.id}>
           <Button
-            text={category}
+            text={categoryItem.name}
             variant="btn btnCategory"
             type="button"
             onClickButton={() => {
-              props.onClickCategory && props.onClickCategory(category);
+              onClickCategory && onClickCategory(categoryItem);
             }}
           />
         </li>

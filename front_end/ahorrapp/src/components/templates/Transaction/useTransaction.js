@@ -1,64 +1,80 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function useTransaction() {
   const [isOpenForm, setIsOpenForm] = useState(false);
-
-  //category list
-  const apiResponse = {
-    expenses: [
-      // {
-      //   name: "Rent",
-      //   transaction_type_id: 1,
-      //   user_id: 1,
-      //   id: 1,
-      // },
-      // {
-      //   name: "Utilities",
-      //   transaction_type_id: 1,
-      //   user_id: 1,
-      //   id: 2,
-      // },
-      // {
-      //   name: "Transport",
-      //   transaction_type_id: 1,
-      //   user_id: 1,
-      //   id: 3,
-      // },
-      // {
-      //   name: "Restaurant",
-      //   transaction_type_id: 1,
-      //   user_id: 1,
-      //   id: 4,
-      // },
-    ],
-    incomes: [],
-  };
-  const categoryListExpenses = Object.values(apiResponse.expenses);
-  const categoryListIncomes = Object.values(apiResponse.incomes);
+  const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
+  const [apiResponse, setApiResponse] = useState(null);
+  const handleRequest = () => {
+    setIsLoading(true);
+    axios
+      .get('https://swapi.dev/api/films')
+      .then((response) => {
+        //console.log(response);
+        const listResponse = {
+          expenses: [
+            {
+              name: 'Rent',
+              transaction_type_id: 1,
+              user_id: 1,
+              id: 1,
+            },
+            {
+              name: 'Utilities',
+              transaction_type_id: 1,
+              user_id: 1,
+              id: 2,
+            },
+            {
+              name: 'Transport',
+              transaction_type_id: 1,
+              user_id: 1,
+              id: 3,
+            },
+            {
+              name: 'Restaurant',
+              transaction_type_id: 1,
+              user_id: 1,
+              id: 4,
+            },
+          ],
+          incomes: [],
+        };
+        setApiResponse(listResponse);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
 
-  const [variant, setVariant] = useState("");
+  useEffect(() => {
+    handleRequest();
+  }, []);
+
+  // apiResponse && console.log(apiResponse);
+
+  const [variant, setVariant] = useState('');
 
   const handleExpenseButton = () => {
-    setCategoryList(categoryListExpenses);
-    setVariant("expense");
+    setCategoryList(apiResponse.expenses);
+    setVariant('expense');
     setIsOpenForm(true);
   };
 
   const handleIncomeButton = () => {
-    setCategoryList(categoryListIncomes);
-    setVariant("income");
+    setCategoryList(apiResponse.incomes);
+    setVariant('income');
     setIsOpenForm(true);
   };
-
-  // const openForm = () => {
-  //   setIsOpenForm(true);
-  // };
 
   return {
     categoryList,
     isOpenForm,
     variant,
+    isLoading,
     handleExpenseButton,
     handleIncomeButton,
   };

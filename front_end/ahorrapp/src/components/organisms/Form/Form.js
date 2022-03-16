@@ -1,11 +1,12 @@
-import React from "react";
-import { Input } from "../../molecules/Input/Input";
-import { TextArea } from "../../atoms/TextArea/TextArea";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import "./Form.css";
-import { useForm } from "./useForm";
-import { CategoryModal } from "../CategoryModal/CategoryModal";
-import { DateModal } from "../../molecules/DateModal/DateModal";
+import React from 'react';
+import { Input } from '../../molecules/Input/Input';
+import { TextArea } from '../../atoms/TextArea/TextArea';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import './Form.css';
+import { useForm } from './useForm';
+import { CategoryModal } from '../CategoryModal/CategoryModal';
+import { LoadingModal } from '../LoadingModal/LoadingModal';
+import { DateModal } from '../../molecules/DateModal/DateModal';
 
 function Form({ isOpenForm, categoryList, variant }) {
   const {
@@ -20,6 +21,7 @@ function Form({ isOpenForm, categoryList, variant }) {
     amountValue,
     textarea,
     disabled,
+    isSubmitting,
     onValueChange,
     openModal,
     closeModal,
@@ -77,6 +79,7 @@ function Form({ isOpenForm, categoryList, variant }) {
         closeModal={closeModal}
         onClickCategory={onClickCategory}
       />
+      <LoadingModal isOpen={isSubmitting} />
       <DateModal isOpenCalendar={isOpenCalendar} onClickDate={onClickDate} />
     </form>
   );
