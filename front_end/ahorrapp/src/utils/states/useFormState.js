@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const useFormState = () => {
   const location = useLocation();
   //Location data
   const transaction = location.state || {};
-  const amountValue = transaction.amount || '';
+  const amountValue = transaction.amount || "";
   const cat = transaction.category || null;
   const transDate = transaction.date || new Date();
   // si local storage o history es vacio
@@ -17,46 +17,34 @@ export const useFormState = () => {
   };
   const [categorySelected, setCategorySelected] = useState(cat);
 
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  const dateToday =
-    monthNames[transDate.getMonth()] +
-    ' ' +
-    transDate.getDate() +
-    '/' +
-    transDate.getFullYear();
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const dateToday = transDate.toLocaleDateString("en-US", options);
   const [date, setDate] = useState(dateToday);
 
-  const [dateFormated, setDateFormated] = useState('');
+  const formatDate = (date) => {
+    const dateToDate = new Date(date);
+    let month = (dateToDate.getMonth() + 1).toString();
+    let day = dateToDate.getDate().toString();
+    const year = dateToDate.getFullYear();
+    if (month.length < 2) {
+      month = "0" + month;
+    }
+    if (day.length < 2) {
+      day = "0" + day;
+    }
+    return [year, month, day].join("-");
+  };
 
-  const [textarea, setTextarea] = useState('');
+  const [dateFormated, setDateFormated] = useState(formatDate(date));
+
+  const [textarea, setTextarea] = useState("");
 
   const onDateChange = (value) => {
-    const dateClicked =
-      monthNames[value.getMonth()] +
-      ' ' +
-      value.getDate() +
-      '/' +
-      value.getFullYear();
+    const dateClicked = value.toLocaleDateString("en-US", options);
     setDate(dateClicked);
-    const dateNewFormat =
-      value.getFullYear() +
-      '-' +
-      (parseInt(value.getMonth()) + 1) +
-      '-' +
-      value.getDate();
+    const dateNewFormat = formatDate(
+      value.toLocaleDateString("en-US", options)
+    );
     setDateFormated(dateNewFormat);
   };
 
@@ -74,8 +62,8 @@ export const useFormState = () => {
   };
 
   const onClearData = () => {
-    setAmount('');
-    setCategorySelected('');
+    setAmount("");
+    setCategorySelected("");
     setDate(dateToday);
   };
 
