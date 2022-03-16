@@ -24,7 +24,6 @@ transaction = APIRouter()
 def create_transaction(transaction: TransactionCreate):
     """Creates new transaction in database"""
     dictionary = transaction.dict()
-    print(dictionary)
     get_one_category(dictionary['category_id'])
     new_transaction = Transaction(**dictionary)
     new_transaction.save()
