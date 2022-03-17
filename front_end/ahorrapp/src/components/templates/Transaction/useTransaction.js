@@ -6,6 +6,9 @@ function useTransaction() {
   // get info by session
   const { userInfo, userLogged } = useSession();
 
+  // get user id
+  const userId = userInfo ? userInfo.id : null;
+
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
