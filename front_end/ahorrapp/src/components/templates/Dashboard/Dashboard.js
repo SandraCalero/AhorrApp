@@ -1,16 +1,21 @@
 import React from "react";
+import ReactLoading from "react-loading";
 import { Title } from "../../atoms/Title/Title";
 import { BarChart } from "../../atoms/BarChart/BarChart";
 import { Box } from "../../atoms/Box/Box";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
 import { NavBar } from "../../molecules/NavBar/NavBar";
 import { Footer } from "../../organisms/Footer/Footer";
+import { Navigate } from "react-router-dom";
 import { Button } from "../../atoms/Button/Button";
-import { useDashboard } from "./useDashboard";
 import { DateModal } from "../../molecules/DateModal/DateModal";
+import { useDashboard } from "./useDashboard";
 
 function Dashboard() {
   const {
+    userName,
+    userLogged,
+    isLoading,
     incomeIcon,
     expenseIcon,
     balanceIcon,
@@ -22,11 +27,27 @@ function Dashboard() {
     onClickDate,
     openCalendar,
   } = useDashboard();
+
+  if (!userLogged) return <Navigate to="/" replace />;
+
+  if (isLoading) {
+    return (
+      <div className="body">
+        <ReactLoading
+          type="bubbles"
+          color="#357EDD"
+          width={"100%"}
+          height={"100%"}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="body">
       <NavBar />
       <section className="container">
-        <Title text="Hi" userName=" userName!" />
+        <Title text="Hi" userName={` ${userName}!`} />
         <Button
           icon={calendarIcon}
           text={`${dateRange[0]}-${dateRange[1]}`}
