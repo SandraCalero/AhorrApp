@@ -1,14 +1,14 @@
-import React from "react";
-import ReactLoading from "react-loading";
-import { Navigate } from "react-router-dom";
-import { Title } from "../../atoms/Title/Title";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { NavBar } from "../../molecules/NavBar/NavBar";
-import { TransactionCard } from "../../molecules/TransactionCard/TransactionCard";
-import { Footer } from "../../organisms/Footer/Footer";
-import { ConfirmationModal } from "../../molecules/ConfirmationModal/ConfirmationModal";
-import { useAllTransactions } from "./useAllTransactions";
-import "./AllTransactions.css";
+import React from 'react';
+import ReactLoading from 'react-loading';
+import { Navigate } from 'react-router-dom';
+import { Title } from '../../atoms/Title/Title';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import { NavBar } from '../../molecules/NavBar/NavBar';
+import { TransactionCard } from '../../molecules/TransactionCard/TransactionCard';
+import { Footer } from '../../organisms/Footer/Footer';
+import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
+import { useAllTransactions } from './useAllTransactions';
+import './AllTransactions.css';
 
 function AllTransactions() {
   const {
@@ -18,6 +18,7 @@ function AllTransactions() {
     expenseIcon,
     isConfirmationOpen,
     openConfirmationModal,
+    closeConfirmationModal,
   } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
@@ -28,8 +29,8 @@ function AllTransactions() {
         <ReactLoading
           type="bubbles"
           color="#357EDD"
-          width={"100%"}
-          height={"100%"}
+          width={'100%'}
+          height={'100%'}
         />
       </div>
     );
@@ -37,7 +38,10 @@ function AllTransactions() {
 
   return (
     <div className="body">
-      <ConfirmationModal isConfirmationOpen={isConfirmationOpen} />
+      <ConfirmationModal
+        isConfirmationOpen={isConfirmationOpen}
+        closeConfirmationModal={closeConfirmationModal}
+      />
       <NavBar />
       <section className="container">
         <Title text="Transactions" />

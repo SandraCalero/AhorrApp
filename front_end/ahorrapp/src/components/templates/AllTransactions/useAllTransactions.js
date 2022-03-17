@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useSession } from "../../../utils/session/useSession";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useSession } from '../../../utils/session/useSession';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleUp,
   faArrowCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 function useAllTransactions() {
   // get info by session
@@ -25,6 +25,11 @@ function useAllTransactions() {
   const openConfirmationModal = () => {
     setIsConfirmationOpen(true);
   };
+  // set state of Confirmation Modal to false
+  const closeConfirmationModal = () => {
+    setIsConfirmationOpen(false);
+  };
+
   return {
     userLogged,
     isLoading,
@@ -32,6 +37,7 @@ function useAllTransactions() {
     expenseIcon,
     isConfirmationOpen,
     openConfirmationModal,
+    closeConfirmationModal,
   };
 }
 
