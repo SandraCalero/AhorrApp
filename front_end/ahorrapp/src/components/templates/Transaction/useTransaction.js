@@ -3,11 +3,14 @@ import axios from "axios";
 import { useSession } from "../../../utils/session/useSession";
 
 function useTransaction() {
-  const { userLooged } = useSession();
+  // get info by session
+  const { userInfo, userLogged } = useSession();
+
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
   const [apiResponse, setApiResponse] = useState(null);
+
   const handleRequest = () => {
     setIsLoading(true);
     axios
@@ -53,8 +56,8 @@ function useTransaction() {
   };
 
   useEffect(() => {
-    userLooged && handleRequest();
-  }, [userLooged]);
+    userLogged && handleRequest();
+  }, [userLogged]);
 
   // apiResponse && console.log(apiResponse);
 
@@ -73,6 +76,7 @@ function useTransaction() {
   };
 
   return {
+    userLogged,
     categoryList,
     isOpenForm,
     variant,

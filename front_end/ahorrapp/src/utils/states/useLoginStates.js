@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useStorage } from "../storage/useStorage";
+import { useNavigate } from "react-router-dom";
 
 function useLoginStates() {
   const { userInfo, onSaveUserInfo, onCleanStorage } = useStorage();
@@ -10,6 +11,7 @@ function useLoginStates() {
   const [isLoading, setIsLoading] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
   const [googleResponse, setGoogleResponse] = useState(null);
+  const navigate = useNavigate();
 
   // If user doesn't have a valid google account
   const responseGoogleFailure = (responseGoogle) => {
@@ -78,7 +80,8 @@ function useLoginStates() {
   // logout
   const handleLogOut = () => {
     onCleanStorage();
-    console.log("logut");
+    navigate("/", { replace: true });
+    console.log("logout");
   };
 
   useEffect(() => {

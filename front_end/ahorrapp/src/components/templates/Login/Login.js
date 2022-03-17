@@ -1,13 +1,12 @@
 import React from "react";
 import { Title } from "../../atoms/Title/Title";
 import "./Login.css";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import { Navigate } from "react-router-dom";
 import { useLoginStates } from "../../../utils/states/useLoginStates";
 
 export function Login() {
-  const { userLogged, responseGoogleFailure, handleSuccess, handleLogOut } =
-    useLoginStates();
+  const { userLogged, responseGoogleFailure, handleSuccess } = useLoginStates();
   return (
     <div className="login">
       {userLogged && <Navigate to="/Dashboard" replace />}
@@ -20,11 +19,6 @@ export function Login() {
         cookiePolicy={"single_host_origin"}
         redirectUri="/Dashboard"
       />
-      <GoogleLogout
-        clientId="861046265404-52vbar87q58gi3raeo23vms8k0c92tci.apps.googleusercontent.com"
-        buttonText="Logout of Google"
-        onLogoutSuccess={handleLogOut}
-      ></GoogleLogout>
     </div>
   );
 }
