@@ -77,12 +77,6 @@ class DBStorage:
 
     def get(self, cls, id):
         """ retrieves one object """
-        print(cls, id)
-        print(User)
-        print(id is not None)
-        print(cls is not None)
-        print(cls.__name__ in classes)
-        print(type(id)is int)
         if id is not None and cls is not None\
                 and cls.__name__ in classes and type(id) is int:
             return self.session.query(cls).filter(cls.id == id).first()
