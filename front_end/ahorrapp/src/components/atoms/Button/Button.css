@@ -54,9 +54,9 @@
 }
 
 .btn.confirmation {
-  height: 20px;
-  width: 60px;
-  font-size: 14px;
+  height: 3rem;
+  width: 6rem;
+  font-size: 1.5rem;
   border-radius: 5px;
 }
 .btn.btnYes {

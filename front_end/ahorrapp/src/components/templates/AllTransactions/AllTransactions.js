@@ -49,25 +49,21 @@ function AllTransactions() {
               icon={incomeIcon}
               openConfirmationModal={openConfirmationModal}
             />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
-            <TransactionCard variant="IncomeCard" icon={incomeIcon} />
-            <TransactionCard variant="ExpenseCard" icon={expenseIcon} />
+            <TransactionCard
+              variant="ExpenseCard"
+              icon={expenseIcon}
+              openConfirmationModal={openConfirmationModal}
+            />
+            <TransactionCard
+              variant="IncomeCard"
+              icon={incomeIcon}
+              openConfirmationModal={openConfirmationModal}
+            />
+            <TransactionCard
+              variant="ExpenseCard"
+              icon={expenseIcon}
+              openConfirmationModal={openConfirmationModal}
+            />
           </div>
         </article>
       </section>
