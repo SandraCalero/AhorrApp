@@ -24,7 +24,7 @@ class CategorySchema(CategoryBase):
     id: int
     created_at: datetime
     updated_at: datetime
-    transactions: Optional[List[TransactionSchema]]
+    transactions: Optional[List[TransactionSchema]] = []
 
     class Config:
         """Activating ORM mode"""
