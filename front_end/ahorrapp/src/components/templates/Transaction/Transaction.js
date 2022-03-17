@@ -7,7 +7,6 @@ import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { Form } from "../../organisms/Form/Form";
 import { Footer } from "../../organisms/Footer/Footer";
 import { useTransaction } from "./useTransaction";
-import { useLoginStates } from "../../../utils/states/useLoginStates";
 
 function Transaction() {
   const {
@@ -19,8 +18,6 @@ function Transaction() {
     handleExpenseButton,
     handleIncomeButton,
   } = useTransaction();
-
-  const { handleLogOut } = useLoginStates();
 
   if (!userLogged) return <Navigate to="/" replace />;
 
@@ -53,7 +50,7 @@ function Transaction() {
           variant={variant}
         />
       </section>
-      <Footer handleLogOut={handleLogOut} />
+      <Footer />
     </div>
   );
 }

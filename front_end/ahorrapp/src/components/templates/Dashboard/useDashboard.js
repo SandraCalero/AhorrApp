@@ -13,6 +13,10 @@ import { useSession } from "../../../utils/session/useSession";
 function useDashboard() {
   // get info by session
   const { userInfo, userLogged } = useSession();
+  // get user name
+  const userName = userInfo ? userInfo.first_name : null;
+  // get user id
+  const userId = userInfo ? userInfo.id : null;
   // Icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
@@ -61,9 +65,6 @@ function useDashboard() {
     setDateRange([startDate, endDate]);
     closeCalendar();
   };
-
-  // get user name
-  const userName = userInfo ? userInfo.first_name : null;
 
   return {
     userName,
