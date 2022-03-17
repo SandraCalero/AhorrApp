@@ -66,7 +66,7 @@ def get_all_categories():
     categories = storage.all(Category)
     if categories.__len__() == 0:
         raise HTTPException(status_code=404, detail="Not items were found")
-    return JSONResponse([value.to_dict() for value in categories.values()])
+    return [value for value in categories.values()]
 
 
 @category.get(
