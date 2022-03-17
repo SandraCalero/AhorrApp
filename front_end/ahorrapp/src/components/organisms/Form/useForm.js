@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import classNames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
   faCalendar,
   faList,
-} from '@fortawesome/free-solid-svg-icons';
-import { useFormState } from '../../../utils/states/useFormState';
+} from "@fortawesome/free-solid-svg-icons";
+import { useFormState } from "../../../utils/states/useFormState";
 
 function useForm({ isOpenForm, variant }) {
-  const wrapperClass = classNames('form', {
+  const wrapperClass = classNames("form", {
     show: isOpenForm,
     [variant]: true,
   });
-  const [prevVariantForm, setPrevVariant] = useState('');
+  const [prevVariantForm, setPrevVariant] = useState("");
   //icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
@@ -71,25 +71,33 @@ function useForm({ isOpenForm, variant }) {
 
   const handleSubmitForm = () => {
     setIsSubmitting(true);
+
+    const data = {
+      value: amount,
+      category_id: categorySelected.id,
+      date: dateFormated,
+      description: textarea,
+    };
+    console.log(data);
     axios({
-      method: 'post',
-      url: 'https://gorest.co.in/public/v2/users',
+      method: "post",
+      url: "https://gorest.co.in/public/v2/users",
       data: {
-        amount,
-        category: categorySelected.id,
+        value: amount,
+        category_id: categorySelected.id,
         date: dateFormated,
-        textarea,
+        description: textarea,
       },
     })
       .then((response) => {
         console.log(response);
-        alert('Transaction added');
+        alert("Transaction added");
         setIsSubmitting(false);
         onClearData();
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to add transaction');
+        alert("Failed to add transaction");
         setIsSubmitting(false);
         onClearData();
       });
@@ -105,7 +113,7 @@ function useForm({ isOpenForm, variant }) {
     amountValue: amount,
     dateIcon,
     isOpen,
-    categorySelected: categorySelected ? categorySelected.name : '',
+    categorySelected: categorySelected ? categorySelected.name : "",
     date,
     isOpenCalendar,
     disabled,

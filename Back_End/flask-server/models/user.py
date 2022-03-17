@@ -5,17 +5,16 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-from models import Base
-
-# Base = declarative_base()
+from models.base_model import Base, BaseModel
 
 
-class User(Base):
+class User(BaseModel, Base):
     """ Class for State inherited from Base
     """
     __tablename__ = 'users'
-    user_id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(45), nullable=False)
     last_name = Column(String(45), nullable=False)
-    email = Column(String(45), nullable=False)
-    categories = relationship("Category", backref="users")
+    email = Column(String(45), unique=True, nullable=False)
+    h_password = Column(String(45), nullable=False)
+    categories = relationship(
+        "Category", backref="users", cascade="all, delete, delete-orphan")

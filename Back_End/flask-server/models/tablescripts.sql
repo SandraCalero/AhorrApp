@@ -82,7 +82,9 @@ CONSTRAINT FK_152 FOREIGN KEY FK_154 (category_id) REFERENCES categories (catego
 
 --******************************** INSERT DATA
 
-INSERT INTO users (first_name, last_name, email) VALUES ("Mateo", "Garcia", "mateog91@gmail.com");
+INSERT INTO users (created_at, updated_at, first_name, last_name, email) VALUES (NOW(), NOW() ,"Mateo", "Garcia", "mateog91@gmail.com");
+
+UPDATE users SET created_at=NOW(), updated_at=NOW() WHERE id=1;
 
 INSERT INTO users (first_name, last_name, email) VALUES ("Sandra", "Calero", "sandra@gmail.com");
 INSERT INTO transaction_types (type) VALUES ("income");
@@ -92,8 +94,17 @@ INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2,1 ,"Resta
 INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2, 1,"Transportation");
 INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2,1 ,"Public Services");
 
+
+
+
 INSERT INTO transactions (description, Value, category_id) VALUES ("comida con Dani", 150000, 1);
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("pago del agua", NOW(), 100000, 3);
 
 INSERT INTO transactions (description, date, Value, category_id) VALUES ("cine", "2022-03-01", 300000, 1);
 
+
+--************** categories and movements for Sandra
+
+
+INSERT INTO categories (transaction_type_id, user_id,  name) VALUES (2, 2,"Transportation");
+INSERT INTO transactions (description, date, Value, category_id) VALUES ("ida zona america", "2022-03-12", 10000, 4);

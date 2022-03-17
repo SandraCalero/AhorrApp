@@ -1,29 +1,30 @@
-from flask import Flask
 from fastapi import FastAPI
 from models import storage
-# from debug_toolbar.middleware import DebugToolbarMiddleware
-import uvicorn
 
-app = FastAPI(debug=True)
+from app.routes import category, transaction, transaction_type, user
+
+
+app = FastAPI(
+    title="AhorraApp API",
+    description="Rutas estructuradas para consumir",
+    version="0.0.1",
+    open_api_tags=[{
+        "name": "transaction_types",
+        "description": "transaction types routes"
+    }]
+)
+
+app.include_router(transaction)
+app.include_router(transaction_type)
+app.include_router(category)
+app.include_router(user)
 # app.add_middleware(DebugToolbarMiddleware)
-print("esto aqui")
+print("estoy aqui.")
 
 
 @app.get('/')
 async def index():
-    return "Hello Sebastian joder tio"
-
-#     lst = []
-#     for instance in session.query(Transactions).order_by(Transactions.date.desc()):
-#         lst.append(instance.date)
-
-#     session.commit()
-#     session.close()
-#     return session.query(Transactions).order_by(Transactions.date.desc())
-
+    return "Testing All datasfsf."
 
 if __name__ == '__main__':
     """ Main Function """
-    host = '0.0.0.0'
-    port = '5000'
-    uvicorn.run(app, host=host, port=port)

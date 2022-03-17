@@ -13,6 +13,7 @@
 
 .glass.show {
   display: flex;
+  flex-direction: column;
 }
 
 .glass .categoryModal {

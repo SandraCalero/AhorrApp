@@ -5,19 +5,17 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models import Base
+from models.base_model import Base, BaseModel
 from models.user import User
 # Base = declarative_base()
 
 
-class Category(Base):
+class Category(Base, BaseModel):
     """ Class for Category inherited from Base
     """
     __tablename__ = 'categories'
-    category_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(45), nullable=False)
-    user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     transaction_type_id = Column(Integer, ForeignKey(
-        'transaction_types.transaction_type_id'), nullable=False)
-    transactions = relationship("Transaction", "categories")
-    
+        'transaction_types.id'), nullable=False)
+    transactions = relationship("Transaction", backref="categories")
