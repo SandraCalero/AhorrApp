@@ -19,7 +19,11 @@ function TransactionCard(props) {
           </div>
           <span className="amount">$150.000</span>
           <Button icon={editButton} variant="btnEdit" />
-          <Button icon={deleteButton} variant="btnEdit" />
+          <Button
+            icon={deleteButton}
+            variant="btnEdit"
+            onClickButton={props.openConfirmationModal}
+          />
         </div>
       </div>
     </div>
