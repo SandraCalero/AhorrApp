@@ -10,7 +10,6 @@ import { Navigate } from "react-router-dom";
 import { Button } from "../../atoms/Button/Button";
 import { DateModal } from "../../molecules/DateModal/DateModal";
 import { useDashboard } from "./useDashboard";
-import { useLoginStates } from "../../../utils/states/useLoginStates";
 
 function Dashboard() {
   const {
@@ -29,7 +28,6 @@ function Dashboard() {
     openCalendar,
   } = useDashboard();
 
-  const { handleLogOut } = useLoginStates();
   if (!userLogged) return <Navigate to="/" replace />;
 
   if (isLoading) {
@@ -96,7 +94,7 @@ function Dashboard() {
           closeModal={closeCalendar}
         />
       </section>
-      <Footer handleLogOut={handleLogOut} />
+      <Footer />
     </div>
   );
 }
