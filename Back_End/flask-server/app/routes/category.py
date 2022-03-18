@@ -12,7 +12,6 @@ from schemas.category_schema import CategoryBase
 from schemas.category_schema import CategorySchema
 from typing import List
 from fastapi.encoders import jsonable_encoder
-from operator import attrgetter
 
 category = APIRouter()
 
@@ -29,17 +28,12 @@ def insert_category(category: CategoryBase):
     if dictionary is None:
         HTTPException(status_code=400, detail="Not a JSON")
 
-    # extract values from dictionary and assignment to variables
-    print(dictionary)
+    #extract values from dictionary and assignment to variables
+    _, user_id, transaction_type_id = dictionary.values()
 
-    user_id, transaction_type_id = [dictionary[key]
-                                    for key in ['user_id', 'transaction_type_id']]
-
-    print(f"user id: {user_id}")
     user = storage.get(User, user_id)
     pprint(user)
-    if not user:
-        print("inside exeption")
+    if user is None:
         raise HTTPException(status_code=400, detail="User Not Found")
 
     transaction_type = storage.get(TransactionType, transaction_type_id)
@@ -48,7 +42,7 @@ def insert_category(category: CategoryBase):
             status_code=400, detail="Transaction type Not Found")
     category = Category(**dictionary)
     category.save()
-    return category
+    return JSONResponse(category.to_dict(), status_code=201)
 
 
 @category.get('/user/{user_id}/categories', tags=['categories'], status_code=200, response_model=List[CategorySchema])
@@ -67,7 +61,7 @@ def get_all_categories():
     categories = storage.all(Category)
     if categories.__len__() == 0:
         raise HTTPException(status_code=404, detail="Not items were found")
-    return [value for value in categories.values()]
+    return JSONResponse([value.to_dict() for value in categories.values()])
 
 
 @category.get(

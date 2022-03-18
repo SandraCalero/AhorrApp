@@ -20,11 +20,11 @@ def get_user_by_id(id: int):
     return user
 
 
-@user.get('/user-email/{email}', tags=['users'], status_code=200, response_model=UserSchema)
+@user.get('/user-email/{email}', tags=['users'], status_code=200)
 def get_user_by_email(email: str):
     """Get existing user by email"""
     if not email:
-        raise HTTPException(status_code=404, detail="No email input")
+        raise HTTPException(status_code=400, detail="No email input")
     users = storage.all(User)
     print(users)
     if not users:
