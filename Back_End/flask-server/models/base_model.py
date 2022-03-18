@@ -38,7 +38,11 @@ class BaseModel:
 
     def __str__(self):
         """String representation of the BaseModel class"""
+<<<<<<< HEAD
         return "[{:s}] ({}) {}".format(self.__class__.__name__, self.id,
+=======
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
+>>>>>>> main
                                          self.__dict__)
 
     def save(self):

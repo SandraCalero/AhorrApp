@@ -1,0 +1,12 @@
+.label {
+  display: flex;
+  background: none;
+  height: 40px;
+  width: 150px;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  font-family: inherit;
+  justify-content: center;
+  align-items: center;
+  color: #797979;
+}

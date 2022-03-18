@@ -32,7 +32,8 @@ def insert_category(category: CategoryBase):
     # extract values from dictionary and assignment to variables
     print(dictionary)
 
-    user_id, transaction_type_id  = [dictionary[key] for key in ['user_id', 'transaction_type_id']]
+    user_id, transaction_type_id = [dictionary[key]
+                                    for key in ['user_id', 'transaction_type_id']]
 
     print(f"user id: {user_id}")
     user = storage.get(User, user_id)

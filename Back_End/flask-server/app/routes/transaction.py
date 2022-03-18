@@ -2,11 +2,7 @@
 """ object that handles all default RestFul API actions for transactions """
 from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import JSONResponse
-from typing import Optional, List
 from models import storage
-from models.category import Category
-from models.transaction import Transaction
-from models.user import User
 from datetime import date
 from schemas.transaction_schema import TransactionCreate, TransactionSchema, TransactionUpdate
 from schemas.category_schema import CategorySchema

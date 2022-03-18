@@ -1,0 +1,51 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  z-index: 1;
+}
+.body .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.body .container .carousel {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 320px;
+}
+
+.body .container .boxes {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.body .container .addTranBtn {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+@media (min-width: 640px) {
+  .body .container {
+    height: auto;
+  }
+
+  .body .container .boxes {
+    margin: 8px 0;
+  }
+  .body .container .addTranBtn {
+    margin: 8px 0;
+  }
+  .body .container .carousel {
+    margin: 8px 0;
+  }
+}
