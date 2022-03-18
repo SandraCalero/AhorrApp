@@ -3,17 +3,17 @@ import { useAllTransactions } from '../../templates/AllTransactions/useAllTransa
 import { TransactionCard } from '../TransactionCard/TransactionCard';
 import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import './TransactionHistory.css';
+import { useTransactionHistory } from './useTransactionHistory';
 
-function TransactionHistory({ setIsLoading }) {
+function TransactionHistory({ transactionList }) {
   const {
     incomeIcon,
     expenseIcon,
-    transactionList,
     isConfirmationOpen,
     YesButtonConfirmationModal,
-    closeConfirmationModal,
     openConfirmationModal,
-  } = useAllTransactions();
+    closeConfirmationModal,
+  } = useTransactionHistory();
 
   return (
     <div className="TransactionHistory">

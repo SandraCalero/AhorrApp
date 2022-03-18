@@ -1,42 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSession } from '../../../utils/session/useSession';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowCircleUp,
-  faArrowCircleDown,
-} from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 function useAllTransactions() {
+  // Everything for transactionList
   // get info by session
   const { userInfo, userLogged } = useSession();
 
-  // get user id
-  const userId = userInfo ? userInfo.id : null;
-
-  // state for Confirmation Modal
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // icons
-  const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
-  const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
-
-  // set state of Confirmation Modal to true
-  const openConfirmationModal = () => {
-    setIsConfirmationOpen(true);
-  };
-  // set state of Confirmation Modal to false, funtion of the "No" button
-  const closeConfirmationModal = () => {
-    setIsConfirmationOpen(false);
-  };
-
-  // function for the "Yes" button of the Confirmation Modal
-  const YesButtonConfirmationModal = () => {
-    // Here is the Delete request of the transaction
-    // Then, close the Modal
-    setIsConfirmationOpen(false);
-  };
+  // get user id
+  const userId = userInfo ? userInfo.id : null;
 
   // State of the api response for the transactions
   const [apiResponse, setApiResponse] = useState(null);
@@ -103,19 +77,13 @@ function useAllTransactions() {
   useEffect(() => {
     userLogged && handleTransactionRequest();
   }, [userLogged]);
+  // End here everything for transactionList
 
   return {
     userLogged,
     isLoading,
-    incomeIcon,
-    expenseIcon,
-    isConfirmationOpen,
     transactionList,
-    handleTransactionRequest,
     setIsLoading,
-    openConfirmationModal,
-    closeConfirmationModal,
-    YesButtonConfirmationModal,
   };
 }
 

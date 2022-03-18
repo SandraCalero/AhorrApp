@@ -10,7 +10,8 @@ import './AllTransactions.css';
 import { TransactionHistory } from '../../molecules/TransactionHistory/TransactionHistory';
 
 function AllTransactions() {
-  const { userLogged, isLoading, setIsLoading } = useAllTransactions();
+  const { userLogged, isLoading, transactionList, setIsLoading } =
+    useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
 
@@ -34,7 +35,7 @@ function AllTransactions() {
         <Title text="Transactions" />
         <DivButtons type="transaction" />
         <article className="transactionsBox">
-          <TransactionHistory setIsLoading={setIsLoading} />
+          <TransactionHistory transactionList={transactionList} />
         </article>
       </section>
       <Footer />
