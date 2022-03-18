@@ -18,6 +18,12 @@ function Dashboard() {
     isLoading,
     incomeIcon,
     expenseIcon,
+    labels,
+    dataExpenses,
+    dataBudget,
+    totalIncomes,
+    totalExpenses,
+    totalBalance,
     balanceIcon,
     plusIcon,
     calendarIcon,
@@ -56,25 +62,29 @@ function Dashboard() {
           type="button"
         />
         <article className="carousel">
-          <BarChart />
+          <BarChart
+            labelsList={labels}
+            dataExpenses={dataExpenses}
+            dataBudget={dataBudget}
+          />
         </article>
         <article className="boxes">
           <Box
             variant="iconIncome"
             transactionType="Incomes"
-            amount="$1.800.000"
+            amount={totalIncomes}
             icon={incomeIcon}
           />
           <Box
             variant="iconExpense"
             transactionType="Expenses"
-            amount="$800.000"
+            amount={totalExpenses}
             icon={expenseIcon}
           />
           <Box
             variant="iconBalance"
             transactionType="Balance"
-            amount="$1.000.000"
+            amount={totalBalance}
             icon={balanceIcon}
           />
         </article>
