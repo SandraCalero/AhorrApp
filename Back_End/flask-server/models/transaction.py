@@ -14,6 +14,7 @@ class Transaction(BaseModel, Base):
     """
     __tablename__ = 'transactions'
     description = Column(String(60), nullable=False)
+    date = Column(Date, default=date.today(), nullable=False)
     value = Column(DECIMAL(15, 2), nullable=False, default=0.0)
     category_id = Column(Integer, ForeignKey(
         'categories.id'), nullable=False)
