@@ -8,6 +8,8 @@ from schemas.transaction_schema import TransactionCreate, TransactionSchema, Tra
 from schemas.category_schema import CategorySchema
 from app.routes.category import get_all_categories, get_one_category, get_categories_by_user
 from app.routes.user import get_user_by_id
+from models.transaction import Transaction
+from typing import List, Optional
 import json
 
 transaction = APIRouter()
