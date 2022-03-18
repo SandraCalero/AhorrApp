@@ -85,7 +85,7 @@ function useAllTransactions() {
           {
             description: 'Car debt',
             date: '2022-03-01',
-            amount: 150000,
+            amount: 15000000,
             category: 'Debts',
             id: 3,
             transactionType: 0,

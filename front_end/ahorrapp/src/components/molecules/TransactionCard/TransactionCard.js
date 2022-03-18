@@ -7,6 +7,11 @@ import './TransactionCard.css';
 function TransactionCard(props) {
   const editButton = <FontAwesomeIcon icon={faEdit} />;
   const deleteButton = <FontAwesomeIcon icon={faTrash} />;
+  const amountFormatted = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(props.amount);
   return (
     <div className={`transactionCard ${props.variant}`}>
       <span className="date">{props.date}</span>
@@ -21,7 +26,7 @@ function TransactionCard(props) {
             </p>
             <p className="categoryCard">{props.category}</p>
           </div>
-          <span className="amount">{props.amount}</span>
+          <span className="amount">{amountFormatted}</span>
           <Button icon={editButton} variant="btnEdit" />
           <Button
             icon={deleteButton}
