@@ -4,6 +4,7 @@ import {
   faArrowCircleUp,
   faArrowCircleDown,
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function useTransactionHistory() {
   // icons
@@ -31,8 +32,9 @@ function useTransactionHistory() {
   // End here the Confirmation Modal utilites
 
   // Everything of Edit Button
+  const navigate = useNavigate();
   const clickEdit = () => {
-    console.log('click on edit button');
+    navigate('/Transaction', { replace: true });
   };
   // End everything of Edit Button
 
