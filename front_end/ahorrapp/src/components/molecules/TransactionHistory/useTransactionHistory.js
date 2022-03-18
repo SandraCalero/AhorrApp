@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleUp,
@@ -30,10 +30,17 @@ function useTransactionHistory() {
   };
   // End here the Confirmation Modal utilites
 
+  // Everything of Edit Button
+  const clickEdit = () => {
+    console.log('click on edit button');
+  };
+  // End everything of Edit Button
+
   return {
     incomeIcon,
     expenseIcon,
     isConfirmationOpen,
+    clickEdit,
     openConfirmationModal,
     closeConfirmationModal,
     YesButtonConfirmationModal,

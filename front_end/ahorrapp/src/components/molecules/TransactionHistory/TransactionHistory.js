@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAllTransactions } from '../../templates/AllTransactions/useAllTransactions';
 import { TransactionCard } from '../TransactionCard/TransactionCard';
 import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import './TransactionHistory.css';
@@ -10,6 +9,7 @@ function TransactionHistory({ transactionList }) {
     incomeIcon,
     expenseIcon,
     isConfirmationOpen,
+    clickEdit,
     YesButtonConfirmationModal,
     openConfirmationModal,
     closeConfirmationModal,
@@ -25,6 +25,7 @@ function TransactionHistory({ transactionList }) {
                 variant="ExpenseCard"
                 icon={expenseIcon}
                 openConfirmationModal={openConfirmationModal}
+                clickEdit={clickEdit}
                 description={transactionItem.description}
                 category={transactionItem.category}
                 amount={transactionItem.amount}
@@ -36,6 +37,7 @@ function TransactionHistory({ transactionList }) {
                 variant="IncomeCard"
                 icon={incomeIcon}
                 openConfirmationModal={openConfirmationModal}
+                clickEdit={clickEdit}
                 description={transactionItem.description}
                 category={transactionItem.category}
                 amount={transactionItem.amount}

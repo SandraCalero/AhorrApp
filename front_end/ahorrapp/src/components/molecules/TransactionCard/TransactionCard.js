@@ -27,7 +27,11 @@ function TransactionCard(props) {
             <p className="categoryCard">{props.category}</p>
           </div>
           <span className="amount">{amountFormatted}</span>
-          <Button icon={editButton} variant="btnEdit" />
+          <Button
+            icon={editButton}
+            variant="btnEdit"
+            onClickButton={props.clickEdit}
+          />
           <Button
             icon={deleteButton}
             variant="btnEdit"
