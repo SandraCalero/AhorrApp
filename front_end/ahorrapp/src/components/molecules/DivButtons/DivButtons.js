@@ -48,7 +48,7 @@ function DivButtons(props) {
         <Button
           text="Yes"
           variant="btn confirmation btnYes"
-          onClickButton={props.closeConfirmationModal}
+          onClickButton={props.YesButtonConfirmationModal}
         />
       )}
     </div>

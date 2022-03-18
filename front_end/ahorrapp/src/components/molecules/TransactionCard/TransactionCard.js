@@ -9,15 +9,19 @@ function TransactionCard(props) {
   const deleteButton = <FontAwesomeIcon icon={faTrash} />;
   return (
     <div className={`transactionCard ${props.variant}`}>
-      <span className="date">March 21 </span>
+      <span className="date">{props.date}</span>
       <div className="rowCard">
         <span className={props.variant}>{props.icon}</span>
         <div className="transactionBody">
           <div className="descriptionContainer">
-            <p className="descriptionCard">Birthday Dinner</p>
-            <p className="categoryCard">Restaurant</p>
+            <p className="descriptionCard">
+              {props.description.length > 20
+                ? props.description.substring(0, 20 - 3) + '...'
+                : props.description}
+            </p>
+            <p className="categoryCard">{props.category}</p>
           </div>
-          <span className="amount">$150.000</span>
+          <span className="amount">{props.amount}</span>
           <Button icon={editButton} variant="btnEdit" />
           <Button
             icon={deleteButton}

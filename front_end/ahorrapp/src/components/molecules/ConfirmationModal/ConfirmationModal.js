@@ -5,7 +5,11 @@ import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import { DivButtons } from '../../molecules/DivButtons/DivButtons';
 import { useConfirmationModal } from './useConfirmationModal';
 
-function ConfirmationModal({ isConfirmationOpen, closeConfirmationModal }) {
+function ConfirmationModal({
+  isConfirmationOpen,
+  closeConfirmationModal,
+  YesButtonConfirmationModal,
+}) {
   const warningIcon = <FontAwesomeIcon icon={faWarning} />;
   const { wrapperClass } = useConfirmationModal({ isConfirmationOpen });
   return (
@@ -21,6 +25,7 @@ function ConfirmationModal({ isConfirmationOpen, closeConfirmationModal }) {
           <DivButtons
             type="confirmation"
             closeConfirmationModal={closeConfirmationModal}
+            YesButtonConfirmationModal={YesButtonConfirmationModal}
           />
         </div>
       </div>

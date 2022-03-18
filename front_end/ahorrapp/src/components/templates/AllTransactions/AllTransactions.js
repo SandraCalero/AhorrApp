@@ -4,21 +4,20 @@ import { Navigate } from 'react-router-dom';
 import { Title } from '../../atoms/Title/Title';
 import { DivButtons } from '../../molecules/DivButtons/DivButtons';
 import { NavBar } from '../../molecules/NavBar/NavBar';
-import { TransactionCard } from '../../molecules/TransactionCard/TransactionCard';
 import { Footer } from '../../organisms/Footer/Footer';
 import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import { useAllTransactions } from './useAllTransactions';
 import './AllTransactions.css';
+import { TransactionHistory } from '../../molecules/TransactionHistory/TransactionHistory';
 
 function AllTransactions() {
   const {
     userLogged,
     isLoading,
-    incomeIcon,
-    expenseIcon,
     isConfirmationOpen,
-    openConfirmationModal,
+    setIsLoading,
     closeConfirmationModal,
+    YesButtonConfirmationModal,
   } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
@@ -38,38 +37,18 @@ function AllTransactions() {
 
   return (
     <div className="body">
-      <ConfirmationModal
-        isConfirmationOpen={isConfirmationOpen}
-        closeConfirmationModal={closeConfirmationModal}
-      />
       <NavBar />
       <section className="container">
         <Title text="Transactions" />
         <DivButtons type="transaction" />
         <article className="transactionsBox">
-          <div className="history">
-            <TransactionCard
-              variant="IncomeCard"
-              icon={incomeIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="ExpenseCard"
-              icon={expenseIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="IncomeCard"
-              icon={incomeIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="ExpenseCard"
-              icon={expenseIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-          </div>
+          <TransactionHistory setIsLoading={setIsLoading} />
         </article>
+        <ConfirmationModal
+          isConfirmationOpen={isConfirmationOpen}
+          closeConfirmationModal={closeConfirmationModal}
+          YesButtonConfirmationModal={YesButtonConfirmationModal}
+        />
       </section>
       <Footer />
     </div>
