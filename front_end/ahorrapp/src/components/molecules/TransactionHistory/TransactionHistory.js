@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAllTransactions } from '../../templates/AllTransactions/useAllTransactions';
 import { TransactionCard } from '../TransactionCard/TransactionCard';
+import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import './TransactionHistory.css';
 
 function TransactionHistory({ setIsLoading }) {
@@ -8,8 +9,10 @@ function TransactionHistory({ setIsLoading }) {
     incomeIcon,
     expenseIcon,
     transactionList,
+    isConfirmationOpen,
+    YesButtonConfirmationModal,
+    closeConfirmationModal,
     openConfirmationModal,
-    handleTransactionRequest,
   } = useAllTransactions();
 
   return (
@@ -42,6 +45,11 @@ function TransactionHistory({ setIsLoading }) {
           </li>
         ))}
       </ul>
+      <ConfirmationModal
+        isConfirmationOpen={isConfirmationOpen}
+        closeConfirmationModal={closeConfirmationModal}
+        YesButtonConfirmationModal={YesButtonConfirmationModal}
+      />
     </div>
   );
 }

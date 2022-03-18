@@ -5,20 +5,12 @@ import { Title } from '../../atoms/Title/Title';
 import { DivButtons } from '../../molecules/DivButtons/DivButtons';
 import { NavBar } from '../../molecules/NavBar/NavBar';
 import { Footer } from '../../organisms/Footer/Footer';
-import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import { useAllTransactions } from './useAllTransactions';
 import './AllTransactions.css';
 import { TransactionHistory } from '../../molecules/TransactionHistory/TransactionHistory';
 
 function AllTransactions() {
-  const {
-    userLogged,
-    isLoading,
-    isConfirmationOpen,
-    setIsLoading,
-    closeConfirmationModal,
-    YesButtonConfirmationModal,
-  } = useAllTransactions();
+  const { userLogged, isLoading, setIsLoading } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
 
@@ -44,11 +36,6 @@ function AllTransactions() {
         <article className="transactionsBox">
           <TransactionHistory setIsLoading={setIsLoading} />
         </article>
-        <ConfirmationModal
-          isConfirmationOpen={isConfirmationOpen}
-          closeConfirmationModal={closeConfirmationModal}
-          YesButtonConfirmationModal={YesButtonConfirmationModal}
-        />
       </section>
       <Footer />
     </div>
