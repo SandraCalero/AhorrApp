@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Schema for Category"""
 
-from typing import Optional, List
+from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime
-from schemas.transaction_schema import TransactionSchema
 
 
 class ItemCreate(BaseModel):
@@ -24,7 +23,6 @@ class CategorySchema(CategoryBase):
     id: int
     created_at: datetime
     updated_at: datetime
-    transactions: Optional[List[TransactionSchema]] = []
 
     class Config:
         """Activating ORM mode"""

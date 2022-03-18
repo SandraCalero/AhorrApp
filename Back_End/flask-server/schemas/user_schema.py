@@ -1,7 +1,6 @@
 from typing import Optional, List
 from pydantic import BaseModel
 from schemas.category_schema import CategorySchema
-from datetime import datetime
 
 
 class UserBase(BaseModel):
@@ -19,9 +18,6 @@ class UserUpdate(UserBase):
 
 
 class UserSchema(UserBase):
-    id: int
-    created_at: datetime
-    updated_at: datetime
     categories: Optional[List[CategorySchema]] = []
 
     class Config:
