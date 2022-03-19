@@ -1,39 +1,26 @@
-import { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useDate } from "../formaters/useDate";
+import { useRef, useState } from 'react';
+import { useDate } from '../formaters/useDate';
 
 export const useFormState = () => {
-  const location = useLocation();
-  //Location data
-  const transaction = location.state || {};
-  const amountValue = transaction.amount || "";
-  const cat = transaction.category || null;
-  const transDate = transaction.date || new Date();
-  // si local storage o history es vacio
-  // pero si tienen valor
-
-  const amount = useRef(amountValue);
+  const amount = useRef('');
   const setAmount = (value) => {
     amount.current = value;
   };
-  const [categorySelected, setCategorySelected] = useState(cat);
+  const [categorySelected, setCategorySelected] = useState(null);
 
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  const dateToday = transDate.toLocaleDateString("en-US", options);
+  const { formatDate, dateToString } = useDate();
+  const dateToday = dateToString(new Date());
+
   const [date, setDate] = useState(dateToday);
-
-  const { formatDate } = useDate();
 
   const [dateFormated, setDateFormated] = useState(formatDate(date));
 
-  const [textarea, setTextarea] = useState("");
+  const [textarea, setTextarea] = useState('');
 
   const onDateChange = (value) => {
-    const dateClicked = value.toLocaleDateString("en-US", options);
+    const dateClicked = dateToString(value);
     setDate(dateClicked);
-    const dateNewFormat = formatDate(
-      value.toLocaleDateString("en-US", options)
-    );
+    const dateNewFormat = formatDate(dateClicked);
     setDateFormated(dateNewFormat);
   };
 
@@ -51,9 +38,11 @@ export const useFormState = () => {
   };
 
   const onClearData = () => {
-    setAmount("");
-    setCategorySelected("");
+    setAmount('');
+    setCategorySelected('');
     setDate(dateToday);
+    setTextarea('');
+    setDateFormated(formatDate(new Date()));
   };
 
   return {

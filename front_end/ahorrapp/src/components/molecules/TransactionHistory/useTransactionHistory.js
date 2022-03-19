@@ -4,7 +4,6 @@ import {
   faArrowCircleUp,
   faArrowCircleDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 
 function useTransactionHistory() {
   // icons
@@ -31,17 +30,31 @@ function useTransactionHistory() {
   };
   // End here the Confirmation Modal utilites
 
-  // Everything of Edit Button
-  const navigate = useNavigate();
-  const clickEdit = () => {
-    navigate('/Transaction', { replace: true });
+  // Everything of FormModal
+  //state of the FormModal
+  const [isFormModalOpen, setIsFormModalOpen] = useState();
+  const openFormModal = () => {
+    setIsFormModalOpen(true);
   };
+  const closeFormModal = () => {
+    setIsFormModalOpen(false);
+  };
+  // End FormModal
+
+  // Everything of Edit Button
+  const clickEdit = () => {
+    console.log('clickEdit');
+    openFormModal();
+  };
+
   // End everything of Edit Button
 
   return {
     incomeIcon,
     expenseIcon,
     isConfirmationOpen,
+    isFormModalOpen,
+    closeFormModal,
     clickEdit,
     openConfirmationModal,
     closeConfirmationModal,

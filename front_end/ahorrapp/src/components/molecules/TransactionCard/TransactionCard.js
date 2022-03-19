@@ -2,19 +2,20 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '../../atoms/Button/Button';
+import { useCurrency } from '../../../utils/formaters/useCurrency';
+import { useDate } from '../../../utils/formaters/useDate';
 import './TransactionCard.css';
 
 function TransactionCard(props) {
+  const { formatCurrency } = useCurrency();
+  const { dateToString } = useDate();
   const editButton = <FontAwesomeIcon icon={faEdit} />;
   const deleteButton = <FontAwesomeIcon icon={faTrash} />;
-  const amountFormatted = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(props.amount);
+  const amountFormatted = formatCurrency(props.amount);
+  const dateString = dateToString(new Date(props.date));
   return (
     <div className={`transactionCard ${props.variant}`}>
-      <span className="date">{props.date}</span>
+      <span className="date">{dateString}</span>
       <div className="rowCard">
         <span className={props.variant}>{props.icon}</span>
         <div className="transactionBody">

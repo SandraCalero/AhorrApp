@@ -3,12 +3,14 @@ import { TransactionCard } from '../TransactionCard/TransactionCard';
 import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
 import './TransactionHistory.css';
 import { useTransactionHistory } from './useTransactionHistory';
+import { FormModal } from '../../organisms/FormModal/FormModal';
 
 function TransactionHistory({ transactionList }) {
   const {
     incomeIcon,
     expenseIcon,
     isConfirmationOpen,
+    isFormModalOpen,
     clickEdit,
     YesButtonConfirmationModal,
     openConfirmationModal,
@@ -52,6 +54,7 @@ function TransactionHistory({ transactionList }) {
         closeConfirmationModal={closeConfirmationModal}
         YesButtonConfirmationModal={YesButtonConfirmationModal}
       />
+      <FormModal isFormModalOpen={isFormModalOpen} />
     </div>
   );
 }
