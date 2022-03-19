@@ -9,6 +9,8 @@ import {
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "../../../utils/session/useSession";
+import { useCurrency } from "../../../utils/formaters/useCurrency";
+import { useDate } from "../../../utils/formaters/useDate";
 
 function useDashboard() {
   // get info by session
@@ -17,6 +19,9 @@ function useDashboard() {
   const userName = userInfo ? userInfo.first_name : null;
   // get user id
   const userId = userInfo ? userInfo.id : null;
+  // call formaters
+  const { formatCurrency } = useCurrency();
+  const { formatDate } = useDate();
   // Icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
@@ -47,20 +52,6 @@ function useDashboard() {
     closeCalendar();
   };
 
-  const formatDate = (date) => {
-    const dateToDate = new Date(date);
-    let month = (dateToDate.getMonth() + 1).toString();
-    let day = dateToDate.getDate().toString();
-    const year = dateToDate.getFullYear();
-    if (month.length < 2) {
-      month = "0" + month;
-    }
-    if (day.length < 2) {
-      day = "0" + day;
-    }
-    return [year, month, day].join("-");
-  };
-
   const getLabelsChart = (dataResponse) => {
     const budget = dataResponse.budget.categories;
     const expenses = dataResponse.expenses.categories;
@@ -83,11 +74,15 @@ function useDashboard() {
     const dataBudget = dataResponse
       ? Object.values(dataResponse.budget.categories)
       : [];
-    const totalIncomes = dataResponse ? dataResponse.incomes.totalIncomes : "";
-    const totalExpenses = dataResponse
-      ? dataResponse.expenses.totalExpenses
+    const totalIncomes = dataResponse
+      ? formatCurrency(dataResponse.incomes.totalIncomes)
       : "";
-    const totalBalance = dataResponse ? dataResponse.totalBalance : "";
+    const totalExpenses = dataResponse
+      ? formatCurrency(dataResponse.expenses.totalExpenses)
+      : "";
+    const totalBalance = dataResponse
+      ? formatCurrency(dataResponse.totalBalance)
+      : "";
 
     return {
       labels,
