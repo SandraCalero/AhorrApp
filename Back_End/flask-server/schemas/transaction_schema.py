@@ -37,11 +37,6 @@ class TransactionCustom(BaseModel):
     budget: dict
 
 
-class TransactionWithCategory(TransactionBase):
-    """Used to show all the transaction data including category name"""
-    category_name: Optional[str] = None
-
-
 class TransactionSchema(TransactionBase):
     id: int
     created_at: datetime
@@ -49,3 +44,8 @@ class TransactionSchema(TransactionBase):
 
     class Config:
         orm_mode = True
+
+
+class TransactionWithCategory(TransactionSchema):
+    """Used to show all the transaction data including category name"""
+    category_name: Optional[str] = None
