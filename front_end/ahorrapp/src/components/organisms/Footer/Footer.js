@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faHome, faUsd } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut, faHome, faUsd } from "@fortawesome/free-solid-svg-icons";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
 import { useGoogleLogout } from "react-google-login";
 import { Button } from "../../atoms/Button/Button";
@@ -16,7 +16,7 @@ function Footer() {
   });
   const homeIcon = <FontAwesomeIcon icon={faHome} />;
   const transIcon = <FontAwesomeIcon icon={faUsd} />;
-  const settingIcon = <FontAwesomeIcon icon={faGear} />;
+  const logoutIcon = <FontAwesomeIcon icon={faSignOut} />;
   return (
     <footer className="FooterMol">
       <LinkButton
@@ -34,7 +34,7 @@ function Footer() {
       <Button
         text="Logout"
         variant="linkFooter Settings"
-        icon={settingIcon}
+        icon={logoutIcon}
         onClickButton={signOut}
       />
     </footer>
