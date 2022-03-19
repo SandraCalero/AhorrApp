@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDate } from "../formaters/useDate";
 
 export const useFormState = () => {
   const location = useLocation();
@@ -21,19 +22,7 @@ export const useFormState = () => {
   const dateToday = transDate.toLocaleDateString("en-US", options);
   const [date, setDate] = useState(dateToday);
 
-  const formatDate = (date) => {
-    const dateToDate = new Date(date);
-    let month = (dateToDate.getMonth() + 1).toString();
-    let day = dateToDate.getDate().toString();
-    const year = dateToDate.getFullYear();
-    if (month.length < 2) {
-      month = "0" + month;
-    }
-    if (day.length < 2) {
-      day = "0" + day;
-    }
-    return [year, month, day].join("-");
-  };
+  const { formatDate } = useDate();
 
   const [dateFormated, setDateFormated] = useState(formatDate(date));
 

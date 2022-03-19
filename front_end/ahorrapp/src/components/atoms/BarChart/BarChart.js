@@ -21,7 +21,7 @@ Chart.register(
   ChartDataLabels
 );
 
-function BarChart() {
+function BarChart({ labelsList, dataExpenses, dataBudget }) {
   const options = {
     responsive: true,
     layout: {
@@ -47,19 +47,19 @@ function BarChart() {
     },
   };
 
-  const labels = ["Rent", "Utilities", "Restaurant", "Transport"];
+  const labels = labelsList;
 
   const data = {
     labels,
     datasets: [
       {
         label: "Budget",
-        data: [100, 200, 300, 500],
+        data: dataBudget,
         backgroundColor: "#4FB8FF",
       },
       {
         label: "Expenses",
-        data: [500, 400, 300, 600],
+        data: dataExpenses,
         backgroundColor: "#F47265",
       },
     ],
