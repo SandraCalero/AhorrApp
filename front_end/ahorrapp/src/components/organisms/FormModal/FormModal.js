@@ -1,13 +1,16 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form } from '../Form/Form';
 import { useFormModal } from './useFormModal';
 import './FormModal.css';
 
 function FormModal({ isFormModalOpen }) {
-  const { wrapperClass } = useFormModal({ isFormModalOpen });
+  const { wrapperClass, categoryList, variant } = useFormModal({
+    isFormModalOpen,
+  });
+
   return (
     <div className={wrapperClass}>
-      <Form isOpenForm={1} />
+      <Form isOpenForm={true} categoryList={[]} variant="form show expense" />
     </div>
   );
 }

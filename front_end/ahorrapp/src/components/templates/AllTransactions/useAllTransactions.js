@@ -22,6 +22,10 @@ function useAllTransactions() {
 
   const { transactionList } = getTransactionList(apiResponse);
 
+  const updateTransactionList = (newList) => {
+    setApiResponse(newList);
+  };
+
   // Handle request of the history
   const handleTransactionRequest = () => {
     setIsLoading(true);
@@ -83,7 +87,7 @@ function useAllTransactions() {
     userLogged,
     isLoading,
     transactionList,
-    setIsLoading,
+    updateTransactionList,
   };
 }
 
