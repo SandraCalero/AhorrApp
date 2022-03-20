@@ -9,7 +9,7 @@ from datetime import datetime
 
 class BudgetBase(BaseModel):
     """Validation budget base used to require budget data"""
-    value = float
+    value: float
     category_id: int
 
 
