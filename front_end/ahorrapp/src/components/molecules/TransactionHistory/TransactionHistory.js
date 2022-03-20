@@ -1,23 +1,35 @@
-import React from 'react';
-import ReactLoading from 'react-loading';
-import { TransactionCard } from '../TransactionCard/TransactionCard';
-import { ConfirmationModal } from '../../molecules/ConfirmationModal/ConfirmationModal';
-import './TransactionHistory.css';
-import { useTransactionHistory } from './useTransactionHistory';
-import { FormModal } from '../../organisms/FormModal/FormModal';
+import React from "react";
+import ReactLoading from "react-loading";
+import { TransactionCard } from "../TransactionCard/TransactionCard";
+import { ConfirmationModal } from "../../molecules/ConfirmationModal/ConfirmationModal";
+import "./TransactionHistory.css";
+import { useTransactionHistory } from "./useTransactionHistory";
+import { FormModal } from "../../organisms/FormModal/FormModal";
 
-function TransactionHistory({ transactionList, updateTransactionList }) {
+function TransactionHistory({
+  transactionList,
+  variantFilter,
+  updateTransactionList,
+}) {
   const {
     isLoading,
     incomeIcon,
     expenseIcon,
+    transactionInfo,
     isConfirmationOpen,
     isFormModalOpen,
+    variantForm,
+    itemList,
     clickEdit,
     YesButtonConfirmationModal,
     openConfirmationModal,
     closeConfirmationModal,
-  } = useTransactionHistory({ updateTransactionList });
+    closeFormModal,
+  } = useTransactionHistory({
+    transactionList,
+    variantFilter,
+    updateTransactionList,
+  });
 
   if (isLoading) {
     return (
@@ -25,8 +37,8 @@ function TransactionHistory({ transactionList, updateTransactionList }) {
         <ReactLoading
           type="bubbles"
           color="#357EDD"
-          width={'100%'}
-          height={'100%'}
+          width={"100%"}
+          height={"100%"}
         />
       </div>
     );
@@ -35,11 +47,11 @@ function TransactionHistory({ transactionList, updateTransactionList }) {
   return (
     <div className="TransactionHistory">
       <ul className="TransactionCardList">
-        {transactionList.map((transactionItem) => {
+        {itemList.map((transactionItem) => {
           const variant =
             transactionItem.transactionType === 0
-              ? 'ExpenseCard'
-              : 'IncomeCard';
+              ? "ExpenseCard"
+              : "IncomeCard";
           const iconCard =
             transactionItem.transactionType === 0 ? expenseIcon : incomeIcon;
           return (
@@ -54,7 +66,7 @@ function TransactionHistory({ transactionList, updateTransactionList }) {
                   clickEdit(transactionItem);
                 }}
                 description={transactionItem.description}
-                category={transactionItem.category}
+                category={transactionItem.category_name}
                 amount={transactionItem.amount}
                 date={transactionItem.date}
               />
@@ -67,7 +79,13 @@ function TransactionHistory({ transactionList, updateTransactionList }) {
         closeConfirmationModal={closeConfirmationModal}
         YesButtonConfirmationModal={YesButtonConfirmationModal}
       />
-      <FormModal isFormModalOpen={isFormModalOpen} />
+      <FormModal
+        isFormModalOpen={isFormModalOpen}
+        transactionInfo={transactionInfo}
+        closeFormModal={closeFormModal}
+        categoryList={[]}
+        variant={variantForm}
+      />
     </div>
   );
 }

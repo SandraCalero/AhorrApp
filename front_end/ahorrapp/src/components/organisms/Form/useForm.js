@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import classNames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
   faCalendar,
   faList,
-} from '@fortawesome/free-solid-svg-icons';
-import { useFormState } from '../../../utils/states/useFormState';
+} from "@fortawesome/free-solid-svg-icons";
+import { useFormState } from "../../../utils/states/useFormState";
 
-function useForm({ isOpenForm, variant }) {
-  const wrapperClass = classNames('form', {
+function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
+  const wrapperClass = classNames("form", {
     show: isOpenForm,
     [variant]: true,
   });
-  const [prevVariantForm, setPrevVariant] = useState('');
+  const [prevVariantForm, setPrevVariant] = useState("");
   //icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
@@ -24,25 +24,34 @@ function useForm({ isOpenForm, variant }) {
     amount,
     categorySelected,
     date,
+    dateToShow,
     textarea,
-    dateFormated,
+    formatDateApi,
     onDateChange,
     onAmoutChange,
     onTextAreaChange,
     onCategoryChange,
     onClearData,
-  } = useFormState();
+  } = useFormState({ transactionInfo });
+  console.log("update", {
+    amount,
+    categorySelected,
+    date,
+    dateToShow,
+    textarea,
+  });
+
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
   useEffect(() => {
-    if (variant !== prevVariantForm) {
+    if (variant !== prevVariantForm && !transactionInfo) {
       onClearData();
       setPrevVariant(variant);
     }
-  }, [variant, onClearData, prevVariantForm]);
+  }, [variant, onClearData, prevVariantForm, transactionInfo]);
 
   //functions
   const openModal = () => {
@@ -71,33 +80,32 @@ function useForm({ isOpenForm, variant }) {
 
   const handleSubmitForm = () => {
     setIsSubmitting(true);
-
     const data = {
       value: amount,
       category_id: categorySelected.id,
-      date: dateFormated,
+      date: formatDateApi(date),
       description: textarea,
     };
-    console.log(data);
+    console.log("handleSubmitFormdata", data);
     axios({
-      method: 'post',
-      url: 'https://gorest.co.in/public/v2/users',
+      method,
+      url,
       data: {
         value: amount,
         category_id: categorySelected.id,
-        date: dateFormated,
+        date: formatDateApi(date),
         description: textarea,
       },
     })
       .then((response) => {
         console.log(response);
-        alert('Transaction added');
+        alert("Transaction added");
         setIsSubmitting(false);
         onClearData();
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to add transaction');
+        alert("Failed to add transaction");
         setIsSubmitting(false);
         onClearData();
       });
@@ -113,8 +121,8 @@ function useForm({ isOpenForm, variant }) {
     amountValue: amount,
     dateIcon,
     isOpen,
-    categorySelected: categorySelected ? categorySelected.name : '',
-    date,
+    categorySelected: categorySelected ? categorySelected.name : "",
+    dateToShow,
     isOpenCalendar,
     disabled,
     textarea,

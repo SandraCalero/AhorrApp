@@ -21,11 +21,12 @@ function useLoginStates() {
   // If user has a valid google account
   const handleSuccess = (responseGoogle) => {
     setGoogleResponse(responseGoogle.profileObj);
-    // const url = `/user-email/${googleResponse.email}`
+    const url = `http://localhost:5000/user-email/${responseGoogle.profileObj.email}`;
     setIsLoading(true);
     axios
-      .get("https://swapi.dev/api/films")
+      .get("https://swapi-api.hbtn.io/api/films")
       .then((response) => {
+        console.log(response);
         const userResponse = {
           first_name: "Mateo",
           last_name: "Garcia",
@@ -50,20 +51,16 @@ function useLoginStates() {
     setIsLoading(true);
     axios({
       method: "POST",
-      url: "",
+      url: "http://localhost:5000/user",
       data: {
         first_name: googleResponse.givenName,
         last_name: googleResponse.familyName,
         email: googleResponse.email,
+        h_password: "string",
       },
     })
       .then((response) => {
-        const userResponse = {
-          first_name: "Mateo",
-          last_name: "Garcia",
-          email: "mateog91@gmail.com",
-          id: 2,
-        };
+        const userResponse = response;
         setIsLoading(false);
         setIsNewUser(false);
         onSaveUserInfo(userResponse);

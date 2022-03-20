@@ -1,14 +1,23 @@
-import React from 'react';
-import { Input } from '../../molecules/Input/Input';
-import { TextArea } from '../../atoms/TextArea/TextArea';
-import { DivButtons } from '../../molecules/DivButtons/DivButtons';
-import { useForm } from './useForm';
-import { CategoryModal } from '../CategoryModal/CategoryModal';
-import { LoadingModal } from '../LoadingModal/LoadingModal';
-import { DateModal } from '../../molecules/DateModal/DateModal';
-import './Form.css';
+import React from "react";
+import { Input } from "../../molecules/Input/Input";
+import { TextArea } from "../../atoms/TextArea/TextArea";
+import { DivButtons } from "../../molecules/DivButtons/DivButtons";
+import { useForm } from "./useForm";
+import { CategoryModal } from "../CategoryModal/CategoryModal";
+import { LoadingModal } from "../LoadingModal/LoadingModal";
+import { DateModal } from "../../molecules/DateModal/DateModal";
+import "./Form.css";
 
-function Form({ isOpenForm, categoryList, variant }) {
+function Form({
+  isOpenForm,
+  categoryList,
+  variant,
+  transactionInfo,
+  url,
+  method,
+  closeFormModal,
+  typeDivButtons = "action",
+}) {
   const {
     wrapperClass,
     amountIcon,
@@ -16,7 +25,7 @@ function Form({ isOpenForm, categoryList, variant }) {
     dateIcon,
     isOpen,
     categorySelected,
-    date,
+    dateToShow,
     isOpenCalendar,
     amountValue,
     textarea,
@@ -30,7 +39,7 @@ function Form({ isOpenForm, categoryList, variant }) {
     openCalendar,
     handleOnBlurTextArea,
     handleSubmitForm,
-  } = useForm({ isOpenForm, variant });
+  } = useForm({ isOpenForm, variant, transactionInfo, url, method });
   return (
     <form
       className={wrapperClass}
@@ -45,7 +54,7 @@ function Form({ isOpenForm, categoryList, variant }) {
         value={amountValue}
         text="Amount"
         name="amount"
-        onValueChange={onValueChange}
+        onBlur={onValueChange}
       />
       <Input
         variant="button"
@@ -60,7 +69,7 @@ function Form({ isOpenForm, categoryList, variant }) {
         variant="date"
         icon={dateIcon}
         text="Date"
-        value={date}
+        value={dateToShow}
         onClick={openCalendar}
       />
       <TextArea
@@ -69,9 +78,12 @@ function Form({ isOpenForm, categoryList, variant }) {
         handleOnBlurTextArea={handleOnBlurTextArea}
       />
       <DivButtons
-        type="action"
+        type={typeDivButtons}
         disabledSubmit={disabled}
-        handleSubmitForm={handleSubmitForm}
+        handleSubmitForm={() => {
+          handleSubmitForm({ url, method });
+        }}
+        onCancelClick={closeFormModal}
       />
       <CategoryModal
         categoryList={categoryList}

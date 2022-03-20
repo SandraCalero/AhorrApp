@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from '../../../utils/session/useSession';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { useSession } from "../../../utils/session/useSession";
+import axios from "axios";
 
 function useAllTransactions() {
   // Everything for transactionList
@@ -32,39 +32,43 @@ function useAllTransactions() {
     const url = `/loquesea/${userId}`;
     console.log(url);
     axios
-      .get('https://swapi.dev/api/films')
+      .get("https://swapi.dev/api/films")
       .then((response) => {
-        console.log('ejecutó petición');
+        console.log("ejecutó petición");
         const listResponse = [
           {
-            description: 'Date with Daniela',
-            date: '2022-03-18',
+            description: "Date with Daniela",
+            date: "2022-03-18",
             amount: 200000,
-            category: 'Restaurant',
+            category_id: 1,
+            category_name: "Restaurant",
             id: 0,
             transactionType: 0,
           },
           {
-            description: 'Salary',
-            date: '2022-03-18',
+            description: "Salary",
+            date: "2022-03-18",
             amount: 2000000,
-            category: 'Salary',
+            category_id: 2,
+            category_name: "Salary",
             id: 1,
             transactionType: 1,
           },
           {
-            description: 'Birthday gift',
-            date: '2022-03-18',
+            description: "Birthday gift",
+            date: "2022-03-18",
             amount: 350000,
-            category: 'Gifts',
+            category_id: 3,
+            category_name: "Gifts",
             id: 2,
             transactionType: 1,
           },
           {
-            description: 'Car debt',
-            date: '2022-03-01',
+            description: "Car debt",
+            date: "2022-03-01",
             amount: 15000000,
-            category: 'Debts',
+            category_id: 4,
+            category_name: "Debts",
             id: 3,
             transactionType: 0,
           },
@@ -88,6 +92,10 @@ function useAllTransactions() {
     isLoading,
     transactionList,
     updateTransactionList,
+    // TODO variantFIler state, handles change state variantFiler
+    variantFiler: null,
+    handleIncomeButton: () => {},
+    handleExpenseButton: () => {},
   };
 }
 

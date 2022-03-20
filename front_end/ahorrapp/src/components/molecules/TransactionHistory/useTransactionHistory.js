@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowCircleUp,
   faArrowCircleDown,
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-function useTransactionHistory({ updateTransactionList }) {
+function useTransactionHistory({
+  transactionList,
+  variantFilter,
+  updateTransactionList,
+}) {
   // icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
@@ -16,6 +20,9 @@ function useTransactionHistory({ updateTransactionList }) {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [transactionId, setTransactionId] = useState(null);
   const [transactionInfo, setTransactionInfo] = useState(null);
+
+  // state for variant formModal
+  const [variantForm, setVariantForm] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,30 +45,33 @@ function useTransactionHistory({ updateTransactionList }) {
     console.log(deleteUrl);
 
     axios
-      .delete('https://swapi.dev/api/films')
+      .delete("https://swapi.dev/api/films")
       .then((response) => {
         const newListResponse = [
           {
-            description: 'Salary',
-            date: '2022-03-18',
+            description: "Salary",
+            date: "2022-03-18",
             amount: 2000000,
-            category: 'Salary',
+            category_id: 2,
+            category_name: "Salary",
             id: 1,
             transactionType: 1,
           },
           {
-            description: 'Birthday gift',
-            date: '2022-03-18',
+            description: "Birthday gift",
+            date: "2022-03-18",
             amount: 350000,
-            category: 'Gifts',
+            category_id: 3,
+            category_name: "Gifts",
             id: 2,
             transactionType: 1,
           },
           {
-            description: 'Car debt',
-            date: '2022-03-01',
+            description: "Car debt",
+            date: "2022-03-01",
             amount: 15000000,
-            category: 'Debts',
+            category_id: 4,
+            category_name: "Debts",
             id: 3,
             transactionType: 0,
           },
@@ -69,11 +79,11 @@ function useTransactionHistory({ updateTransactionList }) {
         updateTransactionList(newListResponse); //set the new transactionList
         setIsConfirmationOpen(false);
         setTransactionId(null);
-        alert('Transaction successfully deleted');
+        alert("Transaction successfully deleted");
         setIsLoading(false);
       })
       .catch((error) => {
-        alert('The transaction could not be deleted');
+        alert("The transaction could not be deleted");
         setIsLoading(false);
         setIsConfirmationOpen(false);
         setTransactionId(null);
@@ -90,11 +100,22 @@ function useTransactionHistory({ updateTransactionList }) {
   };
   // End FormModal
 
+  const filterData = () => {
+    const filterValue = variantFilter === "income" ? 1 : 0;
+
+    if (!variantFilter) return transactionList;
+
+    return transactionList.filter(
+      (item) => item.transactionType === filterValue
+    );
+  };
+
   // Everything of Edit Button
   const clickEdit = (transactionItem) => {
+    const variant = transactionItem.transactionType ? "income" : "expense";
     setIsFormModalOpen(true);
+    setVariantForm(variant);
     setTransactionInfo(transactionItem);
-    console.log(transactionItem);
   };
 
   // End everything of Edit Button
@@ -106,6 +127,8 @@ function useTransactionHistory({ updateTransactionList }) {
     transactionInfo,
     isConfirmationOpen,
     isFormModalOpen,
+    variantForm,
+    itemList: filterData(),
     closeFormModal,
     clickEdit,
     openConfirmationModal,

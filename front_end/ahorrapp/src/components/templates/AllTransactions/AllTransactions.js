@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactLoading from 'react-loading';
-import { Navigate } from 'react-router-dom';
-import { Title } from '../../atoms/Title/Title';
-import { DivButtons } from '../../molecules/DivButtons/DivButtons';
-import { NavBar } from '../../molecules/NavBar/NavBar';
-import { Footer } from '../../organisms/Footer/Footer';
-import { useAllTransactions } from './useAllTransactions';
-import './AllTransactions.css';
-import { TransactionHistory } from '../../molecules/TransactionHistory/TransactionHistory';
+import React from "react";
+import ReactLoading from "react-loading";
+import { Navigate } from "react-router-dom";
+import { Title } from "../../atoms/Title/Title";
+import { DivButtons } from "../../molecules/DivButtons/DivButtons";
+import { NavBar } from "../../molecules/NavBar/NavBar";
+import { Footer } from "../../organisms/Footer/Footer";
+import { useAllTransactions } from "./useAllTransactions";
+import "./AllTransactions.css";
+import { TransactionHistory } from "../../molecules/TransactionHistory/TransactionHistory";
 
 function AllTransactions() {
-  const { userLogged, isLoading, transactionList, updateTransactionList } =
-    useAllTransactions();
+  const {
+    userLogged,
+    isLoading,
+    transactionList,
+    variantFilter,
+    updateTransactionList,
+    handleIncomeButton,
+    handleExpenseButton,
+  } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
 
@@ -21,8 +28,8 @@ function AllTransactions() {
         <ReactLoading
           type="bubbles"
           color="#357EDD"
-          width={'100%'}
-          height={'100%'}
+          width={"100%"}
+          height={"100%"}
         />
       </div>
     );
@@ -33,10 +40,15 @@ function AllTransactions() {
       <NavBar />
       <section className="container">
         <Title text="Transactions" />
-        <DivButtons type="transaction" />
+        <DivButtons
+          type="transaction"
+          onClickLeft={handleIncomeButton}
+          onClickRight={handleExpenseButton}
+        />
         <article className="transactionsBox">
           <TransactionHistory
             transactionList={transactionList}
+            variantFilter={variantFilter}
             updateTransactionList={updateTransactionList}
           />
         </article>

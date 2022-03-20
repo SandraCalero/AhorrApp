@@ -1,31 +1,19 @@
-import { useRef, useState } from 'react';
-import { useDate } from '../formaters/useDate';
+import { useEffect, useState } from "react";
+import { useDate } from "../formaters/useDate";
 
-export const useFormState = () => {
-  const amount = useRef('');
-  const setAmount = (value) => {
-    amount.current = value;
-  };
+export const useFormState = ({ transactionInfo }) => {
+  const { formatDateApi, dateToString, currentDate, stringToDate } = useDate();
+  // form values
+  const [amount, setAmount] = useState("");
   const [categorySelected, setCategorySelected] = useState(null);
-
-  const { formatDate, dateToString } = useDate();
-  const dateToday = dateToString(new Date());
-
-  const [date, setDate] = useState(dateToday);
-
-  const [dateFormated, setDateFormated] = useState(formatDate(date));
-
-  const [textarea, setTextarea] = useState('');
+  const [date, setDate] = useState(currentDate());
+  const [textarea, setTextarea] = useState("");
 
   const onDateChange = (value) => {
-    const dateClicked = dateToString(value);
-    setDate(dateClicked);
-    const dateNewFormat = formatDate(dateClicked);
-    setDateFormated(dateNewFormat);
+    setDate(value);
   };
 
   const onAmoutChange = (values) => {
-    console.log(values.value);
     setAmount(values.value);
   };
 
@@ -33,24 +21,45 @@ export const useFormState = () => {
     setTextarea(event.target.value);
   };
   const onCategoryChange = (value) => {
-    console.log(value);
     setCategorySelected(value);
   };
 
   const onClearData = () => {
-    setAmount('');
-    setCategorySelected('');
-    setDate(dateToday);
-    setTextarea('');
-    setDateFormated(formatDate(new Date()));
+    console.log("clear");
+    setAmount("");
+    setCategorySelected(null);
+    setDate(currentDate());
+    setTextarea("");
   };
 
+  const changeInitialData = ({ amount, category, dateDB, description }) => {
+    setAmount(amount);
+    setCategorySelected(category);
+    setDate(stringToDate(dateDB));
+    setTextarea(description);
+  };
+
+  useEffect(() => {
+    if (transactionInfo) {
+      const amount = transactionInfo.amount;
+      const category = {
+        id: transactionInfo.category_id,
+        name: transactionInfo.category_name,
+      };
+      const dateDB = transactionInfo.date;
+      const description = transactionInfo.description;
+      changeInitialData({ amount, category, dateDB, description });
+    }
+  }, [transactionInfo]);
+
   return {
-    amount: amount.current,
+    amount,
     categorySelected,
+    dateToShow: dateToString(date),
     date,
     textarea,
-    dateFormated,
+    formatDateApi,
+    dateToString,
     onDateChange,
     onAmoutChange,
     onTextAreaChange,

@@ -1,10 +1,12 @@
 import React from "react";
-import "./InputText.css";
 import NumberFormat from "react-number-format";
+import { useInputText } from "./useInputText";
+import "./InputText.css";
 
-function InputText({ value, onValueChange }) {
+function InputText({ value, onBlur }) {
+  const { onBlurInput, onValueChange } = useInputText({ onBlur });
   return (
-    <div className="inputText">
+    <div className="inputText" onBlur={onBlurInput}>
       <NumberFormat
         thousandsGroupStyle="thousand"
         placeholder="$ Enter amount"

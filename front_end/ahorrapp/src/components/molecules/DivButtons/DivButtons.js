@@ -1,35 +1,44 @@
-import React from 'react';
-import './DivButtons.css';
-import { Button } from '../../atoms/Button/Button';
-import { LinkButton } from '../LinkButton/LinkButton';
+import React from "react";
+import "./DivButtons.css";
+import { Button } from "../../atoms/Button/Button";
+import { LinkButton } from "../LinkButton/LinkButton";
 
-function DivButtons(props) {
+function DivButtons({
+  onClickLeft,
+  onClickRight,
+  disabledSubmit,
+  handleSubmitForm,
+  onCancelClick,
+  closeConfirmationModal,
+  YesButtonConfirmationModal,
+  type,
+}) {
   return (
     <div className="divButtons">
-      {props.type === 'transaction' && (
+      {type === "transaction" && (
         <Button
           text="Income"
           variant="btn shadow Income"
-          onClickButton={props.onClickLeft}
+          onClickButton={onClickLeft}
         />
       )}
-      {props.type === 'transaction' && (
+      {type === "transaction" && (
         <Button
           text="Expense"
           variant="btn shadow Expense"
-          onClickButton={props.onClickRight}
+          onClickButton={onClickRight}
         />
       )}
-      {props.type === 'action' && (
+      {type === "action" && (
         <Button
           text="Add"
           variant="btn Add"
           type="button"
-          disabled={props.disabledSubmit}
-          onClickButton={props.handleSubmitForm}
+          disabled={disabledSubmit}
+          onClickButton={handleSubmitForm}
         />
       )}
-      {props.type === 'action' && (
+      {type === "action" && (
         <LinkButton
           route="/Dashboard"
           text="Cancel"
@@ -37,18 +46,35 @@ function DivButtons(props) {
           type="reset"
         />
       )}
-      {props.type === 'confirmation' && (
+      {type === "edit" && (
+        <Button
+          text="Update"
+          variant="btn Add"
+          type="button"
+          disabled={disabledSubmit}
+          onClickButton={handleSubmitForm}
+        />
+      )}
+      {type === "edit" && (
+        <Button
+          text="Cancel"
+          variant="btn Cancel"
+          type="reset"
+          onClickButton={onCancelClick}
+        />
+      )}
+      {type === "confirmation" && (
         <Button
           text="No"
           variant="btn confirmation btnNo"
-          onClickButton={props.closeConfirmationModal}
+          onClickButton={closeConfirmationModal}
         />
       )}
-      {props.type === 'confirmation' && (
+      {type === "confirmation" && (
         <Button
           text="Yes"
           variant="btn confirmation btnYes"
-          onClickButton={props.YesButtonConfirmationModal}
+          onClickButton={YesButtonConfirmationModal}
         />
       )}
     </div>
