@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from models import storage
 
 from app.routes import category, transaction, transaction_type, user
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI(
@@ -12,6 +13,19 @@ app = FastAPI(
         "name": "transaction_types",
         "description": "transaction types routes"
     }]
+)
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(transaction)
