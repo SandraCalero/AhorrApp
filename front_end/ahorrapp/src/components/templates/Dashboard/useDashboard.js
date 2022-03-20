@@ -111,13 +111,13 @@ function useDashboard() {
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
     const dateRangeRequest = newDateRange ? newDateRange : dateRange;
-    const url = `/user/${userId}/all-transactions?i_date=${formatDateApi(
+    const url = `http://localhost:5000/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
     )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
     console.log(url);
 
     axios
-      .get("https://swapi.dev/api/films")
+      .get(url)
       .then((response) => {
         const jsonResponse = {
           expenses: {
@@ -144,7 +144,6 @@ function useDashboard() {
               groseries: "500",
               restaurant: "400",
             },
-            totalBudget: "1800", //No lo necesitamos pintar
           },
           totalBalance: "800",
         };

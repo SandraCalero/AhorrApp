@@ -33,13 +33,6 @@ function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
     onCategoryChange,
     onClearData,
   } = useFormState({ transactionInfo });
-  console.log("update", {
-    amount,
-    categorySelected,
-    date,
-    dateToShow,
-    textarea,
-  });
 
   // states
   const [isOpen, setIsOpen] = useState(false);
