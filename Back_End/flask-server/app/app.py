@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from models import storage
 
-from app.routes import category, transaction, transaction_type, user
+from app.routes import category, transaction, transaction_type, user, budget
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -32,6 +32,7 @@ app.include_router(transaction)
 app.include_router(transaction_type)
 app.include_router(category)
 app.include_router(user)
+app.include_router(budget)
 # app.add_middleware(DebugToolbarMiddleware)
 print("estoy aqui.")
 
