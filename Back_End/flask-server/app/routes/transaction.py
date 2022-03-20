@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ object that handles all default RestFul API actions for transactions """
-from fastapi import APIRouter, Response, status, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, status, HTTPException
 from models import storage
 from datetime import date
 from schemas.transaction_schema import TransactionCreate,\
@@ -14,9 +13,7 @@ from models.transaction import Transaction
 from models.category import Category
 from models.transaction_type import TransactionType
 from typing import List, Optional
-import json
 from pprint import pprint
-from sqlalchemy import inspect
 
 transaction = APIRouter()
 
@@ -126,12 +123,6 @@ def custom_get_all_transactions_by_user(
     storage.session.close()
     pprint(dictionary)
     return dictionary
-
-
-def object_as_dict(obj):
-    """Transforms an sqlalchemy object into a dictionary"""
-    return {c.key: getattr(obj, c.key)
-            for c in inspect(obj).mapper.column_attrs}
 
 
 @ transaction.get(
