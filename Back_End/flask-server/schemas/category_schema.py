@@ -19,6 +19,11 @@ class CategoryBase(ItemCreate):
     transaction_type_id: int
 
 
+class CategoryCustom(BaseModel):
+    expenses: list
+    incomes: list
+
+
 class CategorySchema(CategoryBase):
     """Full Category schema"""
     id: int
