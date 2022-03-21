@@ -8,6 +8,7 @@ import { Footer } from "../../organisms/Footer/Footer";
 import { useAllTransactions } from "./useAllTransactions";
 import "./AllTransactions.css";
 import { TransactionHistory } from "../../molecules/TransactionHistory/TransactionHistory";
+import { Button } from "../../atoms/Button/Button";
 
 function AllTransactions() {
   const {
@@ -16,6 +17,8 @@ function AllTransactions() {
     transactionList,
     categoriesList,
     variantFilter,
+    cleanFilterIcon,
+    onClearFilter,
     updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
@@ -45,6 +48,12 @@ function AllTransactions() {
           type="transaction"
           onClickLeft={handleIncomeButton}
           onClickRight={handleExpenseButton}
+        />
+        <Button
+          icon={cleanFilterIcon}
+          text="Remove filter"
+          variant="cleanFilter"
+          onClickButton={onClearFilter}
         />
         <article className="transactionsBox">
           <TransactionHistory

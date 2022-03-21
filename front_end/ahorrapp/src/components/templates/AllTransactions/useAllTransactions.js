@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "../../../utils/session/useSession";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 function useAllTransactions() {
@@ -11,6 +13,7 @@ function useAllTransactions() {
   const [categoriesList, setCategoriesList] = useState([]);
   const [variantFilter, setVariantFilter] = useState(null);
 
+  const cleanFilterIcon = <FontAwesomeIcon icon={faFilterCircleXmark} />;
   // get user id
   const userId = userInfo ? userInfo.id : null;
 
@@ -62,6 +65,9 @@ function useAllTransactions() {
     setVariantFilter(1);
   };
 
+  const onClearFilter = () => {
+    setVariantFilter(null);
+  };
   const handleRequestCategories = () => {
     setIsLoading(true);
     const url = `http://localhost:5000/user/${userId}/categories`;
@@ -92,8 +98,10 @@ function useAllTransactions() {
     isLoading,
     transactionList,
     categoriesList,
-    updateTransactionList,
+    cleanFilterIcon,
     variantFilter,
+    onClearFilter,
+    updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
   };

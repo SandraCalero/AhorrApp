@@ -74,7 +74,6 @@ function useTransactionHistory({
   // End FormModal
 
   const filterData = () => {
-    console.log(variantFilter);
     if (!variantFilter) return transactionList;
 
     return transactionList.filter(

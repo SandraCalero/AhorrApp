@@ -9,6 +9,7 @@ function FormModal({
   transactionInfo,
   closeFormModal,
   variant,
+  updateTransactionList,
   categoryList,
 }) {
   const { wrapperClass, editIcon, url } = useFormModal({
@@ -27,6 +28,7 @@ function FormModal({
           transactionInfo={transactionInfo}
           closeFormModal={closeFormModal}
           typeDivButtons="edit"
+          updateTransactionList={updateTransactionList}
           url={url}
           method="PUT"
         />

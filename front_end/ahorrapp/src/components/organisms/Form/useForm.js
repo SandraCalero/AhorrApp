@@ -16,6 +16,7 @@ function useForm({
   url,
   method,
   closeFormModal,
+  updateTransactionList,
 }) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
@@ -94,6 +95,7 @@ function useForm({
         console.log(response.data);
         if (method === "PUT") {
           alert("Transaction updated");
+          // updateTransactionList(response.data);
         } else {
           alert("Transaction added");
         }

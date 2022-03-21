@@ -94,3 +94,20 @@
 .navIcon.menu {
   color: grey;
 }
+
+.cleanFilter span {
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+}
+
+.cleanFilter {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  margin-right: 1rem;
+  font-family: inherit;
+  align-self: flex-end;
+  color: #0e4da4;
+}
