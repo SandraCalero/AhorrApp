@@ -58,6 +58,8 @@ def create_default_user_categories(user_id: int):
 )
 def create_user(user: UserCreate):
     """Create new user in database"""
+    from app.routes.transaction_type import create_default_transaction_types
+    create_default_transaction_types()
     dictionary = user.dict()
     users = storage.all(User)
     if users:
