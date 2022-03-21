@@ -3,7 +3,6 @@
 
 from typing import Optional, List
 from pydantic import BaseModel
-from schemas.category_schema import CategorySchema
 from datetime import datetime
 
 
@@ -18,10 +17,9 @@ class BudgetCreate(BudgetBase):
     pass
 
 
-class BudgetUpdate(BudgetBase):
+class BudgetUpdate(BaseModel):
     """Used to validate data in put operation"""
     value: Optional[float] = None
-    category_id: Optional[int] = None
 
 
 class BudgetSchema(BudgetBase):

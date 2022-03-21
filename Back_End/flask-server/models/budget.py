@@ -17,5 +17,3 @@ class Budget(Base, BaseModel):
     value = Column(DECIMAL(15, 2), nullable=False, default=0.00)
     category_id = Column(Integer, ForeignKey(
         'categories.id'), nullable=False)
-    category = relationship(
-        "Category", backref=backref("category", uselist=False))
