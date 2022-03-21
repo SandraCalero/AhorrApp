@@ -18,5 +18,7 @@ class Category(Base, BaseModel):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     transaction_type_id = Column(Integer, ForeignKey(
         'transaction_types.id'), nullable=False)
-    transactions = relationship("Transaction", backref="categories")
-    budgets = relationship("Budget", backref="budgets")
+    transactions = relationship(
+        "Transaction", backref="categories", cascade="all, delete, delete-orphan")
+    budgets = relationship("Budget", backref="categories",
+                           cascade="all, delete, delete-orphan")
