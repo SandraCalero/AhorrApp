@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" object that handles all default RestFul API actions for transaction_types """
+""" object that handles all default RestFul API actions
+for transaction_types """
 from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import JSONResponse
 from pprint import pprint
@@ -42,7 +43,8 @@ def get_all_transaction_types():
     transaction_types = storage.all(TransactionType)
     if transaction_types.__len__() == 0:
         raise HTTPException(status_code=404, detail="Not items were found")
-    return JSONResponse([value.to_dict() for value in transaction_types.values()])
+    return JSONResponse([value.to_dict()
+                         for value in transaction_types.values()])
 
 
 @transaction_type.get(

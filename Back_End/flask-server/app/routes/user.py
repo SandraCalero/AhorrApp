@@ -1,22 +1,17 @@
 #!/usr/bin/python3
 """ object that handles all default RestFul API actions
 for transaction_types """
+from sqlalchemy import inspect
+from fastapi.encoders import jsonable_encoder
+from typing import List, Dict
+from schemas.user_schema import UserSchema, UserCreate, UserBase, UserUpdate
 from fastapi import APIRouter, status, HTTPException
 from models import storage
 from models.user import User
-from schemas.user_schema import UserSchema, UserCreate, UserBase, UserUpdate
-from typing import List, Dict
-from fastapi.encoders import jsonable_encoder
-from sqlalchemy import inspect
+from app.routes.category import insert_category
 
 
 user = APIRouter()
-
-
-def object_as_dict(obj):
-    """Transforms an sqlalchemy object into a dictionary"""
-    return {c.key: getattr(obj, c.key)
-            for c in inspect(obj).mapper.column_attrs}
 
 
 @user.get(
@@ -40,6 +35,17 @@ def get_user_by_email(email: str):
         status_code=400, detail=f"User with email {email} not found")
 
 
+def create_default_user_categories(user_id: int):
+    """Create the default categories for a new user"""
+    expenses = ['Rent', 'Utilities', 'Grocery', 'Entertainment']
+    incomes = ['Salary', 'Investments']
+    [insert_category({'name': expense, 'transaction_type_id': 1,
+                     'user_id': user_id}) for expense in expenses]
+    [insert_category({'name': income, 'transaction_type_id': 2,
+                     'user_id': user_id}) for income in incomes]
+    return storage.get(User, user_id)
+
+
 @user.post(
     '/user',
     tags=['users'],
@@ -56,7 +62,8 @@ def create_user(user: UserCreate):
                 return user
     new_user = User(**dictionary)
     new_user.save()
-    return new_user
+    user_id = new_user.id
+    return create_default_user_categories(user_id)
 
 
 @user.get(
