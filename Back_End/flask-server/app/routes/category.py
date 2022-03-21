@@ -111,7 +111,7 @@ def get_one_category(id: int):
     category = storage.get(Category, id)
     if category:
         return category
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail="Category not found")
 
 
 @category.put(

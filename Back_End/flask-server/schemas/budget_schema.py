@@ -18,6 +18,12 @@ class BudgetCreate(BudgetBase):
     pass
 
 
+class BudgetUpdate(BudgetBase):
+    """Used to validate data in put operation"""
+    value: Optional[float] = None
+    category_id: Optional[int] = None
+
+
 class BudgetSchema(BudgetBase):
     """Data validation for Budget return schema"""
     id: int
