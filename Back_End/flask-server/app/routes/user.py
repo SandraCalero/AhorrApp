@@ -8,7 +8,6 @@ from schemas.user_schema import UserSchema, UserCreate, UserBase, UserUpdate
 from fastapi import APIRouter, status, HTTPException
 from models import storage
 from models.user import User
-from app.routes.category import insert_category
 
 
 user = APIRouter()
@@ -37,12 +36,17 @@ def get_user_by_email(email: str):
 
 def create_default_user_categories(user_id: int):
     """Create the default categories for a new user"""
+    from schemas.category_schema import CategoryBase
+    from app.routes.category import insert_category
+
     expenses = ['Rent', 'Utilities', 'Grocery', 'Entertainment']
     incomes = ['Salary', 'Investments']
-    [insert_category({'name': expense, 'transaction_type_id': 1,
-                     'user_id': user_id}) for expense in expenses]
-    [insert_category({'name': income, 'transaction_type_id': 2,
-                     'user_id': user_id}) for income in incomes]
+    [insert_category(CategoryBase(name=expense, transaction_type_id=1,
+                                  user_id=user_id))
+     for expense in expenses]
+    [insert_category(CategoryBase(name=income, transaction_type_id=2,
+                                  user_id=user_id))
+        for income in incomes]
     return storage.get(User, user_id)
 
 

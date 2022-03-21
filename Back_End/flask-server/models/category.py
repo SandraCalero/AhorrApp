@@ -19,3 +19,4 @@ class Category(Base, BaseModel):
     transaction_type_id = Column(Integer, ForeignKey(
         'transaction_types.id'), nullable=False)
     transactions = relationship("Transaction", backref="categories")
+    budgets = relationship("Budget", backref="budgets")
