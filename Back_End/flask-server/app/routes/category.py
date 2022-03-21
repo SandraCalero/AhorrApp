@@ -27,29 +27,21 @@ category = APIRouter()
 )
 def insert_category(category: CategoryBase):
     """Inserts one category"""
-    dictionary = category.dict()
-    if dictionary is None:
-        HTTPException(status_code=400, detail="Not a JSON")
-
-    # extract values from dictionary and assignment to variables
-    print(dictionary)
-
-    user_id, transaction_type_id = \
-        [dictionary[key]
-         for key in ['user_id', 'transaction_type_id']]
-
-    print(f"user id: {user_id}")
-    user = storage.get(User, user_id)
-    pprint(user)
-    if not user:
-        print("inside exeption")
-        raise HTTPException(status_code=400, detail="User Not Found")
-
-    transaction_type = storage.get(TransactionType, transaction_type_id)
-    if transaction_type is None:
-        raise HTTPException(
-            status_code=400, detail="Transaction type Not Found")
-    category = Category(**dictionary)
+    if type(category) is not dict:
+        category = category.dict()
+        if category is None:
+            HTTPException(status_code=400, detail="Not a JSON")
+        user_id, transaction_type_id = \
+            [category[key]
+             for key in ['user_id', 'transaction_type_id']]
+        user = storage.get(User, user_id)
+        if not user:
+            raise HTTPException(status_code=400, detail="User Not Found")
+        transaction_type = storage.get(TransactionType, transaction_type_id)
+        if transaction_type is None:
+            raise HTTPException(
+                status_code=400, detail="Transaction type Not Found")
+    category = Category(**category)
     category.save()
     return category
 
