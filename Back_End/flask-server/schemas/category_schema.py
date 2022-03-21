@@ -5,6 +5,7 @@ from typing import Optional, List
 from pydantic import BaseModel
 from datetime import datetime
 from schemas.transaction_schema import TransactionSchema
+from schemas.budget_schema import BudgetSchema
 
 
 class ItemCreate(BaseModel):
@@ -30,6 +31,7 @@ class CategorySchema(CategoryBase):
     created_at: datetime
     updated_at: datetime
     transactions: Optional[List[TransactionSchema]] = []
+    budgets: Optional[List[BudgetSchema]] = []
 
     class Config:
         """Activating ORM mode"""

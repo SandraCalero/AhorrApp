@@ -17,21 +17,15 @@ HBNB_MYSQL_DB = os.getenv('HBNB_MYSQL_DB')
 
 # Create Engine
 engine = create_engine(
-    f'mysql+mysqldb://{HBNB_MYSQL_USER}:{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/{HBNB_MYSQL_DB}')
+    'mysql+mysqldb://{}:{}@{}/{}').format(
+    HBNB_MYSQL_USER,
+    HBNB_MYSQL_PWD,
+    HBNB_MYSQL_HOST,
+    HBNB_MYSQL_DB
+)
 
 # Start Session
 Session = sessionmaker(bind=engine)
 session = Session()
-# Base = declarative_base()
-
-# class User(Base):
-#     """ Class for State inherited from Base
-#     """
-#     __tablename__ = 'user'
-#     user_id = Column(Integer, primary_key=True, autoincrement=True)
-#     first_name = Column(String(45), nullable=False)
-#     last_name = Column(String(45), nullable=False)
-#     email = Column(String(45), nullable=False) 
 
 Base.metadata.drop_all(engine)
-# Base.metadata.create_all(engine)
