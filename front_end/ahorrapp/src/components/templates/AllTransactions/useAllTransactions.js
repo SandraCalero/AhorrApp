@@ -5,9 +5,10 @@ import axios from "axios";
 function useAllTransactions() {
   // Everything for transactionList
   // get info by session
-  const { userInfo, userLogged } = useSession();
+  const { userInfo, userLogged, onSaveUserInfo } = useSession();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [categoriesList, setCategoriesList] = useState([]);
 
   // get user id
   const userId = userInfo ? userInfo.id : null;
@@ -29,51 +30,40 @@ function useAllTransactions() {
   // Handle request of the history
   const handleTransactionRequest = () => {
     setIsLoading(true);
-    const url = `/loquesea/${userId}`;
+    const url = `http://localhost:5000/user/${userId}/all-transactions`;
+    axios
+      .get(url)
+      .then((response) => {
+        const listResponse = response.data;
+        setApiResponse(listResponse);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
+
+  const checkCategoryList = () => {
+    const categsList = userInfo ? userInfo.categoryList : {};
+    if (categsList) {
+      setCategoriesList(categsList);
+    } else {
+      handleRequestCategories();
+    }
+  };
+
+  const handleRequestCategories = () => {
+    setIsLoading(true);
+    const url = `http://localhost:5000/user/${userId}/categories`;
     console.log(url);
     axios
-      .get("https://swapi.dev/api/films")
+      .get(url)
       .then((response) => {
-        console.log("ejecutó petición");
-        const listResponse = [
-          {
-            description: "Date with Daniela",
-            date: "2022-03-18",
-            amount: 200000,
-            category_id: 1,
-            category_name: "Restaurant",
-            id: 0,
-            transactionType: 0,
-          },
-          {
-            description: "Salary",
-            date: "2022-03-18",
-            amount: 2000000,
-            category_id: 2,
-            category_name: "Salary",
-            id: 1,
-            transactionType: 1,
-          },
-          {
-            description: "Birthday gift",
-            date: "2022-03-18",
-            amount: 350000,
-            category_id: 3,
-            category_name: "Gifts",
-            id: 2,
-            transactionType: 1,
-          },
-          {
-            description: "Car debt",
-            date: "2022-03-01",
-            amount: 15000000,
-            category_id: 4,
-            category_name: "Debts",
-            id: 3,
-            transactionType: 0,
-          },
-        ];
-        setApiResponse(listResponse);
+        const listResponse = response.data;
+        userInfo.categoryList = listResponse;
+        setCategoriesList(listResponse);
+        onSaveUserInfo(userInfo);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -84,6 +74,7 @@ function useAllTransactions() {
 
   useEffect(() => {
     userLogged && handleTransactionRequest();
+    userLogged && checkCategoryList();
   }, [userLogged]);
   // End here everything for transactionList
 
@@ -91,9 +82,10 @@ function useAllTransactions() {
     userLogged,
     isLoading,
     transactionList,
+    categoriesList,
     updateTransactionList,
     // TODO variantFIler state, handles change state variantFiler
-    variantFiler: null,
+    variantFilter: null,
     handleIncomeButton: () => {},
     handleExpenseButton: () => {},
   };

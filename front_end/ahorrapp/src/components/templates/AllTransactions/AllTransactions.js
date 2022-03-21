@@ -14,6 +14,7 @@ function AllTransactions() {
     userLogged,
     isLoading,
     transactionList,
+    categoriesList,
     variantFilter,
     updateTransactionList,
     handleIncomeButton,
@@ -50,6 +51,7 @@ function AllTransactions() {
             transactionList={transactionList}
             variantFilter={variantFilter}
             updateTransactionList={updateTransactionList}
+            categoriesList={categoriesList}
           />
         </article>
       </section>

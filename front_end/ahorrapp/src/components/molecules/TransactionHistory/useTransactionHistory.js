@@ -10,6 +10,7 @@ function useTransactionHistory({
   transactionList,
   variantFilter,
   updateTransactionList,
+  categoriesList,
 }) {
   // icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
@@ -20,6 +21,7 @@ function useTransactionHistory({
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [transactionId, setTransactionId] = useState(null);
   const [transactionInfo, setTransactionInfo] = useState(null);
+  const [categoryList, setCategoryList] = useState([]);
 
   // state for variant formModal
   const [variantForm, setVariantForm] = useState("");
@@ -41,41 +43,12 @@ function useTransactionHistory({
     setIsLoading(true);
     // Here is the Delete request of the transaction
     // Then, close the Modal
-    const deleteUrl = `/loquesea/${transactionId}`;
-    console.log(deleteUrl);
-
+    const deleteUrl = `http://localhost:5000/transaction/${transactionId}`;
     axios
-      .delete("https://swapi.dev/api/films")
+      .delete(deleteUrl)
       .then((response) => {
-        const newListResponse = [
-          {
-            description: "Salary",
-            date: "2022-03-18",
-            amount: 2000000,
-            category_id: 2,
-            category_name: "Salary",
-            id: 1,
-            transactionType: 1,
-          },
-          {
-            description: "Birthday gift",
-            date: "2022-03-18",
-            amount: 350000,
-            category_id: 3,
-            category_name: "Gifts",
-            id: 2,
-            transactionType: 1,
-          },
-          {
-            description: "Car debt",
-            date: "2022-03-01",
-            amount: 15000000,
-            category_id: 4,
-            category_name: "Debts",
-            id: 3,
-            transactionType: 0,
-          },
-        ];
+        console.log(response);
+        const newListResponse = response.data;
         updateTransactionList(newListResponse); //set the new transactionList
         setIsConfirmationOpen(false);
         setTransactionId(null);
@@ -106,13 +79,14 @@ function useTransactionHistory({
     if (!variantFilter) return transactionList;
 
     return transactionList.filter(
-      (item) => item.transactionType === filterValue
+      (item) => item.transaction_type_id === filterValue
     );
   };
 
   // Everything of Edit Button
   const clickEdit = (transactionItem) => {
-    const variant = transactionItem.transactionType ? "income" : "expense";
+    const variant = transactionItem.transaction_type_id ? "income" : "expense";
+    setCategoryList(categoriesList[`${variant}s`]);
     setIsFormModalOpen(true);
     setVariantForm(variant);
     setTransactionInfo(transactionItem);
@@ -127,6 +101,7 @@ function useTransactionHistory({
     transactionInfo,
     isConfirmationOpen,
     isFormModalOpen,
+    categoryList,
     variantForm,
     itemList: filterData(),
     closeFormModal,

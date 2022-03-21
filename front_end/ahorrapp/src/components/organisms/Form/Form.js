@@ -1,10 +1,10 @@
 import React from "react";
+import ReactLoading from "react-loading";
 import { Input } from "../../molecules/Input/Input";
 import { TextArea } from "../../atoms/TextArea/TextArea";
 import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { useForm } from "./useForm";
 import { CategoryModal } from "../CategoryModal/CategoryModal";
-import { LoadingModal } from "../LoadingModal/LoadingModal";
 import { DateModal } from "../../molecules/DateModal/DateModal";
 import "./Form.css";
 
@@ -39,7 +39,28 @@ function Form({
     openCalendar,
     handleOnBlurTextArea,
     handleSubmitForm,
-  } = useForm({ isOpenForm, variant, transactionInfo, url, method });
+  } = useForm({
+    isOpenForm,
+    variant,
+    transactionInfo,
+    url,
+    method,
+    closeFormModal,
+  });
+
+  if (isSubmitting) {
+    return (
+      <div className={wrapperClass}>
+        <ReactLoading
+          type="bubbles"
+          color="#357EDD"
+          width={"100%"}
+          height={"100%"}
+        />
+      </div>
+    );
+  }
+
   return (
     <form
       className={wrapperClass}
@@ -80,9 +101,7 @@ function Form({
       <DivButtons
         type={typeDivButtons}
         disabledSubmit={disabled}
-        handleSubmitForm={() => {
-          handleSubmitForm({ url, method });
-        }}
+        handleSubmitForm={handleSubmitForm}
         onCancelClick={closeFormModal}
       />
       <CategoryModal
@@ -91,7 +110,6 @@ function Form({
         closeModal={closeModal}
         onClickCategory={onClickCategory}
       />
-      <LoadingModal isOpen={isSubmitting} />
       <DateModal isOpenCalendar={isOpenCalendar} onClickDate={onClickDate} />
     </form>
   );

@@ -25,7 +25,6 @@ export const useFormState = ({ transactionInfo }) => {
   };
 
   const onClearData = () => {
-    console.log("clear");
     setAmount("");
     setCategorySelected(null);
     setDate(currentDate());
@@ -41,7 +40,7 @@ export const useFormState = ({ transactionInfo }) => {
 
   useEffect(() => {
     if (transactionInfo) {
-      const amount = transactionInfo.amount;
+      const amount = transactionInfo.value;
       const category = {
         id: transactionInfo.category_id,
         name: transactionInfo.category_name,

@@ -1,42 +1,45 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '../../atoms/Button/Button';
-import { useCurrency } from '../../../utils/formaters/useCurrency';
-import { useDate } from '../../../utils/formaters/useDate';
-import './TransactionCard.css';
+import React from "react";
+import { Button } from "../../atoms/Button/Button";
+import { useTransactionCard } from "./useTransactionCard";
+import "./TransactionCard.css";
 
-function TransactionCard(props) {
-  const { formatCurrency } = useCurrency();
-  const { dateToString } = useDate();
-  const editButton = <FontAwesomeIcon icon={faEdit} />;
-  const deleteButton = <FontAwesomeIcon icon={faTrash} />;
-  const amountFormatted = formatCurrency(props.amount);
-  const dateString = dateToString(new Date(props.date));
+function TransactionCard({
+  variant,
+  icon,
+  amount,
+  category,
+  date,
+  description,
+  clickEdit,
+  openConfirmationModal,
+}) {
+  const { editButton, deleteButton, amountFormatted, dateToShow } =
+    useTransactionCard({ amount, date });
+
   return (
-    <div className={`transactionCard ${props.variant}`}>
-      <span className="date">{dateString}</span>
+    <div className={`transactionCard ${variant}`}>
+      <span className="date">{dateToShow}</span>
       <div className="rowCard">
-        <span className={props.variant}>{props.icon}</span>
+        <span className={variant}>{icon}</span>
         <div className="transactionBody">
           <div className="descriptionContainer">
             <p className="descriptionCard">
-              {props.description.length > 20
-                ? props.description.substring(0, 20 - 3) + '...'
-                : props.description}
+              {description.length > 20
+                ? description.substring(0, 20 - 3) + "..."
+                : description}
             </p>
-            <p className="categoryCard">{props.category}</p>
+            <p className="categoryCard">{category}</p>
           </div>
           <span className="amount">{amountFormatted}</span>
           <Button
             icon={editButton}
             variant="btnEdit"
-            onClickButton={props.clickEdit}
+            onClickButton={clickEdit}
           />
           <Button
             icon={deleteButton}
             variant="btnEdit"
-            onClickButton={props.openConfirmationModal}
+            onClickButton={openConfirmationModal}
           />
         </div>
       </div>

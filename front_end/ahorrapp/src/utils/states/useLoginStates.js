@@ -48,7 +48,6 @@ function useLoginStates() {
   const handleLogOut = () => {
     onCleanStorage();
     navigate("/", { replace: true });
-    console.log("logout");
   };
 
   return {

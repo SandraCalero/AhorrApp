@@ -1,8 +1,6 @@
 import React from "react";
 import { Form } from "../Form/Form";
 import { useFormModal } from "./useFormModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./FormModal.css";
 import { Title } from "../../atoms/Title/Title";
 
@@ -13,10 +11,11 @@ function FormModal({
   variant,
   categoryList,
 }) {
-  const { wrapperClass } = useFormModal({
+  const { wrapperClass, editIcon, url } = useFormModal({
     isFormModalOpen,
+    transactionInfo,
   });
-  const editIcon = <FontAwesomeIcon icon={faEdit} />;
+
   return (
     <div className={wrapperClass}>
       <div className="formContainer">
@@ -28,8 +27,8 @@ function FormModal({
           transactionInfo={transactionInfo}
           closeFormModal={closeFormModal}
           typeDivButtons="edit"
-          url=""
-          method="put"
+          url={url}
+          method="PUT"
         />
       </div>
     </div>

@@ -23,7 +23,7 @@ function useDashboard() {
 
   // call formaters
   const { formatCurrency } = useCurrency();
-  const { formatDateApi, dateToString, stringToDate, currentDate } = useDate();
+  const { formatDateApi, dateToString, currentDate } = useDate();
 
   // Icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
@@ -64,7 +64,7 @@ function useDashboard() {
     ) {
       return Object.keys(budget);
     } else {
-      alert("Budget categories are diferent to Expenses categories");
+      console.log("Budget categories are diferent to Expenses categories");
       return [];
     }
   };
@@ -114,39 +114,10 @@ function useDashboard() {
     const url = `http://localhost:5000/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
     )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
-    console.log(url);
-
     axios
       .get(url)
       .then((response) => {
-        const jsonResponse = {
-          expenses: {
-            categories: {
-              rent: "500",
-              utilities: "400",
-              groseries: "500",
-              restaurant: "400",
-            },
-            totalExpenses: "1800",
-          },
-          incomes: {
-            categories: {
-              salary: "2000",
-              gift: "100",
-              investments: "500",
-            },
-            totalIncomes: "2600",
-          },
-          budget: {
-            categories: {
-              rent: "100",
-              utilities: "50",
-              groseries: "500",
-              restaurant: "400",
-            },
-          },
-          totalBalance: "800",
-        };
+        const jsonResponse = response.data;
         setApiResponse(jsonResponse);
         setIsLoading(false);
       })

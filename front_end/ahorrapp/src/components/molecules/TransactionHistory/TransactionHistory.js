@@ -9,6 +9,7 @@ import { FormModal } from "../../organisms/FormModal/FormModal";
 function TransactionHistory({
   transactionList,
   variantFilter,
+  categoriesList,
   updateTransactionList,
 }) {
   const {
@@ -18,6 +19,7 @@ function TransactionHistory({
     transactionInfo,
     isConfirmationOpen,
     isFormModalOpen,
+    categoryList,
     variantForm,
     itemList,
     clickEdit,
@@ -27,6 +29,7 @@ function TransactionHistory({
     closeFormModal,
   } = useTransactionHistory({
     transactionList,
+    categoriesList,
     variantFilter,
     updateTransactionList,
   });
@@ -49,11 +52,13 @@ function TransactionHistory({
       <ul className="TransactionCardList">
         {itemList.map((transactionItem) => {
           const variant =
-            transactionItem.transactionType === 0
+            transactionItem.transaction_type_id === 1
               ? "ExpenseCard"
               : "IncomeCard";
           const iconCard =
-            transactionItem.transactionType === 0 ? expenseIcon : incomeIcon;
+            transactionItem.transaction_type_id === 1
+              ? expenseIcon
+              : incomeIcon;
           return (
             <li key={transactionItem.id}>
               <TransactionCard
@@ -67,7 +72,7 @@ function TransactionHistory({
                 }}
                 description={transactionItem.description}
                 category={transactionItem.category_name}
-                amount={transactionItem.amount}
+                amount={transactionItem.value}
                 date={transactionItem.date}
               />
             </li>
@@ -83,7 +88,7 @@ function TransactionHistory({
         isFormModalOpen={isFormModalOpen}
         transactionInfo={transactionInfo}
         closeFormModal={closeFormModal}
-        categoryList={[]}
+        categoryList={categoryList}
         variant={variantForm}
       />
     </div>

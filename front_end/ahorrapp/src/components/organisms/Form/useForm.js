@@ -9,7 +9,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useFormState } from "../../../utils/states/useFormState";
 
-function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
+function useForm({
+  isOpenForm,
+  variant,
+  transactionInfo = null,
+  url,
+  method,
+  closeFormModal,
+}) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
     [variant]: true,
@@ -73,13 +80,6 @@ function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
 
   const handleSubmitForm = () => {
     setIsSubmitting(true);
-    const data = {
-      value: amount,
-      category_id: categorySelected.id,
-      date: formatDateApi(date),
-      description: textarea,
-    };
-    console.log("handleSubmitFormdata", data);
     axios({
       method,
       url,
@@ -93,6 +93,7 @@ function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
       .then((response) => {
         console.log(response);
         alert("Transaction added");
+        closeFormModal && closeFormModal();
         setIsSubmitting(false);
         onClearData();
       })
@@ -100,6 +101,7 @@ function useForm({ isOpenForm, variant, transactionInfo = null, url, method }) {
         console.log(error);
         alert("Failed to add transaction");
         setIsSubmitting(false);
+        closeFormModal && closeFormModal();
         onClearData();
       });
   };
