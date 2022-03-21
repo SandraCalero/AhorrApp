@@ -85,7 +85,6 @@ function TransactionHistory({
         YesButtonConfirmationModal={YesButtonConfirmationModal}
       />
       <FormModal
-        updateTransactionList={updateTransactionList}
         isFormModalOpen={isFormModalOpen}
         transactionInfo={transactionInfo}
         closeFormModal={closeFormModal}

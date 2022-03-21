@@ -13,7 +13,6 @@ function Form({
   categoryList,
   variant,
   transactionInfo,
-  updateTransactionList,
   url,
   method,
   closeFormModal,
@@ -47,7 +46,6 @@ function Form({
     url,
     method,
     closeFormModal,
-    updateTransactionList,
   });
 
   if (isSubmitting) {

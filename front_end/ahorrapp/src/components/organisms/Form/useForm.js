@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import classNames from "classnames";
+// import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
@@ -16,7 +17,6 @@ function useForm({
   url,
   method,
   closeFormModal,
-  updateTransactionList,
 }) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
@@ -42,10 +42,16 @@ function useForm({
     onClearData,
   } = useFormState({ transactionInfo });
 
+  // const navigate = useNavigate();
+
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   useEffect(() => {
     if (variant !== prevVariantForm && !transactionInfo) {
@@ -92,10 +98,9 @@ function useForm({
       },
     })
       .then((response) => {
-        console.log(response.data);
         if (method === "PUT") {
           alert("Transaction updated");
-          // updateTransactionList(response.data);
+          refreshPage();
         } else {
           alert("Transaction added");
         }
