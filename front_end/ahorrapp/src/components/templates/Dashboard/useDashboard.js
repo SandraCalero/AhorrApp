@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,9 +20,11 @@ function useDashboard() {
   const userName = userInfo ? userInfo.first_name : null;
   // get user id
   const userId = userInfo ? userInfo.id : null;
+
   // call formaters
   const { formatCurrency } = useCurrency();
-  const { formatDate } = useDate();
+  const { formatDateApi, dateToString, currentDate } = useDate();
+
   // Icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
@@ -31,12 +34,12 @@ function useDashboard() {
 
   // Handle calendar
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  const date = new Date();
-  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-  const firstDayDateString = firstDay.toLocaleDateString("en-US", options);
-  const today = date.toLocaleDateString("en-US", options);
-  const [dateRange, setDateRange] = useState([firstDayDateString, today]);
+
+  const firstDay = moment().startOf("month");
+  const today = currentDate();
+
+  const [dateRange, setDateRange] = useState([firstDay, today]);
+
   const openCalendar = () => {
     setIsOpenCalendar(true);
   };
@@ -44,8 +47,8 @@ function useDashboard() {
     setIsOpenCalendar(false);
   };
   const onClickDate = (value) => {
-    const startDate = value[0].toLocaleDateString("en-US", options);
-    const endDate = value[1].toLocaleDateString("en-US", options);
+    const startDate = value[0];
+    const endDate = value[1];
     const newDateRange = [startDate, endDate];
     setDateRange(newDateRange);
     handleRequest(newDateRange);
@@ -61,7 +64,7 @@ function useDashboard() {
     ) {
       return Object.keys(budget);
     } else {
-      alert("Budget categories are diferent to Expenses categories");
+      console.log("Budget categories are diferent to Expenses categories");
       return [];
     }
   };
@@ -108,43 +111,13 @@ function useDashboard() {
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
     const dateRangeRequest = newDateRange ? newDateRange : dateRange;
-    const url = `/user/${userId}/all-transactions?i_date=${formatDate(
+    const url = `http://localhost:5000/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
-    )}&f_date=${formatDate(dateRangeRequest[1])}`;
-    console.log(url);
-
+    )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
     axios
-      .get("https://swapi.dev/api/films")
+      .get(url)
       .then((response) => {
-        const jsonResponse = {
-          expenses: {
-            categories: {
-              rent: "500",
-              utilities: "400",
-              groseries: "500",
-              restaurant: "400",
-            },
-            totalExpenses: "1800",
-          },
-          incomes: {
-            categories: {
-              salary: "2000",
-              gift: "100",
-              investments: "500",
-            },
-            totalIncomes: "2600",
-          },
-          budget: {
-            categories: {
-              rent: "100",
-              utilities: "50",
-              groseries: "500",
-              restaurant: "400",
-            },
-            totalBudget: "1800", //No lo necesitamos pintar
-          },
-          totalBalance: "800",
-        };
+        const jsonResponse = response.data;
         setApiResponse(jsonResponse);
         setIsLoading(false);
       })
@@ -174,7 +147,7 @@ function useDashboard() {
     plusIcon,
     calendarIcon,
     isOpenCalendar,
-    dateRange,
+    dateRange: [dateToString(dateRange[0]), dateToString(dateRange[1])],
     closeCalendar,
     onClickDate,
     openCalendar,

@@ -1,18 +1,22 @@
+import moment from "moment";
+
 const useDate = () => {
-  const formatDate = (date) => {
-    const dateToDate = new Date(date);
-    let month = (dateToDate.getMonth() + 1).toString();
-    let day = dateToDate.getDate().toString();
-    const year = dateToDate.getFullYear();
-    if (month.length < 2) {
-      month = "0" + month;
-    }
-    if (day.length < 2) {
-      day = "0" + day;
-    }
-    return [year, month, day].join("-");
+  // Parameter will be a date obj or string
+  const formatDateApi = (date) => {
+    const dateToDate = moment(date).format("YYYY-MM-DD");
+    return dateToDate;
   };
-  return { formatDate };
+  // Parameter will be a date obj or string
+  const dateToString = (date) => {
+    const dateString = moment(date).format("MMM Do YY");
+    return dateString;
+  };
+  // Parameter will be a string with format YYYY-MM-DD or MMM Do YY
+  const stringToDate = (date) => moment(date);
+
+  const currentDate = () => moment();
+
+  return { formatDateApi, dateToString, stringToDate, currentDate };
 };
 
 export { useDate };

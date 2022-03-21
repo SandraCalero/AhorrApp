@@ -3,30 +3,24 @@ import "./Input.css";
 import { InputText } from "../../atoms/InputText/InputText";
 import { Label } from "../../atoms/Label/Label";
 
-function Input(props) {
+function Input({ icon, text, variant, value, placeholder, onClick, onBlur }) {
   return (
     <div className="input">
       <div className="iconText">
-        <span className="iconInput">{props.icon}</span>
-        <span className="textInput">{props.text}</span>
+        <span className="iconInput">{icon}</span>
+        <span className="textInput">{text}</span>
       </div>
-      {props.variant === "input" && (
-        <InputText value={props.value} onValueChange={props.onValueChange} />
-      )}
-      {props.variant === "button" && (
+      {variant === "input" && <InputText value={value} onBlur={onBlur} />}
+      {variant === "button" && (
         <Label
           variant="label"
-          text={props.value}
-          placeholder={props.placeholder}
-          onClick={props.onClick}
+          text={value}
+          placeholder={placeholder}
+          onClick={onClick}
         />
       )}
-      {props.variant === "date" && (
-        <Label
-          variant="label date"
-          text={props.value}
-          onClick={props.onClick}
-        />
+      {variant === "date" && (
+        <Label variant="label date" text={value} onClick={onClick} />
       )}
     </div>
   );

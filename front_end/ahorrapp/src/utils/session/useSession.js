@@ -1,10 +1,10 @@
 import { useStorage } from "../storage/useStorage";
 
 const useSession = () => {
-  const { userInfo } = useStorage();
+  const { userInfo, onSaveUserInfo } = useStorage();
   const userLogged = !!userInfo;
 
-  return { userInfo, userLogged };
+  return { userInfo, userLogged, onSaveUserInfo };
 };
 
 export { useSession };

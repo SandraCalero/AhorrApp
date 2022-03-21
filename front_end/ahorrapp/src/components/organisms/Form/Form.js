@@ -1,14 +1,23 @@
 import React from "react";
+import ReactLoading from "react-loading";
 import { Input } from "../../molecules/Input/Input";
 import { TextArea } from "../../atoms/TextArea/TextArea";
 import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { useForm } from "./useForm";
 import { CategoryModal } from "../CategoryModal/CategoryModal";
-import { LoadingModal } from "../LoadingModal/LoadingModal";
 import { DateModal } from "../../molecules/DateModal/DateModal";
 import "./Form.css";
 
-function Form({ isOpenForm, categoryList, variant }) {
+function Form({
+  isOpenForm,
+  categoryList,
+  variant,
+  transactionInfo,
+  url,
+  method,
+  closeFormModal,
+  typeDivButtons = "action",
+}) {
   const {
     wrapperClass,
     amountIcon,
@@ -16,7 +25,7 @@ function Form({ isOpenForm, categoryList, variant }) {
     dateIcon,
     isOpen,
     categorySelected,
-    date,
+    dateToShow,
     isOpenCalendar,
     amountValue,
     textarea,
@@ -30,7 +39,28 @@ function Form({ isOpenForm, categoryList, variant }) {
     openCalendar,
     handleOnBlurTextArea,
     handleSubmitForm,
-  } = useForm({ isOpenForm, variant });
+  } = useForm({
+    isOpenForm,
+    variant,
+    transactionInfo,
+    url,
+    method,
+    closeFormModal,
+  });
+
+  if (isSubmitting) {
+    return (
+      <div className={wrapperClass}>
+        <ReactLoading
+          type="bubbles"
+          color="#357EDD"
+          width={"100%"}
+          height={"100%"}
+        />
+      </div>
+    );
+  }
+
   return (
     <form
       className={wrapperClass}
@@ -45,7 +75,7 @@ function Form({ isOpenForm, categoryList, variant }) {
         value={amountValue}
         text="Amount"
         name="amount"
-        onValueChange={onValueChange}
+        onBlur={onValueChange}
       />
       <Input
         variant="button"
@@ -60,7 +90,7 @@ function Form({ isOpenForm, categoryList, variant }) {
         variant="date"
         icon={dateIcon}
         text="Date"
-        value={date}
+        value={dateToShow}
         onClick={openCalendar}
       />
       <TextArea
@@ -69,9 +99,10 @@ function Form({ isOpenForm, categoryList, variant }) {
         handleOnBlurTextArea={handleOnBlurTextArea}
       />
       <DivButtons
-        type="action"
+        type={typeDivButtons}
         disabledSubmit={disabled}
         handleSubmitForm={handleSubmitForm}
+        onCancelClick={closeFormModal}
       />
       <CategoryModal
         categoryList={categoryList}
@@ -79,7 +110,6 @@ function Form({ isOpenForm, categoryList, variant }) {
         closeModal={closeModal}
         onClickCategory={onClickCategory}
       />
-      <LoadingModal isOpen={isSubmitting} />
       <DateModal isOpenCalendar={isOpenCalendar} onClickDate={onClickDate} />
     </form>
   );

@@ -4,20 +4,24 @@ import { Navigate } from "react-router-dom";
 import { Title } from "../../atoms/Title/Title";
 import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { NavBar } from "../../molecules/NavBar/NavBar";
-import { TransactionCard } from "../../molecules/TransactionCard/TransactionCard";
 import { Footer } from "../../organisms/Footer/Footer";
-import { ConfirmationModal } from "../../molecules/ConfirmationModal/ConfirmationModal";
 import { useAllTransactions } from "./useAllTransactions";
 import "./AllTransactions.css";
+import { TransactionHistory } from "../../molecules/TransactionHistory/TransactionHistory";
+import { Button } from "../../atoms/Button/Button";
 
 function AllTransactions() {
   const {
     userLogged,
     isLoading,
-    incomeIcon,
-    expenseIcon,
-    isConfirmationOpen,
-    openConfirmationModal,
+    transactionList,
+    categoriesList,
+    variantFilter,
+    cleanFilterIcon,
+    onClearFilter,
+    updateTransactionList,
+    handleIncomeButton,
+    handleExpenseButton,
   } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
@@ -37,34 +41,27 @@ function AllTransactions() {
 
   return (
     <div className="body">
-      <ConfirmationModal isConfirmationOpen={isConfirmationOpen} />
       <NavBar />
       <section className="container">
         <Title text="Transactions" />
-        <DivButtons type="transaction" />
+        <DivButtons
+          type="transaction"
+          onClickLeft={handleIncomeButton}
+          onClickRight={handleExpenseButton}
+        />
+        <Button
+          icon={cleanFilterIcon}
+          text="Remove filter"
+          variant="cleanFilter"
+          onClickButton={onClearFilter}
+        />
         <article className="transactionsBox">
-          <div className="history">
-            <TransactionCard
-              variant="IncomeCard"
-              icon={incomeIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="ExpenseCard"
-              icon={expenseIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="IncomeCard"
-              icon={incomeIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-            <TransactionCard
-              variant="ExpenseCard"
-              icon={expenseIcon}
-              openConfirmationModal={openConfirmationModal}
-            />
-          </div>
+          <TransactionHistory
+            transactionList={transactionList}
+            variantFilter={variantFilter}
+            updateTransactionList={updateTransactionList}
+            categoriesList={categoriesList}
+          />
         </article>
       </section>
       <Footer />

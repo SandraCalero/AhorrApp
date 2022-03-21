@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import classNames from "classnames";
+// import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
@@ -9,7 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useFormState } from "../../../utils/states/useFormState";
 
-function useForm({ isOpenForm, variant }) {
+function useForm({
+  isOpenForm,
+  variant,
+  transactionInfo = null,
+  url,
+  method,
+  closeFormModal,
+}) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
     [variant]: true,
@@ -24,25 +32,33 @@ function useForm({ isOpenForm, variant }) {
     amount,
     categorySelected,
     date,
+    dateToShow,
     textarea,
-    dateFormated,
+    formatDateApi,
     onDateChange,
     onAmoutChange,
     onTextAreaChange,
     onCategoryChange,
     onClearData,
-  } = useFormState();
+  } = useFormState({ transactionInfo });
+
+  // const navigate = useNavigate();
+
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   useEffect(() => {
-    if (variant !== prevVariantForm) {
+    if (variant !== prevVariantForm && !transactionInfo) {
       onClearData();
       setPrevVariant(variant);
     }
-  }, [variant, onClearData, prevVariantForm]);
+  }, [variant, onClearData, prevVariantForm, transactionInfo]);
 
   //functions
   const openModal = () => {
@@ -71,27 +87,24 @@ function useForm({ isOpenForm, variant }) {
 
   const handleSubmitForm = () => {
     setIsSubmitting(true);
-
-    const data = {
-      value: amount,
-      category_id: categorySelected.id,
-      date: dateFormated,
-      description: textarea,
-    };
-    console.log(data);
     axios({
-      method: "post",
-      url: "https://gorest.co.in/public/v2/users",
+      method,
+      url,
       data: {
         value: amount,
         category_id: categorySelected.id,
-        date: dateFormated,
+        date: formatDateApi(date),
         description: textarea,
       },
     })
       .then((response) => {
-        console.log(response);
-        alert("Transaction added");
+        if (method === "PUT") {
+          alert("Transaction updated");
+          refreshPage();
+        } else {
+          alert("Transaction added");
+        }
+        closeFormModal && closeFormModal();
         setIsSubmitting(false);
         onClearData();
       })
@@ -99,6 +112,7 @@ function useForm({ isOpenForm, variant }) {
         console.log(error);
         alert("Failed to add transaction");
         setIsSubmitting(false);
+        closeFormModal && closeFormModal();
         onClearData();
       });
   };
@@ -114,7 +128,7 @@ function useForm({ isOpenForm, variant }) {
     dateIcon,
     isOpen,
     categorySelected: categorySelected ? categorySelected.name : "",
-    date,
+    dateToShow,
     isOpenCalendar,
     disabled,
     textarea,

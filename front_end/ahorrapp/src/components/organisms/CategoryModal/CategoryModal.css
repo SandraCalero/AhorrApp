@@ -22,6 +22,8 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
   align-items: center;
   border-radius: 16px;
   background: #ffff;

@@ -1,10 +1,10 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
-import { Login } from "./components/templates/Login/Login";
-import { Dashboard } from "./components/templates/Dashboard/Dashboard";
-import { AllTransactions } from "./components/templates/AllTransactions/AllTransactions";
-import { Transaction } from "./components/templates/Transaction/Transaction";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { Login } from './components/templates/Login/Login';
+import { Dashboard } from './components/templates/Dashboard/Dashboard';
+import { AllTransactions } from './components/templates/AllTransactions/AllTransactions';
+import { Transaction } from './components/templates/Transaction/Transaction';
 
 function App() {
   return (

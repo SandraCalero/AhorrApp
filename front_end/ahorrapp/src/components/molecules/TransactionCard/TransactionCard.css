@@ -3,6 +3,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 0.5rem 0rem;
 }
 /*date and card + icon*/
 .transactionCard.IncomeCard .date {
@@ -59,21 +60,22 @@
 /*Card body*/
 
 .transactionCard.IncomeCard .transactionBody {
-  border-radius: 0.5rem;
   border-bottom-left-radius: 0;
 }
 
 .transactionCard.ExpenseCard .transactionBody {
-  border-radius: 0.5rem;
   border-bottom-right-radius: 0;
 }
 
 .transactionCard .transactionBody {
   display: flex;
+  border-radius: 0.5rem;
   border: 1px solid #c4c4c4;
   align-items: center;
   background-color: white;
   min-height: 60px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .transactionCard .transactionBody .descriptionContainer {

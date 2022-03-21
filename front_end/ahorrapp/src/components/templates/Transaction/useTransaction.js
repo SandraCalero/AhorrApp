@@ -4,7 +4,7 @@ import { useSession } from "../../../utils/session/useSession";
 
 function useTransaction() {
   // get info by session
-  const { userInfo, userLogged } = useSession();
+  const { userInfo, userLogged, onSaveUserInfo } = useSession();
 
   // get user id
   const userId = userInfo ? userInfo.id : null;
@@ -14,41 +14,24 @@ function useTransaction() {
   const [categoryList, setCategoryList] = useState([]);
   const [apiResponse, setApiResponse] = useState(null);
 
+  const checkCategoryList = () => {
+    const categsList = userInfo ? userInfo.categoryList : {};
+    if (categsList) {
+      setApiResponse(categsList);
+    } else {
+      handleRequest();
+    }
+  };
+
   const handleRequest = () => {
     setIsLoading(true);
+    const url = `http://localhost:5000/user/${userId}/categories`;
     axios
-      .get("https://swapi.dev/api/films")
+      .get(url)
       .then((response) => {
-        //console.log(response);
-        const listResponse = {
-          expenses: [
-            {
-              name: "Rent",
-              transaction_type_id: 1,
-              user_id: 1,
-              id: 1,
-            },
-            {
-              name: "Utilities",
-              transaction_type_id: 1,
-              user_id: 1,
-              id: 2,
-            },
-            {
-              name: "Transport",
-              transaction_type_id: 1,
-              user_id: 1,
-              id: 3,
-            },
-            {
-              name: "Restaurant",
-              transaction_type_id: 1,
-              user_id: 1,
-              id: 4,
-            },
-          ],
-          incomes: [],
-        };
+        const listResponse = response.data;
+        userInfo.categoryList = listResponse;
+        onSaveUserInfo(userInfo);
         setApiResponse(listResponse);
         setIsLoading(false);
       })
@@ -59,10 +42,8 @@ function useTransaction() {
   };
 
   useEffect(() => {
-    userLogged && handleRequest();
+    userLogged && checkCategoryList();
   }, [userLogged]);
-
-  // apiResponse && console.log(apiResponse);
 
   const [variant, setVariant] = useState("");
 
