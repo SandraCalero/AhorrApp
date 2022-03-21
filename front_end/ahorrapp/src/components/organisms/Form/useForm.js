@@ -91,8 +91,12 @@ function useForm({
       },
     })
       .then((response) => {
-        console.log(response);
-        alert("Transaction added");
+        console.log(response.data);
+        if (method === "PUT") {
+          alert("Transaction updated");
+        } else {
+          alert("Transaction added");
+        }
         closeFormModal && closeFormModal();
         setIsSubmitting(false);
         onClearData();

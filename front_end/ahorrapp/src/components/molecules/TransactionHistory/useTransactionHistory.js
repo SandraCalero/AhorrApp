@@ -47,7 +47,6 @@ function useTransactionHistory({
     axios
       .delete(deleteUrl)
       .then((response) => {
-        console.log(response);
         const newListResponse = response.data;
         updateTransactionList(newListResponse); //set the new transactionList
         setIsConfirmationOpen(false);
@@ -57,6 +56,7 @@ function useTransactionHistory({
       })
       .catch((error) => {
         alert("The transaction could not be deleted");
+        console.log(error);
         setIsLoading(false);
         setIsConfirmationOpen(false);
         setTransactionId(null);
