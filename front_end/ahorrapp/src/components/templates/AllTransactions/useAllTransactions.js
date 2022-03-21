@@ -9,6 +9,7 @@ function useAllTransactions() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [categoriesList, setCategoriesList] = useState([]);
+  const [variantFilter, setVariantFilter] = useState(null);
 
   // get user id
   const userId = userInfo ? userInfo.id : null;
@@ -53,6 +54,14 @@ function useAllTransactions() {
     }
   };
 
+  const handleIncomeButton = () => {
+    setVariantFilter(2);
+  };
+
+  const handleExpenseButton = () => {
+    setVariantFilter(1);
+  };
+
   const handleRequestCategories = () => {
     setIsLoading(true);
     const url = `http://localhost:5000/user/${userId}/categories`;
@@ -84,10 +93,9 @@ function useAllTransactions() {
     transactionList,
     categoriesList,
     updateTransactionList,
-    // TODO variantFIler state, handles change state variantFiler
-    variantFilter: null,
-    handleIncomeButton: () => {},
-    handleExpenseButton: () => {},
+    variantFilter,
+    handleIncomeButton,
+    handleExpenseButton,
   };
 }
 

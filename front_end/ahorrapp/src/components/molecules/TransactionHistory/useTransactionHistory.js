@@ -74,18 +74,18 @@ function useTransactionHistory({
   // End FormModal
 
   const filterData = () => {
-    const filterValue = variantFilter === "income" ? 1 : 0;
-
+    console.log(variantFilter);
     if (!variantFilter) return transactionList;
 
     return transactionList.filter(
-      (item) => item.transaction_type_id === filterValue
+      (item) => item.transaction_type_id === variantFilter
     );
   };
 
   // Everything of Edit Button
   const clickEdit = (transactionItem) => {
-    const variant = transactionItem.transaction_type_id ? "income" : "expense";
+    const variant =
+      transactionItem.transaction_type_id === 2 ? "income" : "expense";
     setCategoryList(categoriesList[`${variant}s`]);
     setIsFormModalOpen(true);
     setVariantForm(variant);
