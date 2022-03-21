@@ -110,7 +110,7 @@ def get_one_category(id: int):
     """Gets one category by id"""
     category = storage.get(Category, id)
     if category:
-        return JSONResponse(category.to_dict())
+        return category
     raise HTTPException(status_code=404, detail="Item not found")
 
 
