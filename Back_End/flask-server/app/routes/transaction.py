@@ -198,6 +198,7 @@ def update_trasaction(
 def delete_transaction(id: int):
     """Delete a transaction by its id"""
     transaction = get_transaction(id)
+    category = get_one_category(transaction.category_id)
     transaction.delete()
     storage.save()
-    return {}
+    return get_all_transactions_by_user(category.user_id)
