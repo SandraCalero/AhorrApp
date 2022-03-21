@@ -162,7 +162,8 @@ def get_all_transactions_by_user(
             'date': transaction.date,
             'value': transaction.value,
             'category_id': transaction.category_id,
-            'category_name': category.name
+            'category_name': category.name,
+            'transaction_type_id': category.transaction_type_id
         }
         transactions.append(row)
     storage.session.close()

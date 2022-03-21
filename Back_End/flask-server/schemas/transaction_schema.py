@@ -52,3 +52,4 @@ class TransactionSchema(TransactionBase):
 class TransactionWithCategory(TransactionSchema):
     """Used to show all the transaction data including category name"""
     category_name: Optional[str] = None
+    transaction_type_id: Optional[int] = None
