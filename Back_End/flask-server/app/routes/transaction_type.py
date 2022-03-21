@@ -14,6 +14,15 @@ from fastapi.encoders import jsonable_encoder
 transaction_type = APIRouter()
 
 
+def check_transaction_types_default():
+    """Check if the transaction type expenses
+    and incomes are already created"""
+    if storage.get(TransactionType, 1) is None\
+            and storage.get(TransactionType, 2) is None:
+        return False
+    return True
+
+
 @transaction_type.post(
     '/transaction_types',
     response_model=Transaction_type_schema_out,
@@ -23,6 +32,7 @@ transaction_type = APIRouter()
 def insert_transaction_type(transaction_type: Transaction_type_schema_in):
     """Inserts one transaction type"""
     dictionary = transaction_type.dict()
+    print("Llegando hasta aca : {}".format(dictionary))
     if dictionary is None:
         HTTPException(status_code=400, detail="Not a JSON")
     if dictionary.get('type') is None:
@@ -30,6 +40,13 @@ def insert_transaction_type(transaction_type: Transaction_type_schema_in):
     transaction_type = TransactionType(**dictionary)
     transaction_type.save()
     return JSONResponse(transaction_type.to_dict(), status_code=201)
+
+
+def create_default_transaction_types():
+    """ Creating the Expenses and the Incomes """
+    if check_transaction_types_default() is False:
+        insert_transaction_type(Transaction_type_schema_in(type='Expenses'))
+        insert_transaction_type(Transaction_type_schema_in(type='Incomes'))
 
 
 @transaction_type.get(
@@ -74,6 +91,9 @@ def update_transaction_type(
     transaction_type: Transaction_type_schema_in
 ):
     """Updates a transaction type"""
+    if id is 1 or id is 2:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail="this transaction type can't be edited")
     dictionary = transaction_type.dict()
     if dictionary is None:
         raise HTTPException(status_code=400, detail="Not a JSON")
@@ -95,6 +115,9 @@ def update_transaction_type(
 )
 def delete_transaction_type(id: int):
     """Deletes a transaction type"""
+    if id is 1 or id is 2:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail="this transaction type can't be deleted")
     transaction_type = storage.get(TransactionType, id)
     if transaction_type is None:
         raise HTTPException(status_code=404, detail="Not found")
