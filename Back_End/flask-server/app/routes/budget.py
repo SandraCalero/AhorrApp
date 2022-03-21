@@ -57,7 +57,8 @@ def create_budget(input_budget: BudgetCreate):
             if dictionary['category_id'] == budget.category_id:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
-                    detail='Budget already exists for that category (id:{}, name: {})'
+                    detail="""Budget already exists for
+                    that category (id:{}, name: {})"""
                     .format(budget.category_id, budget.category.name)
                 )
     category = get_one_category(input_budget.category_id)

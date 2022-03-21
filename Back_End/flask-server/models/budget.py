@@ -3,7 +3,8 @@
     and an instance Base = declarative_base():
 """
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, DECIMAL, Date
+from sqlalchemy import Column, Integer, String, ForeignKey,\
+    DateTime, DECIMAL, Date
 from datetime import date
 from models.base_model import Base, BaseModel
 from sqlalchemy.orm import relationship, backref

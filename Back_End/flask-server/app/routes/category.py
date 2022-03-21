@@ -13,10 +13,18 @@ from schemas.category_schema import CategoryBase
 from schemas.category_schema import CategorySchema
 from schemas.category_schema import CategoryCustom
 from typing import List
-from fastapi.encoders import jsonable_encoder
-from operator import attrgetter
+
 
 category = APIRouter()
+
+
+def create_default_category_budget(category):
+    """Create a budget when a category is created"""
+    if category.transaction_type_id == 1:
+        from app.routes.budget import create_budget
+        from schemas.budget_schema import BudgetCreate
+        budget = BudgetCreate(category_id=category.id, value=0)
+        create_budget(budget)
 
 
 @category.post(
@@ -27,22 +35,22 @@ category = APIRouter()
 )
 def insert_category(category: CategoryBase):
     """Inserts one category"""
-    if type(category) is not dict:
-        category = category.dict()
-        if category is None:
-            HTTPException(status_code=400, detail="Not a JSON")
-        user_id, transaction_type_id = \
-            [category[key]
-             for key in ['user_id', 'transaction_type_id']]
-        user = storage.get(User, user_id)
-        if not user:
-            raise HTTPException(status_code=400, detail="User Not Found")
-        transaction_type = storage.get(TransactionType, transaction_type_id)
-        if transaction_type is None:
-            raise HTTPException(
-                status_code=400, detail="Transaction type Not Found")
+    category = category.dict()
+    if category is None:
+        HTTPException(status_code=400, detail="Not a JSON")
+    user_id, transaction_type_id = \
+        [category[key]
+            for key in ['user_id', 'transaction_type_id']]
+    user = storage.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=400, detail="User Not Found")
+    transaction_type = storage.get(TransactionType, transaction_type_id)
+    if transaction_type is None:
+        raise HTTPException(
+            status_code=400, detail="Transaction type Not Found")
     category = Category(**category)
     category.save()
+    create_default_category_budget(category)
     return category
 
 
