@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" object that handles all default RestFul API actions for transaction_types """
+""" object that handles all default RestFul API actions
+for transaction_types """
 from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import JSONResponse
 from pprint import pprint
@@ -10,6 +11,7 @@ from models.transaction_type import TransactionType
 from schemas.category_schema import ItemCreate
 from schemas.category_schema import CategoryBase
 from schemas.category_schema import CategorySchema
+from schemas.category_schema import CategoryCustom
 from typing import List
 from fastapi.encoders import jsonable_encoder
 from operator import attrgetter
@@ -25,43 +27,71 @@ category = APIRouter()
 )
 def insert_category(category: CategoryBase):
     """Inserts one category"""
-    dictionary = category.dict()
-    if dictionary is None:
-        HTTPException(status_code=400, detail="Not a JSON")
-
-    # extract values from dictionary and assignment to variables
-    print(dictionary)
-
-    user_id, transaction_type_id = [dictionary[key]
-                                    for key in ['user_id', 'transaction_type_id']]
-
-    print(f"user id: {user_id}")
-    user = storage.get(User, user_id)
-    pprint(user)
-    if not user:
-        print("inside exeption")
-        raise HTTPException(status_code=400, detail="User Not Found")
-
-    transaction_type = storage.get(TransactionType, transaction_type_id)
-    if transaction_type is None:
-        raise HTTPException(
-            status_code=400, detail="Transaction type Not Found")
-    category = Category(**dictionary)
+    if type(category) is not dict:
+        category = category.dict()
+        if category is None:
+            HTTPException(status_code=400, detail="Not a JSON")
+        user_id, transaction_type_id = \
+            [category[key]
+             for key in ['user_id', 'transaction_type_id']]
+        user = storage.get(User, user_id)
+        if not user:
+            raise HTTPException(status_code=400, detail="User Not Found")
+        transaction_type = storage.get(TransactionType, transaction_type_id)
+        if transaction_type is None:
+            raise HTTPException(
+                status_code=400, detail="Transaction type Not Found")
+    category = Category(**category)
     category.save()
     return category
 
 
-@category.get('/user/{user_id}/categories', tags=['categories'], status_code=200, response_model=List[CategorySchema])
 def get_categories_by_user(user_id: int):
+    """Getting all categories of an specific user"""
+    result = storage.session.query(
+        Category,
+        TransactionType,
+        User
+    )\
+        .select_from(Category)\
+        .join(User)\
+        .join(TransactionType)\
+        .filter(Category.user_id == user_id)\
+        .all()
+    return result
+
+
+@category.get(
+    '/user/{user_id}/categories',
+    tags=['categories'],
+    status_code=200,
+    response_model=CategoryCustom
+)
+def custom_get_categories_by_user(user_id: int):
     """Gets all the categories form an specific user"""
     user = storage.get(User, user_id)
     if user is None:
         raise HTTPException(status_code=400, detail="User not found")
-    user_categories = user.categories
-    return [category for category in user_categories]
+    dictionary = {
+        'expenses': [],
+        'incomes': []
+    }
+    categories = get_categories_by_user(user_id)
+    for category, user, transactiontype in categories:
+        print(category.to_dict())
+        if category.transaction_type_id == 1:
+            dictionary['expenses'].append(category)
+        if category.transaction_type_id == 2:
+            dictionary['incomes'].append(category)
+    return dictionary
 
 
-@category.get('/categories', tags=['categories'], status_code=200, response_model=List[CategorySchema])
+@category.get(
+    '/categories',
+    tags=['categories'],
+    status_code=200,
+    response_model=List[CategorySchema]
+)
 def get_all_categories():
     """Gets all the categories"""
     categories = storage.all(Category)

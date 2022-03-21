@@ -35,17 +35,21 @@ class TransactionCustom(BaseModel):
     expenses: dict
     incomes: dict
     budget: dict
+    totalBalance: float
 
 
 class TransactionSchema(TransactionBase):
+    """Default schema for validation"""
     id: int
     created_at: datetime
     updated_at: datetime
 
     class Config:
+        """Merging the functionality of the ORM with FASTAPI"""
         orm_mode = True
 
 
 class TransactionWithCategory(TransactionSchema):
     """Used to show all the transaction data including category name"""
     category_name: Optional[str] = None
+    transaction_type_id: Optional[int] = None

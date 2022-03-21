@@ -97,7 +97,8 @@ def custom_get_all_transactions_by_user(
     dictionary = {
         'expenses': {'categories': {}, 'totalExpenses': 0},
         'incomes': {'categories': {}, 'totalIncomes': 0},
-        'budget': {'categories': {}}
+        'budget': {'categories': {}},
+        'totalBalance': 0
     }
     for transaction, category, transactiontype in results:
         if transactiontype.id == 1:
@@ -120,6 +121,8 @@ def custom_get_all_transactions_by_user(
                 dictionary['incomes']['categories'][category.name] =\
                     dictionary['incomes']['categories'][category.name] + \
                     transaction.value
+    dictionary['totalBalance'] = dictionary['incomes']['totalIncomes'] -\
+        dictionary['expenses']['totalExpenses']
     storage.session.close()
     pprint(dictionary)
     return dictionary
@@ -136,7 +139,7 @@ def get_all_transactions_by_user(
     i_date: Optional[date] = "1900-01-01",
     f_date: Optional[date] = "2099-12-31"
 ):
-    """Get all transactions of user given user_id orderd by most recent to
+    """Get all transactions of user given user_id ordered by most recent to
     oldest"""
     if i_date >= f_date:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -149,7 +152,6 @@ def get_all_transactions_by_user(
         .filter(Category.user_id == user_id)\
         .order_by(Transaction.date.desc())\
         .all()
-    # return "hi"
     transactions = []
     for transaction, category in all_transactions:
         row = {
@@ -160,7 +162,8 @@ def get_all_transactions_by_user(
             'date': transaction.date,
             'value': transaction.value,
             'category_id': transaction.category_id,
-            'category_name': category.name
+            'category_name': category.name,
+            'transaction_type_id': category.transaction_type_id
         }
         transactions.append(row)
     storage.session.close()
@@ -182,12 +185,10 @@ def update_trasaction(
     transaction = storage.get(Transaction, id)
     if transaction is None:
         raise HTTPException(status_code=404, detail="Transaction not found")
-
     [
         setattr(transaction, key, value) for key, value in dictionary.items()
     ]
     transaction.save()
-
     return transaction
 
 
