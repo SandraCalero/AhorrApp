@@ -46,7 +46,7 @@
 
 .btn.Cancel {
   background: #c4c4c4;
-  color: #565e64;
+  color: #5c636a;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -91,8 +91,18 @@
   border: none;
 }
 
-.navIcon.menu {
-  color: grey;
+.btn.navIcon.menu {
+  display: flex;
+  color: #3a3636;
+  font-size: 1rem;
+  margin: 0;
+  align-items: center;
+}
+
+.btn.navIcon.menu span {
+  color: #4fb8ff;
+  font-size: 1.5rem;
+  margin-right: 0.2rem;
 }
 
 .cleanFilter span {

@@ -2,7 +2,7 @@ import React from "react";
 import ReactLoading from "react-loading";
 import { Navigate } from "react-router-dom";
 import { Title } from "../../atoms/Title/Title";
-import { NavBar } from "../../molecules/NavBar/NavBar";
+import { NavBar } from "../../organisms/NavBar/NavBar";
 import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { Form } from "../../organisms/Form/Form";
 import { Footer } from "../../organisms/Footer/Footer";

@@ -7,7 +7,7 @@ function Input({ icon, text, variant, value, placeholder, onClick, onBlur }) {
   return (
     <div className="input">
       <div className="iconText">
-        <span className="iconInput">{icon}</span>
+        {icon && <span className="iconInput">{icon}</span>}
         <span className="textInput">{text}</span>
       </div>
       {variant === "input" && <InputText value={value} onBlur={onBlur} />}

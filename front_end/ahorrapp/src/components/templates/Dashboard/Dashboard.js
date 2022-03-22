@@ -4,7 +4,7 @@ import { Title } from "../../atoms/Title/Title";
 import { BarChart } from "../../atoms/BarChart/BarChart";
 import { Box } from "../../atoms/Box/Box";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
-import { NavBar } from "../../molecules/NavBar/NavBar";
+import { NavBar } from "../../organisms/NavBar/NavBar";
 import { Footer } from "../../organisms/Footer/Footer";
 import { Navigate } from "react-router-dom";
 import { Button } from "../../atoms/Button/Button";

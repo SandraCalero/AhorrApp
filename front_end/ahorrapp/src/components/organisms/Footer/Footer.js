@@ -1,6 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOut, faHome, faUsd } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignOut,
+  faChartColumn,
+  faArrowRightArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
 import { useGoogleLogout } from "react-google-login";
 import { Button } from "../../atoms/Button/Button";
@@ -14,8 +18,8 @@ function Footer() {
       "861046265404-52vbar87q58gi3raeo23vms8k0c92tci.apps.googleusercontent.com",
     onLogoutSuccess: handleLogOut,
   });
-  const homeIcon = <FontAwesomeIcon icon={faHome} />;
-  const transIcon = <FontAwesomeIcon icon={faUsd} />;
+  const homeIcon = <FontAwesomeIcon icon={faChartColumn} />;
+  const transIcon = <FontAwesomeIcon icon={faArrowRightArrowLeft} />;
   const logoutIcon = <FontAwesomeIcon icon={faSignOut} />;
   return (
     <footer className="FooterMol">
