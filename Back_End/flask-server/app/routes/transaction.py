@@ -7,7 +7,7 @@ from schemas.transaction_schema import TransactionCreate,\
     TransactionSchema, TransactionUpdate, TransactionCustom,\
     TransactionWithCategory
 from schemas.category_schema import CategorySchema
-from app.routes.category import get_one_category
+from app.routes.category import get_one_category, get_categories_by_user
 from app.routes.user import get_user_by_id
 from models.transaction import Transaction
 from models.category import Category
@@ -52,13 +52,13 @@ def get_data_by_date(i_date, f_date, user_id):
     """Function that valdiate the incoming dates to handle the flow"""
     if type(i_date) is str or type(f_date) is str:
         results = storage.session.query(
-            Transaction,
             Category,
+            Transaction,
             TransactionType
         )\
-            .select_from(Transaction)\
-            .join(Category)\
-            .join(TransactionType)\
+            .select_from(Category)\
+            .outerjoin(Transaction)\
+            .outerjoin(TransactionType)\
             .filter(Category.user_id == user_id)\
             .all()
     else:
@@ -68,16 +68,17 @@ def get_data_by_date(i_date, f_date, user_id):
                 detail="f_date cannot be before or same as i_date"
             )
         results = storage.session.query(
-            Transaction,
             Category,
+            Transaction,
             TransactionType
         )\
-            .select_from(Transaction)\
-            .join(Category)\
-            .join(TransactionType)\
+            .select_from(Category)\
+            .outerjoin(Transaction)\
+            .outerjoin(TransactionType)\
             .filter(Category.user_id == user_id)\
             .filter(Transaction.date.between(i_date, f_date))\
             .all()
+
     return results
 
 
@@ -93,8 +94,10 @@ def custom_get_all_transactions_by_user(
     f_date: Optional[date] = "2099-12-31"
 ):
     """Getting all transactions of an user with a custome build"""
-    get_user_by_id(user_id)
+    user = get_user_by_id(user_id)
+    # [print(c.name) for c in cs]
     results = get_data_by_date(i_date, f_date, user_id)
+    # print(results)
     dictionary = {
         'expenses': {'categories': {}, 'totalExpenses': 0},
         'incomes': {'categories': {}, 'totalIncomes': 0},
@@ -102,18 +105,29 @@ def custom_get_all_transactions_by_user(
         'totalBalance': 0
     }
 
+    # get categories
+    categories = user.categories
+    # categories = get_categories_by_user(user_id)
+
+    # insert categories in dictionary with costum model (category_name: 0)
+    category_dictionary = {category.name: 0 for category in categories
+                           if category.transaction_type_id == 1}
+    print(category_dictionary)
+    dictionary['expenses']['categories'] = category_dictionary
+
     # assign budget dictionary with budgets of current user
     budgets = get_budgets_by_user(user_id)
-    budget_dictionary = {budget.get('category_name'): budget.get('value', 0)for budget in budgets}
+    budget_dictionary = {budget.get('category_name'): budget.get(
+        'value', 0)for budget in budgets}
     dictionary['budget']['categories'] = budget_dictionary
-        
+
     # for budget in budgets:
     #     print([budget.category_name, budget.value])
 
     # budget_dictionary = {budget.category_name: budget.value for budget in budgets}
     # dictionary['budget']['categories'] = budget_dictionary
 
-    for transaction, category, transactiontype in results:
+    for category, transaction, transactiontype in results:
         # print("inside results")
         # print(category.name, category.budgets[0].value)
         # [print(category.name, budget.value) for budget in category.budgets]
@@ -147,7 +161,7 @@ def custom_get_all_transactions_by_user(
     dictionary['totalBalance'] = dictionary['incomes']['totalIncomes'] -\
         dictionary['expenses']['totalExpenses']
     storage.session.close()
-    pprint(dictionary)
+    # pprint(dictionary)
     return dictionary
 
 
