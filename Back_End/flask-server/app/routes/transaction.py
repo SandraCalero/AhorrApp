@@ -83,7 +83,7 @@ def get_data_by_date(i_date, f_date, user_id):
 @transaction.get(
     '/user/{user_id}/transactions',
     tags=['transactions'],
-    status_code=201,
+    status_code=200,
     response_model=TransactionCustom
 )
 def custom_get_all_transactions_by_user(
@@ -101,6 +101,9 @@ def custom_get_all_transactions_by_user(
         'totalBalance': 0
     }
     for transaction, category, transactiontype in results:
+        print("inside results")
+        print(category.name, category.budgets[0].value)
+        # [print(category.name, budget.value) for budget in category.budgets]
         if transactiontype.id == 1:
             dictionary['expenses']['totalExpenses'] =\
                 dictionary['expenses']['totalExpenses'] + transaction.value
@@ -111,6 +114,9 @@ def custom_get_all_transactions_by_user(
                 dictionary['expenses']['categories'][category.name] =\
                     dictionary['expenses']['categories'][category.name] + \
                     transaction.value
+            if category.name not in dictionary['budget']['categories']:
+                dictionary['budget']['categories'].update(
+                {category.name: category.budgets[0].value})
         if transactiontype.id == 2:
             dictionary['incomes']['totalIncomes'] =\
                 dictionary['incomes']['totalIncomes'] + transaction.value
