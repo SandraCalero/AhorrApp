@@ -101,11 +101,16 @@ def custom_get_all_transactions_by_user(
         'budget': {'categories': {}},
         'totalBalance': 0
     }
+
+    #assign budget dictionary with budgets of current user
+    budgets = get_budgets_by_user(user_id)
+    dictionary['budget']['categories'] = budgets
+
     for transaction, category, transactiontype in results:
         # print("inside results")
         # print(category.name, category.budgets[0].value)
         # [print(category.name, budget.value) for budget in category.budgets]
-        budgets = get_budgets_by_user(user_id)
+
         if transactiontype.id == 1:
             dictionary['expenses']['totalExpenses'] =\
                 dictionary['expenses']['totalExpenses'] + transaction.value
@@ -121,8 +126,7 @@ def custom_get_all_transactions_by_user(
             #         if budget.category_id == category.id:
             #             break
             #     dictionary['budget']['categories'].update(
-                    # {category.name: budget.value})
-            dictionary['budget']['categories'] = budgets
+                # {category.name: budget.value})
         if transactiontype.id == 2:
             dictionary['incomes']['totalIncomes'] =\
                 dictionary['incomes']['totalIncomes'] + transaction.value
