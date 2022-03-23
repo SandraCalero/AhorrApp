@@ -43,15 +43,29 @@ def get_budget(id: int):
 
 @budget.get('/user/{userId}/budgets',
             tags=['budgets'],
-            response_model=List[BudgetSchema],
+            # response_model=List[BudgetSchema],
             status_code=status.HTTP_200_OK
             )
 def get_budgets_by_user(userId: int):
     """Get the budgets associated with a user"""
+    dictionary = {}
     categories = get_categories_by_user(userId)
-    result = [Category.budgets[0] for Category, _, _ in categories
-              if Category.budgets]
-    return result
+    # result = [Category.budgets[0].to_dict() for Category, _, _ in categories if Category.budgets]
+
+    lst = []
+    for Category, _, _ in categories:
+        if Category.budgets:
+            lst.append(Category.budgets[0].to_dict())
+            lst[-1]['category_name'] = Category.name
+
+        # for buget in result:
+        #     print(type(category.dict()))
+            # if category.id == buget.category_id:
+            #     budget['category_name'] = category.name
+
+    # for buget, category in zip(result, categories:
+    #     budget['category_name'] = 
+    return lst
 
 
 @budget.post(
