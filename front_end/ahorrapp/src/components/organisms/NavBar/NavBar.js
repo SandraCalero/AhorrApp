@@ -14,6 +14,7 @@ function NavBar() {
     closeFormModal,
     onClickBudget,
   } = useNavBar();
+
   return (
     <nav className="navBar">
       <Button

@@ -32,40 +32,7 @@ function useNavBar() {
       .get(url)
       .then((response) => {
         console.log(response.data);
-        const listResponse = [
-          {
-            value: 500,
-            category_id: 31,
-            category_name: "Rent",
-            id: 17,
-            created_at: "2022-03-22T14:14:21",
-            updated_at: "2022-03-22T14:14:21",
-          },
-          {
-            value: 0,
-            category_id: 32,
-            category_name: "Utilities",
-            id: 18,
-            created_at: "2022-03-22T14:14:21",
-            updated_at: "2022-03-22T14:14:21",
-          },
-          {
-            value: 0,
-            category_id: 33,
-            category_name: "Grocery",
-            id: 19,
-            created_at: "2022-03-22T14:14:21",
-            updated_at: "2022-03-22T14:14:21",
-          },
-          {
-            value: 0,
-            category_id: 34,
-            category_name: "Entertainment",
-            id: 20,
-            created_at: "2022-03-22T14:14:22",
-            updated_at: "2022-03-22T14:14:22",
-          },
-        ];
+        const listResponse = response.data;
         setBudgetUser(listResponse);
         setIsLoading(false);
       })
