@@ -7,10 +7,10 @@ services:
     ports:
       - 33307:3306
     environment:
-      MYSQL_DATABASE: 'test_mysql_db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'pwd'
-      MYSQL_ROOT_PASSWORD: 'rootpassword'
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./Back_End/mysql-db:/var/lib/mysql      
 
@@ -23,11 +23,10 @@ services:
     volumes:
       - ./Back_End/flask-server:/code
     environment:
-      HBNB_MYSQL_USER: 'user'
-      HBNB_MYSQL_PWD: 'pwd'
-      HBNB_MYSQL_HOST: 'mysql'
-      HBNB_MYSQL_DB:  'test_mysql_db'
-      FLASK_DEBUG: '1'
+      - HBNB_MYSQL_USER=${HBNB_MYSQL_USER}
+      - HBNB_MYSQL_PWD=${HBNB_MYSQL_PWD}
+      - HBNB_MYSQL_HOST=${HBNB_MYSQL_HOST}
+      - HBNB_MYSQL_DB=${HBNB_MYSQL_DB}
     # command: bash -c "while true; do sleep 2s; done"
     command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000 --reload"
     depends_on:
