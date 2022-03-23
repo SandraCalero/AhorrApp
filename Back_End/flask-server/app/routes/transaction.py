@@ -118,7 +118,7 @@ def custom_get_all_transactions_by_user(
                     transaction.value
             if category.name not in dictionary['budget']['categories']:
                 for budget in budgets:
-                    if budget.id == category.id:
+                    if budget.category_id == category.id:
                         break
                 dictionary['budget']['categories'].update(
                     {category.name: budget.value})
