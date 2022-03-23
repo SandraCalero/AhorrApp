@@ -14,6 +14,7 @@ from models.category import Category
 from models.transaction_type import TransactionType
 from typing import List, Optional
 from pprint import pprint
+from app.routes.budget import get_budgets_by_user
 
 transaction = APIRouter()
 
@@ -104,6 +105,7 @@ def custom_get_all_transactions_by_user(
         # print("inside results")
         # print(category.name, category.budgets[0].value)
         # [print(category.name, budget.value) for budget in category.budgets]
+        budgets = get_budgets_by_user(user_id)
         if transactiontype.id == 1:
             dictionary['expenses']['totalExpenses'] =\
                 dictionary['expenses']['totalExpenses'] + transaction.value
@@ -115,8 +117,11 @@ def custom_get_all_transactions_by_user(
                     dictionary['expenses']['categories'][category.name] + \
                     transaction.value
             if category.name not in dictionary['budget']['categories']:
+                for budget in budgets:
+                    if budget.id == category.id:
+                        break
                 dictionary['budget']['categories'].update(
-                {category.name: category.budgets[0].value})
+                    {category.name: budget.value})
         if transactiontype.id == 2:
             dictionary['incomes']['totalIncomes'] =\
                 dictionary['incomes']['totalIncomes'] + transaction.value
