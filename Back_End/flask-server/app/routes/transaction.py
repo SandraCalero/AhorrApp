@@ -102,9 +102,16 @@ def custom_get_all_transactions_by_user(
         'totalBalance': 0
     }
 
-    #assign budget dictionary with budgets of current user
+    # assign budget dictionary with budgets of current user
     budgets = get_budgets_by_user(user_id)
-    dictionary['budget']['categories'] = budgets
+    budget_dictionary = {budget.get('category_name'): budget.get('value', 0)for budget in budgets}
+    dictionary['budget']['categories'] = budget_dictionary
+        
+    # for budget in budgets:
+    #     print([budget.category_name, budget.value])
+
+    # budget_dictionary = {budget.category_name: budget.value for budget in budgets}
+    # dictionary['budget']['categories'] = budget_dictionary
 
     for transaction, category, transactiontype in results:
         # print("inside results")
