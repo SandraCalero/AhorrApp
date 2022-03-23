@@ -41,7 +41,7 @@ def get_budget(id: int):
     return budget
 
 
-@budget.get('/user/${userId}/budgets',
+@budget.get('/user/{userId}/budgets',
             tags=['budgets'],
             response_model=List[BudgetSchema],
             status_code=status.HTTP_200_OK
