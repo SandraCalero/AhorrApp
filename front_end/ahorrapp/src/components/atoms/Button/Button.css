@@ -93,6 +93,7 @@
 
 .btn.navIcon.menu {
   display: flex;
+  width: auto;
   color: #3a3636;
   font-size: 1rem;
   margin: 0;

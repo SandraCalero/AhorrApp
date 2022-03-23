@@ -1,7 +1,5 @@
 import React from "react";
 import ReactLoading from "react-loading";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import { Title } from "../../atoms/Title/Title";
 import { BarChart } from "../../atoms/BarChart/BarChart";
 import { Box } from "../../atoms/Box/Box";
@@ -63,22 +61,6 @@ function Dashboard() {
           onClickButton={openCalendar}
           type="button"
         />
-        {/* <Carousel>
-          <div>
-            <BarChart
-              labelsList={labels}
-              dataExpenses={dataExpenses}
-              dataBudget={dataBudget}
-            />
-          </div>
-          <div>
-            <BarChart
-              labelsList={labels}
-              dataExpenses={dataExpenses}
-              dataBudget={dataBudget}
-            />
-          </div>
-        </Carousel> */}
         <article className="boxes">
           <Box
             variant="iconIncome"
@@ -94,9 +76,16 @@ function Dashboard() {
           />
           <Box
             variant="iconBalance"
-            transactionType="Balance"
+            transactionType="Savings"
             amount={totalBalance}
             icon={balanceIcon}
+          />
+        </article>
+        <article className="barChart">
+          <BarChart
+            labelsList={labels}
+            dataExpenses={dataExpenses}
+            dataBudget={dataBudget}
           />
         </article>
         <article className="addTranBtn">

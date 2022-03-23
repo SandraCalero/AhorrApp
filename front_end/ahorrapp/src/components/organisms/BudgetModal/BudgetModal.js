@@ -39,7 +39,7 @@ function BudgetModal({
   return (
     <div className={wrapperClass}>
       <div className="budgetModal">
-        <Title text=" New Budget" icon={budgetIcon} />
+        <Title text=" Mar/22 Budget" icon={budgetIcon} />
         <form
           className="budgetForm"
           method="post"
@@ -59,7 +59,7 @@ function BudgetModal({
                     onBlur={(values) => {
                       onValueChange(
                         budgerItem.category_name,
-                        budgerItem.category_id,
+                        budgerItem.id,
                         values.value
                       );
                     }}

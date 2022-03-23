@@ -29,8 +29,9 @@ function useNavBar() {
     const url = `http://localhost:5000/user/${userId}/budgets`;
     console.log(url);
     axios
-      .get("https://swapi.dev/api/films")
+      .get(url)
       .then((response) => {
+        console.log(response.data);
         const listResponse = [
           {
             value: 500,

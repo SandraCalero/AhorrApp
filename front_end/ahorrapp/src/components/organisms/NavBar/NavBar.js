@@ -18,7 +18,7 @@ function NavBar() {
     <nav className="navBar">
       <Button
         variant="btn navIcon menu"
-        text="New Budget"
+        text="Mar/22 Budget"
         icon={budgetIcon}
         onClickButton={onClickBudget}
       />

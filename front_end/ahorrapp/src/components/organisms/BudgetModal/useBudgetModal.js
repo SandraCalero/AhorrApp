@@ -14,8 +14,8 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [objPost, setObjPost] = useState({});
 
-  const onValueChange = (categoryName, category_id, value) => {
-    const budgetValue = { category_id, value };
+  const onValueChange = (categoryName, id, value) => {
+    const budgetValue = { id, value };
     const copyPost = { ...objPost };
     copyPost[categoryName] = budgetValue;
     setObjPost(copyPost);
@@ -26,7 +26,7 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     budgetUser.forEach((budgetItem) => {
       const categoryName = budgetItem.category_name;
       copyPost[categoryName] = {
-        category_id: budgetItem.category_id,
+        id: budgetItem.id,
         value: budgetItem.value,
       };
     });
@@ -38,7 +38,7 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     console.log(data);
     setIsSubmitting(true);
     axios({
-      method: "POST",
+      method: "PUT",
       url: "http://localhost:5000/budget",
       data: { budget: Object.values(objPost) },
     })

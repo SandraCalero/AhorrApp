@@ -6,7 +6,7 @@ import {
   faPlusCircle,
   faArrowCircleUp,
   faArrowCircleDown,
-  faBalanceScale,
+  faPiggyBank,
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "../../../utils/session/useSession";
@@ -28,7 +28,7 @@ function useDashboard() {
   // Icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
   const expenseIcon = <FontAwesomeIcon icon={faArrowCircleDown} />;
-  const balanceIcon = <FontAwesomeIcon icon={faBalanceScale} />;
+  const balanceIcon = <FontAwesomeIcon icon={faPiggyBank} />;
   const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />;
   const calendarIcon = <FontAwesomeIcon icon={faCalendar} />;
 
