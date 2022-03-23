@@ -116,12 +116,13 @@ def custom_get_all_transactions_by_user(
                 dictionary['expenses']['categories'][category.name] =\
                     dictionary['expenses']['categories'][category.name] + \
                     transaction.value
-            if category.name not in dictionary['budget']['categories']:
-                for budget in budgets:
-                    if budget.category_id == category.id:
-                        break
-                dictionary['budget']['categories'].update(
-                    {category.name: budget.value})
+            # if category.name not in dictionary['budget']['categories']:
+            #     for budget in budgets:
+            #         if budget.category_id == category.id:
+            #             break
+            #     dictionary['budget']['categories'].update(
+                    # {category.name: budget.value})
+            dictionary['budget']['categories'] = budgets
         if transactiontype.id == 2:
             dictionary['incomes']['totalIncomes'] =\
                 dictionary['incomes']['totalIncomes'] + transaction.value
