@@ -15,6 +15,9 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.7);
 }
 
+.btn.calendar span {
+  font-size: 1.5rem;
+}
 .btn.calendar {
   background: none;
   margin: 0;

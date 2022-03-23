@@ -21,6 +21,10 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     setObjPost(copyPost);
   };
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   useEffect(() => {
     const copyPost = { ...objPost };
     budgetUser.forEach((budgetItem) => {
@@ -44,6 +48,7 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     })
       .then((response) => {
         alert("Congratulations, you have created your budget for this month");
+        refreshPage();
         closeFormModal && closeFormModal();
         setIsSubmitting(false);
       })
