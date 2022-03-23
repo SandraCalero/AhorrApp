@@ -33,13 +33,14 @@ services:
     depends_on:
       - mysql
 
+  react-app:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./front_end/ahorrapp
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_NAME=PRODUCTION
+    ports:
+      - '8080:80'
 
-
-  # nginx:
-  #   image: nginx
-  #   ports:
-  #     - 8000:80
-  #   volumes:
-  #     - ./nginx/default.d/:/etc/nginx/conf.d/
-  #   depends_on:
-  #     - flask-server

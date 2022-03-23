@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 33307:3306
+    environment:
+      MYSQL_DATABASE: 'test_mysql_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'pwd'
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    volumes:
+      - ./Back_End/mysql-db:/var/lib/mysql      
+
+  flask-server:
+    build:
+      context: ./Back_End/flask-server
+      target: base
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./Back_End/flask-server:/code
+    environment:
+      HBNB_MYSQL_USER: 'user'
+      HBNB_MYSQL_PWD: 'pwd'
+      HBNB_MYSQL_HOST: 'mysql'
+      HBNB_MYSQL_DB:  'test_mysql_db'
+      FLASK_DEBUG: '1'
+    # command: bash -c "while true; do sleep 2s; done"
+    command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000 --reload"
+    depends_on:
+      - mysql
+
+  react-app:
+    stdin_open: true
+    tty: true
+    build: 
+      context: ./front_end/ahorrapp
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./front_end/ahorrapp/src:/app/src
+    environment:
+      - REACT_APP_NAME=DEVELOPMENT
+      - CHOKIDAR_USEPOLLING=true
