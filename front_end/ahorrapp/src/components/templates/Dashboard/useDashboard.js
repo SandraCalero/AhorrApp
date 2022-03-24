@@ -55,13 +55,26 @@ function useDashboard() {
     closeCalendar();
   };
 
+  const validateKeys = (budgetKeys, expensesKeys) => {
+    let areEquals = true;
+
+    if (budgetKeys.lenght === expensesKeys.lenght) {
+      budgetKeys.forEach((key) => {
+        if (!expensesKeys.includes(key)) {
+          areEquals = false;
+        }
+      });
+    }
+
+    return areEquals;
+  };
+
   const getLabelsChart = (dataResponse) => {
     const budget = dataResponse.budget.categories;
     const expenses = dataResponse.expenses.categories;
-    if (
-      JSON.stringify(Object.keys(budget)) ===
-      JSON.stringify(Object.keys(expenses))
-    ) {
+    const budgetKeys = Object.keys(budget);
+    const expensesKeys = Object.keys(expenses);
+    if (validateKeys(budgetKeys, expensesKeys)) {
       return Object.keys(budget);
     } else {
       console.log("Budget categories are diferent to Expenses categories");
@@ -69,13 +82,19 @@ function useDashboard() {
     }
   };
 
+  const getValues = (labels, data) => {
+    return labels.map((key) => {
+      return data[key];
+    });
+  };
+
   const getDataApiResponse = (dataResponse) => {
     const labels = dataResponse ? getLabelsChart(dataResponse) : [];
     const dataExpenses = dataResponse
-      ? Object.values(dataResponse.expenses.categories)
+      ? getValues(dataResponse.expenses.categories)
       : [];
     const dataBudget = dataResponse
-      ? Object.values(dataResponse.budget.categories)
+      ? getValues(dataResponse.budget.categories)
       : [];
     const totalIncomes = dataResponse
       ? formatCurrency(dataResponse.incomes.totalIncomes)
