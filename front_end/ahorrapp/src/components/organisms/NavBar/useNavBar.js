@@ -27,11 +27,9 @@ function useNavBar() {
   const handleRequestBudget = () => {
     setIsLoading(true);
     const url = `http://dreamteamsoutions.software:5000/user/${userId}/budgets`;
-    console.log(url);
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
         const listResponse = response.data;
         setBudgetUser(listResponse);
         setIsLoading(false);

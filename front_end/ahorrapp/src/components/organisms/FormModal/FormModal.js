@@ -10,6 +10,7 @@ function FormModal({
   closeFormModal,
   variant,
   categoryList,
+  onReloadData,
 }) {
   const { wrapperClass, editIcon, url } = useFormModal({
     isFormModalOpen,
@@ -29,6 +30,7 @@ function FormModal({
           typeDivButtons="edit"
           url={url}
           method="PUT"
+          onReloadData={onReloadData}
         />
       </div>
     </div>

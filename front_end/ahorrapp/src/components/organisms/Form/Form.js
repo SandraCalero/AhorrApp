@@ -17,6 +17,7 @@ function Form({
   method,
   closeFormModal,
   typeDivButtons = "action",
+  onReloadData,
 }) {
   const {
     wrapperClass,
@@ -46,6 +47,7 @@ function Form({
     url,
     method,
     closeFormModal,
+    onReloadData,
   });
 
   if (isSubmitting) {

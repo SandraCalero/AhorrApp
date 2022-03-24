@@ -11,6 +11,7 @@ function TransactionHistory({
   variantFilter,
   categoriesList,
   updateTransactionList,
+  onReloadData,
 }) {
   const {
     isLoading,
@@ -90,6 +91,7 @@ function TransactionHistory({
         closeFormModal={closeFormModal}
         categoryList={categoryList}
         variant={variantForm}
+        onReloadData={onReloadData}
       />
     </div>
   );

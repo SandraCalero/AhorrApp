@@ -2,9 +2,14 @@ import classNames from "classnames";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWallet } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
-function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
+function useBudgetModal({
+  isFormModalOpen,
+  closeFormModal,
+  budgetUser = [],
+  onReloadData,
+}) {
   const wrapperClass = classNames("glass", {
     show: isFormModalOpen,
   });
@@ -12,6 +17,8 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
   const budgetIcon = <FontAwesomeIcon icon={faWallet} />;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isReloadDataRef = useRef(false);
+  const isReloadData = isReloadDataRef.current;
   const [objPost, setObjPost] = useState({});
 
   const onValueChange = (categoryName, id, value) => {
@@ -20,10 +27,6 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     copyPost[categoryName] = budgetValue;
     setObjPost(copyPost);
   };
-
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   useEffect(() => {
     const copyPost = { ...objPost };
@@ -46,9 +49,9 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     })
       .then((response) => {
         alert("Congratulations, you have created your budget for this month");
-        refreshPage();
-        closeFormModal && closeFormModal();
+        isReloadDataRef.current = true;
         setIsSubmitting(false);
+        closeFormModal && closeFormModal();
       })
       .catch((error) => {
         console.log(error);
@@ -57,6 +60,13 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
         closeFormModal && closeFormModal();
       });
   };
+
+  useEffect(() => {
+    if (isReloadData) {
+      isReloadDataRef.current = false;
+      onReloadData && onReloadData();
+    }
+  }, [isReloadData]);
 
   return {
     isSubmitting,

@@ -11,6 +11,7 @@ function BudgetModal({
   closeFormModal,
   isLoading,
   budgetUser,
+  onReloadData,
 }) {
   const {
     isSubmitting,
@@ -23,6 +24,7 @@ function BudgetModal({
     isFormModalOpen,
     budgetUser,
     closeFormModal,
+    onReloadData,
   });
   if (isLoading || isSubmitting) {
     return (
