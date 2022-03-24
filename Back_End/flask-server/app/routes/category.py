@@ -58,8 +58,8 @@ def get_categories_by_user(user_id: int):
     """Getting all categories of an specific user"""
     result = storage.session.query(
         Category,
-        TransactionType,
-        User
+        User,
+        TransactionType
     )\
         .select_from(Category)\
         .join(User)\
