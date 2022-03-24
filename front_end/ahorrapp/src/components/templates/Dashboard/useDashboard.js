@@ -117,6 +117,8 @@ function useDashboard() {
   };
 
   const [isLoading, setIsLoading] = useState(false);
+  const [reloadData, setReloadData] = useState(false);
+
   const [apiResponse, setApiResponse] = useState(null);
   const {
     labels,
@@ -128,7 +130,7 @@ function useDashboard() {
   } = getDataApiResponse(apiResponse);
 
   const onReloadData = () => {
-    handleRequest();
+    setReloadData(true);
   };
 
   const handleRequest = (newDateRange) => {
@@ -143,16 +145,22 @@ function useDashboard() {
         const jsonResponse = response.data;
         setApiResponse(jsonResponse);
         setIsLoading(false);
+        reloadData && setReloadData(false);
       })
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
+        reloadData && setReloadData(false);
       });
   };
 
   useEffect(() => {
     userLogged && handleRequest();
   }, [userLogged]);
+
+  useEffect(() => {
+    reloadData && handleRequest();
+  }, [reloadData]);
 
   return {
     userName,

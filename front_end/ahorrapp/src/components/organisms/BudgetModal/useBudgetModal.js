@@ -2,7 +2,7 @@ import classNames from "classnames";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWallet } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 function useBudgetModal({
   isFormModalOpen,
@@ -17,6 +17,8 @@ function useBudgetModal({
   const budgetIcon = <FontAwesomeIcon icon={faWallet} />;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isReloadDataRef = useRef(false);
+  const isReloadData = isReloadDataRef.current;
   const [objPost, setObjPost] = useState({});
 
   const onValueChange = (categoryName, id, value) => {
@@ -47,9 +49,9 @@ function useBudgetModal({
     })
       .then((response) => {
         alert("Congratulations, you have created your budget for this month");
-        closeFormModal && closeFormModal();
-        onReloadData && onReloadData();
+        isReloadDataRef.current = true;
         setIsSubmitting(false);
+        closeFormModal && closeFormModal();
       })
       .catch((error) => {
         console.log(error);
@@ -58,6 +60,13 @@ function useBudgetModal({
         closeFormModal && closeFormModal();
       });
   };
+
+  useEffect(() => {
+    if (isReloadData) {
+      isReloadDataRef.current = false;
+      onReloadData && onReloadData();
+    }
+  }, [isReloadData]);
 
   return {
     isSubmitting,

@@ -22,6 +22,7 @@ function AllTransactions() {
     updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
+    onReloadData,
   } = useAllTransactions();
 
   if (!userLogged) return <Navigate to="/" replace />;
@@ -51,7 +52,7 @@ function AllTransactions() {
         />
         <Button
           icon={cleanFilterIcon}
-          text="Remove filter"
+          text="Clear filter"
           variant="cleanFilter"
           onClickButton={onClearFilter}
         />
@@ -61,6 +62,7 @@ function AllTransactions() {
             variantFilter={variantFilter}
             updateTransactionList={updateTransactionList}
             categoriesList={categoriesList}
+            onReloadData={onReloadData}
           />
         </article>
       </section>
