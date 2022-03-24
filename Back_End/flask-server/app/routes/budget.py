@@ -115,11 +115,17 @@ def update_budget(
     '/budget-by-list',
     tags=['budgets'],
     status_code=200,
-    response_model=BudgetSchema
+    response_model=List[BudgetSchema]
 )
 def update_budget_by_list(data: dict):
     input_list = data.get('budget')
-
+    lst = []
     for dict in input_list:
         id, value = dict['id'], dict['value']
-        update_budget(id, value)
+        budget = storage.get(Budget, id)
+        if budget is None:
+            raise HTTPException(status_code=404, detail="Budget Not found")
+        [setattr(budget, key, value) for key, value in dict.items()]
+        budget.save()
+        lst.append(budget)
+    return lst
