@@ -119,5 +119,7 @@ def update_budget(
 )
 def update_budget_by_list(data: dict):
     input_list = data.get('budget')
-    for budget in input_list:
-        update_budget(budget)
+
+    for dict in input_list:
+        id, value = dict['id'], dict['value']
+        update_budget(id, value)
