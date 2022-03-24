@@ -32,6 +32,7 @@ function Dashboard() {
     closeCalendar,
     onClickDate,
     openCalendar,
+    onReloadData,
   } = useDashboard();
 
   if (!userLogged) return <Navigate to="/" replace />;
@@ -51,7 +52,7 @@ function Dashboard() {
 
   return (
     <div className="body">
-      <NavBar />
+      <NavBar onReloadData={onReloadData} />
       <section className="container">
         <Title text="Hi" userName={` ${userName}!`} />
         <Button

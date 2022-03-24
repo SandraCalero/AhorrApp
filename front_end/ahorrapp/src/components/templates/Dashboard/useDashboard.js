@@ -91,10 +91,10 @@ function useDashboard() {
   const getDataApiResponse = (dataResponse) => {
     const labels = dataResponse ? getLabelsChart(dataResponse) : [];
     const dataExpenses = dataResponse
-      ? getValues(dataResponse.expenses.categories)
+      ? getValues(labels, dataResponse.expenses.categories)
       : [];
     const dataBudget = dataResponse
-      ? getValues(dataResponse.budget.categories)
+      ? getValues(labels, dataResponse.budget.categories)
       : [];
     const totalIncomes = dataResponse
       ? formatCurrency(dataResponse.incomes.totalIncomes)
@@ -126,6 +126,10 @@ function useDashboard() {
     totalExpenses,
     totalBalance,
   } = getDataApiResponse(apiResponse);
+
+  const onReloadData = () => {
+    handleRequest();
+  };
 
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
@@ -170,6 +174,7 @@ function useDashboard() {
     closeCalendar,
     onClickDate,
     openCalendar,
+    onReloadData,
   };
 }
 

@@ -4,7 +4,7 @@ import { BudgetModal } from "../BudgetModal/BudgetModal";
 import { useNavBar } from "./useNavBar";
 import "./NavBar.css";
 
-function NavBar() {
+function NavBar({ onReloadData }) {
   const {
     isLoading,
     budgetUser,
@@ -26,6 +26,7 @@ function NavBar() {
       <BudgetModal
         isLoading={isLoading}
         budgetUser={budgetUser}
+        onReloadData={onReloadData}
         isFormModalOpen={isFormModalOpen}
         closeFormModal={closeFormModal}
       />

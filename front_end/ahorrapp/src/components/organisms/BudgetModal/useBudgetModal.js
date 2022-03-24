@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWallet } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
+function useBudgetModal({
+  isFormModalOpen,
+  closeFormModal,
+  budgetUser = [],
+  onReloadData,
+}) {
   const wrapperClass = classNames("glass", {
     show: isFormModalOpen,
   });
@@ -20,10 +25,6 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     copyPost[categoryName] = budgetValue;
     setObjPost(copyPost);
   };
-
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   useEffect(() => {
     const copyPost = { ...objPost };
@@ -46,8 +47,8 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     })
       .then((response) => {
         alert("Congratulations, you have created your budget for this month");
-        refreshPage();
         closeFormModal && closeFormModal();
+        onReloadData && onReloadData();
         setIsSubmitting(false);
       })
       .catch((error) => {
