@@ -38,12 +38,10 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
   }, [budgetUser]);
 
   const handleSubmitBudget = () => {
-    const data = { budget: Object.values(objPost) };
-    console.log(data);
     setIsSubmitting(true);
     axios({
       method: "PUT",
-      url: "http://localhost:5000/budget",
+      url: "http://localhost:5000/budget-by-list",
       data: { budget: Object.values(objPost) },
     })
       .then((response) => {
