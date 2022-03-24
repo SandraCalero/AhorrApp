@@ -109,3 +109,15 @@ def update_budget(
     [setattr(budget, key, value) for key, value in dictionary.items()]
     budget.save()
     return budget
+
+
+@budget.put(
+    '/budget-by-list',
+    tags=['budgets'],
+    status_code=200,
+    response_model=BudgetSchema
+)
+def update_budget_by_list(data: dict):
+    input_list = data.get('budget')
+    for budget in input_list:
+        update_budget(budget)
