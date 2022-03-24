@@ -26,7 +26,7 @@ function useNavBar() {
 
   const handleRequestBudget = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/budgets`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/budgets`;
     console.log(url);
     axios
       .get(url)

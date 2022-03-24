@@ -48,7 +48,7 @@ function Transaction() {
           isOpenForm={isOpenForm}
           categoryList={categoryList}
           variant={variant}
-          url="http://localhost:5000/transactions"
+          url="http://dreamteamsoutions.software:5000/transactions"
           method="POST"
         />
       </section>

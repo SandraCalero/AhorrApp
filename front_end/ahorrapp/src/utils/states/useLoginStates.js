@@ -22,7 +22,7 @@ function useLoginStates() {
     setIsLoading(true);
     axios({
       method: "POST",
-      url: "http://localhost:5000/user",
+      url: "http://dreamteamsoutions.software:5000/user",
       data: {
         first_name: responseGoogle.profileObj.givenName,
         last_name: responseGoogle.profileObj.familyName,

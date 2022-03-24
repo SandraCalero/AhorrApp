@@ -41,7 +41,7 @@ function useBudgetModal({ isFormModalOpen, closeFormModal, budgetUser = [] }) {
     setIsSubmitting(true);
     axios({
       method: "PUT",
-      url: "http://localhost:5000/budget-by-list",
+      url: "http://dreamteamsoutions.software:5000/budget-by-list",
       data: { budget: Object.values(objPost) },
     })
       .then((response) => {

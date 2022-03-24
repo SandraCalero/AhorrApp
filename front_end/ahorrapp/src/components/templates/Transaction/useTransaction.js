@@ -25,7 +25,7 @@ function useTransaction() {
 
   const handleRequest = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/categories`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/categories`;
     axios
       .get(url)
       .then((response) => {

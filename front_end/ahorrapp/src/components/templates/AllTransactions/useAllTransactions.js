@@ -34,7 +34,7 @@ function useAllTransactions() {
   // Handle request of the history
   const handleTransactionRequest = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/all-transactions`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/all-transactions`;
     axios
       .get(url)
       .then((response) => {
@@ -70,7 +70,7 @@ function useAllTransactions() {
   };
   const handleRequestCategories = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/categories`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/categories`;
     console.log(url);
     axios
       .get(url)
