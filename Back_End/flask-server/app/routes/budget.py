@@ -3,7 +3,7 @@
 from fastapi import APIRouter, status, HTTPException
 from models import storage
 from models.budget import Budget
-from schemas.budget_schema import BudgetSchema, BudgetCreate, BudgetUpdate
+from schemas.budget_schema import BudgetSchema, BudgetCreate, BudgetUpdate, BudgetCostume
 from typing import List, Dict, Optional
 from app.routes.category import get_one_category, get_categories_by_user
 
@@ -43,7 +43,7 @@ def get_budget(id: int):
 
 @budget.get('/user/{userId}/budgets',
             tags=['budgets'],
-            response_model=List[BudgetSchema],
+            response_model=List[BudgetCostume],
             status_code=status.HTTP_200_OK
             )
 def get_budgets_by_user(userId: int):
