@@ -34,6 +34,9 @@
 }
 
 @media (min-width: 640px) {
+  .body {
+    width: 100%;
+  }
   .body .container {
     height: auto;
   }
