@@ -121,7 +121,7 @@ def update_budget_by_list(data: dict):
     input_list = data.get('budget')
     lst = []
     for dict in input_list:
-        id, value = dict['id'], dict['value']
+        id = dict['id']
         budget = storage.get(Budget, id)
         if budget is None:
             raise HTTPException(status_code=404, detail="Budget Not found")
