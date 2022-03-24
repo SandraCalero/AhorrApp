@@ -111,7 +111,7 @@ function useDashboard() {
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
     const dateRangeRequest = newDateRange ? newDateRange : dateRange;
-    const url = `http://localhost:5000/user/${userId}/transactions?i_date=${formatDateApi(
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
     )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
     axios

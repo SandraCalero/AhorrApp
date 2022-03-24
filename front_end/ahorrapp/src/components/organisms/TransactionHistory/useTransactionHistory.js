@@ -43,7 +43,7 @@ function useTransactionHistory({
     setIsLoading(true);
     // Here is the Delete request of the transaction
     // Then, close the Modal
-    const deleteUrl = `http://localhost:5000/transaction/${transactionId}`;
+    const deleteUrl = `http://dreamteamsoutions.software:5000/transaction/${transactionId}`;
     axios
       .delete(deleteUrl)
       .then((response) => {
