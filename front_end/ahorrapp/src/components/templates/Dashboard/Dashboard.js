@@ -4,7 +4,7 @@ import { Title } from "../../atoms/Title/Title";
 import { BarChart } from "../../atoms/BarChart/BarChart";
 import { Box } from "../../atoms/Box/Box";
 import { LinkButton } from "../../molecules/LinkButton/LinkButton";
-import { NavBar } from "../../molecules/NavBar/NavBar";
+import { NavBar } from "../../organisms/NavBar/NavBar";
 import { Footer } from "../../organisms/Footer/Footer";
 import { Navigate } from "react-router-dom";
 import { Button } from "../../atoms/Button/Button";
@@ -61,13 +61,6 @@ function Dashboard() {
           onClickButton={openCalendar}
           type="button"
         />
-        <article className="carousel">
-          <BarChart
-            labelsList={labels}
-            dataExpenses={dataExpenses}
-            dataBudget={dataBudget}
-          />
-        </article>
         <article className="boxes">
           <Box
             variant="iconIncome"
@@ -83,9 +76,16 @@ function Dashboard() {
           />
           <Box
             variant="iconBalance"
-            transactionType="Balance"
+            transactionType="Savings"
             amount={totalBalance}
             icon={balanceIcon}
+          />
+        </article>
+        <article className="barChart">
+          <BarChart
+            labelsList={labels}
+            dataExpenses={dataExpenses}
+            dataBudget={dataBudget}
           />
         </article>
         <article className="addTranBtn">

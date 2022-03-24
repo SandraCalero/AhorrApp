@@ -9,11 +9,14 @@
   align-items: center;
 }
 
-/* .login .loginBtn {
-  width: 12.5rem;
+.login .divLogo {
+  width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
 }
 
-.login .loginBtn button {
-} */
+.login .divLogo .imgLogo {
+  width: 15.625rem;
+  aspect-ratio: 2.5;
+}

@@ -3,11 +3,11 @@ import ReactLoading from "react-loading";
 import { Navigate } from "react-router-dom";
 import { Title } from "../../atoms/Title/Title";
 import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { NavBar } from "../../molecules/NavBar/NavBar";
+import { NavBar } from "../../organisms/NavBar/NavBar";
 import { Footer } from "../../organisms/Footer/Footer";
 import { useAllTransactions } from "./useAllTransactions";
 import "./AllTransactions.css";
-import { TransactionHistory } from "../../molecules/TransactionHistory/TransactionHistory";
+import { TransactionHistory } from "../../organisms/TransactionHistory/TransactionHistory";
 import { Button } from "../../atoms/Button/Button";
 
 function AllTransactions() {
