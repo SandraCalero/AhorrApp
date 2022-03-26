@@ -7,6 +7,7 @@ import { DivButtons } from "../../molecules/DivButtons/DivButtons";
 import { Form } from "../../organisms/Form/Form";
 import { Footer } from "../../organisms/Footer/Footer";
 import { useTransaction } from "./useTransaction";
+import { API } from '../../../config';
 
 function Transaction() {
   const {
@@ -19,6 +20,7 @@ function Transaction() {
     handleIncomeButton,
   } = useTransaction();
 
+  const routeApi = `${API}/transactions`;
   if (!userLogged) return <Navigate to="/" replace />;
 
   if (isLoading) {
@@ -48,7 +50,7 @@ function Transaction() {
           isOpenForm={isOpenForm}
           categoryList={categoryList}
           variant={variant}
-          url="http://dreamteamsoutions.software:5000/transactions"
+          url={routeApi}
           method="POST"
         />
       </section>

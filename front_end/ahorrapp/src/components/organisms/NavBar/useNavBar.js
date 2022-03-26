@@ -3,6 +3,7 @@ import { useSession } from "../../../utils/session/useSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faWallet } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { API } from '../../../config';
 
 function useNavBar() {
   const { userInfo } = useSession();
@@ -26,7 +27,7 @@ function useNavBar() {
 
   const handleRequestBudget = () => {
     setIsLoading(true);
-    const url = `http://dreamteamsoutions.software:5000/user/${userId}/budgets`;
+    const url = `${API}/user/${userId}/budgets`;
     axios
       .get(url)
       .then((response) => {

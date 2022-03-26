@@ -3,6 +3,7 @@ import { useSession } from "../../../utils/session/useSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { API } from '../../../config';
 
 function useAllTransactions() {
   // Everything for transactionList
@@ -38,7 +39,7 @@ function useAllTransactions() {
   // Handle request of the history
   const handleTransactionRequest = () => {
     setIsLoading(true);
-    const url = `http://dreamteamsoutions.software:5000/user/${userId}/all-transactions`;
+    const url = `${API}/user/${userId}/all-transactions`;
     axios
       .get(url)
       .then((response) => {
@@ -77,7 +78,7 @@ function useAllTransactions() {
 
   const handleRequestCategories = () => {
     setIsLoading(true);
-    const url = `http://dreamteamsoutions.software:5000/user/${userId}/categories`;
+    const url = `${API}/user/${userId}/categories`;
     console.log(url);
     axios
       .get(url)

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useStorage } from "../storage/useStorage";
 import { useNavigate } from "react-router-dom";
+import { API } from '../../config';
 
 function useLoginStates() {
   const { userInfo, onSaveUserInfo, onCleanStorage } = useStorage();
@@ -22,7 +23,7 @@ function useLoginStates() {
     setIsLoading(true);
     axios({
       method: "POST",
-      url: "http://dreamteamsoutions.software:5000/user",
+      url: `${API}/user`,
       data: {
         first_name: responseGoogle.profileObj.givenName,
         last_name: responseGoogle.profileObj.familyName,
