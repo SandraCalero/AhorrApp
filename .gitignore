@@ -3,6 +3,6 @@ venv/
 __pycache__
 Back_End/mysql-db/*
 # front end
-
+.env
 node_modules/
 

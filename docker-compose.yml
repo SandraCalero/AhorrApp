@@ -23,10 +23,10 @@ services:
     volumes:
       - ./Back_End/flask-server:/code
     environment:
-      - HBNB_MYSQL_USER=${HBNB_MYSQL_USER}
-      - HBNB_MYSQL_PWD=${HBNB_MYSQL_PWD}
-      - HBNB_MYSQL_HOST=${HBNB_MYSQL_HOST}
-      - HBNB_MYSQL_DB=${HBNB_MYSQL_DB}
+      - BACKEND_MYSQL_USER=${BACKEND_MYSQL_USER}
+      - BACKEND_MYSQL_PWD=${BACKEND_MYSQL_PWD}
+      - BACKEND_MYSQL_HOST=${BACKEND_MYSQL_HOST}
+      - BACKEND_MYSQL_DB=${BACKEND_MYSQL_DB}
     # command: bash -c "while true; do sleep 2s; done"
     command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000"
     depends_on:
@@ -38,6 +38,8 @@ services:
     build: 
       context: ./front_end/ahorrapp
       dockerfile: Dockerfile.dev
+    env_file:
+      - ./front_end/ahorrapp/.env
 
 
     # environment:
