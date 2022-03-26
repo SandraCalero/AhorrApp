@@ -10,6 +10,7 @@ function useAllTransactions() {
   const { userInfo, userLogged, onSaveUserInfo } = useSession();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [reloadData, setReloadData] = useState(false);
   const [categoriesList, setCategoriesList] = useState([]);
   const [variantFilter, setVariantFilter] = useState(null);
 
@@ -31,20 +32,25 @@ function useAllTransactions() {
     setApiResponse(newList);
   };
 
+  const onReloadData = () => {
+    setReloadData(true);
+  };
   // Handle request of the history
   const handleTransactionRequest = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/all-transactions`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/all-transactions`;
     axios
       .get(url)
       .then((response) => {
         const listResponse = response.data;
         setApiResponse(listResponse);
         setIsLoading(false);
+        reloadData && setReloadData(false);
       })
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
+        reloadData && setReloadData(false);
       });
   };
 
@@ -68,9 +74,10 @@ function useAllTransactions() {
   const onClearFilter = () => {
     setVariantFilter(null);
   };
+
   const handleRequestCategories = () => {
     setIsLoading(true);
-    const url = `http://localhost:5000/user/${userId}/categories`;
+    const url = `http://dreamteamsoutions.software:5000/user/${userId}/categories`;
     console.log(url);
     axios
       .get(url)
@@ -91,6 +98,11 @@ function useAllTransactions() {
     userLogged && handleTransactionRequest();
     userLogged && checkCategoryList();
   }, [userLogged]);
+
+  useEffect(() => {
+    reloadData && handleTransactionRequest();
+    reloadData && checkCategoryList();
+  }, [reloadData]);
   // End here everything for transactionList
 
   return {
@@ -104,6 +116,7 @@ function useAllTransactions() {
     updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
+    onReloadData,
   };
 }
 

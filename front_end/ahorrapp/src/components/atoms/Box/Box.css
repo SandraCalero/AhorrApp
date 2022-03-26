@@ -29,12 +29,15 @@
 
 .box .iconIncome {
   color: #62a856;
+  font-size: 1.5rem;
 }
 
 .box .iconExpense {
   color: #f47265;
+  font-size: 1.5rem;
 }
 
 .box .iconBalance {
-  color: #3a3636;
+  color: #f5e27d;
+  font-size: 1.5rem;
 }

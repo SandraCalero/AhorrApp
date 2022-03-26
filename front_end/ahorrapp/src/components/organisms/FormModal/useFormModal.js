@@ -10,7 +10,7 @@ function useFormModal({ isFormModalOpen, transactionInfo }) {
   const editIcon = <FontAwesomeIcon icon={faEdit} />;
 
   const url = transactionInfo
-    ? `http://localhost:5000/transaction/${transactionInfo.id}`
+    ? `http://dreamteamsoutions.software:5000/transaction/${transactionInfo.id}`
     : "";
 
   return { wrapperClass, editIcon, url };

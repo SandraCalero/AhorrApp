@@ -58,8 +58,8 @@ def get_categories_by_user(user_id: int):
     """Getting all categories of an specific user"""
     result = storage.session.query(
         Category,
-        TransactionType,
-        User
+        User,
+        TransactionType
     )\
         .select_from(Category)\
         .join(User)\
@@ -104,7 +104,7 @@ def get_all_categories():
     """Gets all the categories"""
     categories = storage.all(Category)
     if categories.__len__() == 0:
-        raise HTTPException(status_code=404, detail="Not items were found")
+        raise HTTPException(status_code=404, detail="No Category items were found")
     return [value for value in categories.values()]
 
 
@@ -138,7 +138,7 @@ def update_category(
         raise HTTPException(status_code=400, detail="Not a JSON")
     category = storage.get(TransactionType, id)
     if category is None:
-        raise HTTPException(status_code=404, detail="Not found")
+        raise HTTPException(status_code=404, detail="TransactionType Not found")
 
     [setattr(category, key, value) for key, value in dictionary.items()
         if key not in ['id', 'created_at', 'updated_at']]
@@ -156,7 +156,7 @@ def delete_category(id: int):
     """Deletes a transaction type"""
     category = storage.get(Category, id)
     if category is None:
-        raise HTTPException(status_code=404, detail="Not found")
+        raise HTTPException(status_code=404, detail="Category Not found")
     category.delete()
     storage.save()
     return JSONResponse({}, status_code=201)

@@ -14,8 +14,7 @@
   width: 100%;
 }
 
-.body .container .carousel {
-  margin-top: 1rem;
+.body .container .barChart {
   display: flex;
   align-items: center;
   width: 100%;
@@ -35,6 +34,9 @@
 }
 
 @media (min-width: 640px) {
+  .body {
+    width: 100%;
+  }
   .body .container {
     height: auto;
   }

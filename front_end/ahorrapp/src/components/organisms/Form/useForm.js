@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import classNames from "classnames";
-// import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
@@ -17,6 +16,7 @@ function useForm({
   url,
   method,
   closeFormModal,
+  onReloadData,
 }) {
   const wrapperClass = classNames("form", {
     show: isOpenForm,
@@ -47,11 +47,9 @@ function useForm({
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isReloadDataRef = useRef(false);
+  const isReloadData = isReloadDataRef.current;
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   useEffect(() => {
     if (variant !== prevVariantForm && !transactionInfo) {
@@ -100,12 +98,12 @@ function useForm({
       .then((response) => {
         if (method === "PUT") {
           alert("Transaction updated");
-          refreshPage();
+          isReloadDataRef.current = true;
         } else {
           alert("Transaction added");
         }
-        closeFormModal && closeFormModal();
         setIsSubmitting(false);
+        closeFormModal && closeFormModal();
         onClearData();
       })
       .catch((error) => {
@@ -116,6 +114,13 @@ function useForm({
         onClearData();
       });
   };
+
+  useEffect(() => {
+    if (isReloadData) {
+      isReloadDataRef.current = false;
+      onReloadData && onReloadData();
+    }
+  }, [isReloadData]);
 
   const disabled = !amount || !categorySelected || !date;
 

@@ -3,9 +3,9 @@
 from fastapi import APIRouter, status, HTTPException
 from models import storage
 from models.budget import Budget
-from schemas.budget_schema import BudgetSchema, BudgetCreate, BudgetUpdate
+from schemas.budget_schema import BudgetSchema, BudgetCreate, BudgetUpdate, BudgetCostume
 from typing import List, Dict, Optional
-from app.routes.category import get_one_category
+from app.routes.category import get_one_category, get_categories_by_user
 
 budget = APIRouter()
 
@@ -39,6 +39,24 @@ def get_budget(id: int):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Budget not found")
     return budget
+
+
+@budget.get('/user/{userId}/budgets',
+            tags=['budgets'],
+            response_model=List[BudgetCostume],
+            status_code=status.HTTP_200_OK
+            )
+def get_budgets_by_user(userId: int):
+    """Get the budgets associated with a user"""
+    categories = get_categories_by_user(userId)
+
+    lst = []
+    for Category, _, _ in categories:
+        if Category.budgets:
+            lst.append(Category.budgets[0].to_dict())
+            lst[-1]['category_name'] = Category.name
+
+    return lst
 
 
 @budget.post(
@@ -91,3 +109,23 @@ def update_budget(
     [setattr(budget, key, value) for key, value in dictionary.items()]
     budget.save()
     return budget
+
+
+@budget.put(
+    '/budget-by-list',
+    tags=['budgets'],
+    status_code=200,
+    response_model=List[BudgetSchema]
+)
+def update_budget_by_list(data: dict):
+    input_list = data.get('budget')
+    lst = []
+    for dict in input_list:
+        id = dict['id']
+        budget = storage.get(Budget, id)
+        if budget is None:
+            raise HTTPException(status_code=404, detail="Budget Not found")
+        [setattr(budget, key, value) for key, value in dict.items()]
+        budget.save()
+        lst.append(budget)
+    return lst

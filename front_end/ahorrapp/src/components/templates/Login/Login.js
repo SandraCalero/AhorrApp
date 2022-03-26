@@ -1,5 +1,4 @@
 import React from "react";
-import { Title } from "../../atoms/Title/Title";
 import "./Login.css";
 import { GoogleLogin } from "react-google-login";
 import { Navigate } from "react-router-dom";
@@ -10,7 +9,10 @@ export function Login() {
   return (
     <div className="login">
       {userLogged && <Navigate to="/Dashboard" replace />}
-      <Title text="AhorrApp" />
+
+      <div className="divLogo">
+        <img className="imgLogo" src="logoAhorrApp.png" alt="Logo AhorrApp" />
+      </div>
       <GoogleLogin
         clientId="861046265404-52vbar87q58gi3raeo23vms8k0c92tci.apps.googleusercontent.com"
         buttonText="Sing in with Google"

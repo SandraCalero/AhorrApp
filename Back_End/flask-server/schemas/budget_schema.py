@@ -22,6 +22,13 @@ class BudgetUpdate(BaseModel):
     value: Optional[float] = None
 
 
+class BudgetCostume(BudgetBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+    category_name: str
+
+
 class BudgetSchema(BudgetBase):
     """Data validation for Budget return schema"""
     id: int

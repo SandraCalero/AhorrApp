@@ -1,16 +1,17 @@
 import React from "react";
 import ReactLoading from "react-loading";
-import { TransactionCard } from "../TransactionCard/TransactionCard";
+import { TransactionCard } from "../../molecules/TransactionCard/TransactionCard";
 import { ConfirmationModal } from "../../molecules/ConfirmationModal/ConfirmationModal";
 import "./TransactionHistory.css";
 import { useTransactionHistory } from "./useTransactionHistory";
-import { FormModal } from "../../organisms/FormModal/FormModal";
+import { FormModal } from "../FormModal/FormModal";
 
 function TransactionHistory({
   transactionList,
   variantFilter,
   categoriesList,
   updateTransactionList,
+  onReloadData,
 }) {
   const {
     isLoading,
@@ -90,6 +91,7 @@ function TransactionHistory({
         closeFormModal={closeFormModal}
         categoryList={categoryList}
         variant={variantForm}
+        onReloadData={onReloadData}
       />
     </div>
   );
