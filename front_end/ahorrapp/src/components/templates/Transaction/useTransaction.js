@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "../../../utils/session/useSession";
+import { API } from '../../../config';
 
 function useTransaction() {
   // get info by session
@@ -25,7 +26,7 @@ function useTransaction() {
 
   const handleRequest = () => {
     setIsLoading(true);
-    const url = `http://dreamteamsoutions.software:5000/user/${userId}/categories`;
+    const url = `${API}/user/${userId}/categories`;
     axios
       .get(url)
       .then((response) => {

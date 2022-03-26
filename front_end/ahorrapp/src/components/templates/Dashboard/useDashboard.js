@@ -12,6 +12,7 @@ import {
 import { useSession } from "../../../utils/session/useSession";
 import { useCurrency } from "../../../utils/formaters/useCurrency";
 import { useDate } from "../../../utils/formaters/useDate";
+import { API } from '../../../config';
 
 function useDashboard() {
   // get info by session
@@ -136,7 +137,7 @@ function useDashboard() {
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
     const dateRangeRequest = newDateRange ? newDateRange : dateRange;
-    const url = `http://dreamteamsoutions.software:5000/user/${userId}/transactions?i_date=${formatDateApi(
+    const url = `${API}/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
     )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
     axios

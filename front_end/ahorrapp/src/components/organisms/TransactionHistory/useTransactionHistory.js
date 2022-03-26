@@ -5,6 +5,7 @@ import {
   faArrowCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { API } from '../../../config';
 
 function useTransactionHistory({
   transactionList,
@@ -43,7 +44,7 @@ function useTransactionHistory({
     setIsLoading(true);
     // Here is the Delete request of the transaction
     // Then, close the Modal
-    const deleteUrl = `http://dreamteamsoutions.software:5000/transaction/${transactionId}`;
+    const deleteUrl = `${API}/transaction/${transactionId}`;
     axios
       .delete(deleteUrl)
       .then((response) => {

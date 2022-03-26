@@ -96,6 +96,12 @@ npm install dotenv
 ```
 
 Take a look in how can be called the specific env variable inside the src/config.js script:
+```
+# this is the data inse the .env file
+REACT_APP_API_URL=http://<subdomain-name>:5000
+EX:
+REACT_APP_API_URL=http://localhost:5000
+```
 
 ```js
 export const API = process.env.REACT_APP_API_URL;
