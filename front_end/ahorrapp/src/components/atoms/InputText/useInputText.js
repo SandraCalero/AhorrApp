@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 const useInputText = ({ onBlur }) => {
-  const amount = useRef("");
+  const amount = useRef('');
   const setAmount = (value) => {
     amount.current = value;
   };

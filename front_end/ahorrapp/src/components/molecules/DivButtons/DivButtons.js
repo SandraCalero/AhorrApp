@@ -1,9 +1,9 @@
-import React from "react";
-import "./DivButtons.css";
-import { Button } from "../../atoms/Button/Button";
-import { LinkButton } from "../LinkButton/LinkButton";
+import React from 'react';
+import './DivButtons.css';
+import { Button } from '../../atoms/Button/Button';
+import { LinkButton } from '../LinkButton/LinkButton';
 
-function DivButtons({
+function DivButtons ({
   onClickLeft,
   onClickRight,
   disabledSubmit,
@@ -11,69 +11,69 @@ function DivButtons({
   onCancelClick,
   closeConfirmationModal,
   YesButtonConfirmationModal,
-  type,
+  type
 }) {
   return (
-    <div className="divButtons">
-      {type === "transaction" && (
+    <div className='divButtons'>
+      {type === 'transaction' && (
         <Button
-          text="Income"
-          variant="btn shadow Income"
+          text='Income'
+          variant='btn shadow Income'
           onClickButton={onClickLeft}
         />
       )}
-      {type === "transaction" && (
+      {type === 'transaction' && (
         <Button
-          text="Expense"
-          variant="btn shadow Expense"
+          text='Expense'
+          variant='btn shadow Expense'
           onClickButton={onClickRight}
         />
       )}
-      {type === "action" && (
+      {type === 'action' && (
         <Button
-          text="Add"
-          variant="btn Add"
-          type="button"
+          text='Add'
+          variant='btn Add'
+          type='button'
           disabled={disabledSubmit}
           onClickButton={handleSubmitForm}
         />
       )}
-      {type === "action" && (
+      {type === 'action' && (
         <LinkButton
-          route="/Dashboard"
-          text="Cancel"
-          variant="btn Cancel"
-          type="reset"
+          route='/Dashboard'
+          text='Cancel'
+          variant='btn Cancel'
+          type='reset'
         />
       )}
-      {type === "edit" && (
+      {type === 'edit' && (
         <Button
-          text="Update"
-          variant="btn Add"
-          type="button"
+          text='Update'
+          variant='btn Add'
+          type='button'
           disabled={disabledSubmit}
           onClickButton={handleSubmitForm}
         />
       )}
-      {type === "edit" && (
+      {type === 'edit' && (
         <Button
-          text="Cancel"
-          variant="btn Cancel"
-          type="reset"
+          text='Cancel'
+          variant='btn Cancel'
+          type='reset'
           onClickButton={onCancelClick}
         />
       )}
-      {type === "confirmation" && (
+      {type === 'confirmation' && (
         <Button
-          text="No"
-          variant="btn confirmation btnNo"
+          text='No'
+          variant='btn confirmation btnNo'
           onClickButton={closeConfirmationModal}
         />
       )}
-      {type === "confirmation" && (
+      {type === 'confirmation' && (
         <Button
-          text="Yes"
-          variant="btn confirmation btnYes"
+          text='Yes'
+          variant='btn confirmation btnYes'
           onClickButton={YesButtonConfirmationModal}
         />
       )}

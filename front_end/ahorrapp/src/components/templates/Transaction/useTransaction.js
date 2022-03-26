@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useSession } from "../../../utils/session/useSession";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSession } from '../../../utils/session/useSession';
 import { API } from '../../../config';
 
-function useTransaction() {
+function useTransaction () {
   // get info by session
   const { userInfo, userLogged, onSaveUserInfo } = useSession();
 
@@ -46,17 +46,17 @@ function useTransaction() {
     userLogged && checkCategoryList();
   }, [userLogged]);
 
-  const [variant, setVariant] = useState("");
+  const [variant, setVariant] = useState('');
 
   const handleExpenseButton = () => {
     setCategoryList(apiResponse.expenses);
-    setVariant("expense");
+    setVariant('expense');
     setIsOpenForm(true);
   };
 
   const handleIncomeButton = () => {
     setCategoryList(apiResponse.incomes);
-    setVariant("income");
+    setVariant('income');
     setIsOpenForm(true);
   };
 
@@ -67,7 +67,7 @@ function useTransaction() {
     variant,
     isLoading,
     handleExpenseButton,
-    handleIncomeButton,
+    handleIncomeButton
   };
 }
 

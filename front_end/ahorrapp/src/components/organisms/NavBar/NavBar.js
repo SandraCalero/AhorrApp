@@ -1,10 +1,10 @@
-import React from "react";
-import { Button } from "../../atoms/Button/Button";
-import { BudgetModal } from "../BudgetModal/BudgetModal";
-import { useNavBar } from "./useNavBar";
-import "./NavBar.css";
+import React from 'react';
+import { Button } from '../../atoms/Button/Button';
+import { BudgetModal } from '../BudgetModal/BudgetModal';
+import { useNavBar } from './useNavBar';
+import './NavBar.css';
 
-function NavBar({ onReloadData }) {
+function NavBar ({ onReloadData }) {
   const {
     isLoading,
     budgetUser,
@@ -12,14 +12,14 @@ function NavBar({ onReloadData }) {
     userIcon,
     isFormModalOpen,
     closeFormModal,
-    onClickBudget,
+    onClickBudget
   } = useNavBar();
 
   return (
-    <nav className="navBar">
+    <nav className='navBar'>
       <Button
-        variant="btn navIcon menu"
-        text="Mar/22 Budget"
+        variant='btn navIcon menu'
+        text='Mar/22 Budget'
         icon={budgetIcon}
         onClickButton={onClickBudget}
       />
@@ -30,7 +30,7 @@ function NavBar({ onReloadData }) {
         isFormModalOpen={isFormModalOpen}
         closeFormModal={closeFormModal}
       />
-      <Button variant="navIcon" icon={userIcon} />
+      <Button variant='navIcon' icon={userIcon} />
     </nav>
   );
 }

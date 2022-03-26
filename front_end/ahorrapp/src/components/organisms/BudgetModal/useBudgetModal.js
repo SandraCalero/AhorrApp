@@ -1,18 +1,18 @@
-import classNames from "classnames";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWallet } from "@fortawesome/free-solid-svg-icons";
-import { useRef, useEffect, useState } from "react";
+import classNames from 'classnames';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import { useRef, useEffect, useState } from 'react';
 import { API } from '../../../config';
 
-function useBudgetModal({
+function useBudgetModal ({
   isFormModalOpen,
   closeFormModal,
   budgetUser = [],
-  onReloadData,
+  onReloadData
 }) {
-  const wrapperClass = classNames("glass", {
-    show: isFormModalOpen,
+  const wrapperClass = classNames('glass', {
+    show: isFormModalOpen
   });
 
   const budgetIcon = <FontAwesomeIcon icon={faWallet} />;
@@ -35,7 +35,7 @@ function useBudgetModal({
       const categoryName = budgetItem.category_name;
       copyPost[categoryName] = {
         id: budgetItem.id,
-        value: budgetItem.value,
+        value: budgetItem.value
       };
     });
     setObjPost(copyPost);
@@ -44,19 +44,19 @@ function useBudgetModal({
   const handleSubmitBudget = () => {
     setIsSubmitting(true);
     axios({
-      method: "PUT",
+      method: 'PUT',
       url: `${API}/budget-by-list`,
-      data: { budget: Object.values(objPost) },
+      data: { budget: Object.values(objPost) }
     })
       .then((response) => {
-        alert("Congratulations, you have created your budget for this month");
+        alert('Congratulations, you have created your budget for this month');
         isReloadDataRef.current = true;
         setIsSubmitting(false);
         closeFormModal && closeFormModal();
       })
       .catch((error) => {
         console.log(error);
-        alert("Failed to add budget");
+        alert('Failed to add budget');
         setIsSubmitting(false);
         closeFormModal && closeFormModal();
       });
@@ -75,7 +75,7 @@ function useBudgetModal({
     budgetIcon,
     onValueChange,
     objPost,
-    handleSubmitBudget,
+    handleSubmitBudget
   };
 }
 

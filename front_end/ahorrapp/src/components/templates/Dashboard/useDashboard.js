@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlusCircle,
   faArrowCircleUp,
   faArrowCircleDown,
   faPiggyBank,
-  faCalendar,
-} from "@fortawesome/free-solid-svg-icons";
-import { useSession } from "../../../utils/session/useSession";
-import { useCurrency } from "../../../utils/formaters/useCurrency";
-import { useDate } from "../../../utils/formaters/useDate";
+  faCalendar
+} from '@fortawesome/free-solid-svg-icons';
+import { useSession } from '../../../utils/session/useSession';
+import { useCurrency } from '../../../utils/formaters/useCurrency';
+import { useDate } from '../../../utils/formaters/useDate';
 import { API } from '../../../config';
 
-function useDashboard() {
+function useDashboard () {
   // get info by session
   const { userInfo, userLogged } = useSession();
   // get user name
@@ -36,7 +36,7 @@ function useDashboard() {
   // Handle calendar
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
-  const firstDay = moment().startOf("month");
+  const firstDay = moment().startOf('month');
   const today = currentDate();
 
   const [dateRange, setDateRange] = useState([firstDay, today]);
@@ -78,7 +78,7 @@ function useDashboard() {
     if (validateKeys(budgetKeys, expensesKeys)) {
       return Object.keys(budget);
     } else {
-      console.log("Budget categories are diferent to Expenses categories");
+      console.log('Budget categories are diferent to Expenses categories');
       return [];
     }
   };
@@ -99,13 +99,13 @@ function useDashboard() {
       : [];
     const totalIncomes = dataResponse
       ? formatCurrency(dataResponse.incomes.totalIncomes)
-      : "";
+      : '';
     const totalExpenses = dataResponse
       ? formatCurrency(dataResponse.expenses.totalExpenses)
-      : "";
+      : '';
     const totalBalance = dataResponse
       ? formatCurrency(dataResponse.totalBalance)
-      : "";
+      : '';
 
     return {
       labels,
@@ -113,7 +113,7 @@ function useDashboard() {
       dataBudget,
       totalIncomes,
       totalExpenses,
-      totalBalance,
+      totalBalance
     };
   };
 
@@ -127,7 +127,7 @@ function useDashboard() {
     dataBudget,
     totalIncomes,
     totalExpenses,
-    totalBalance,
+    totalBalance
   } = getDataApiResponse(apiResponse);
 
   const onReloadData = () => {
@@ -136,7 +136,7 @@ function useDashboard() {
 
   const handleRequest = (newDateRange) => {
     setIsLoading(true);
-    const dateRangeRequest = newDateRange ? newDateRange : dateRange;
+    const dateRangeRequest = newDateRange || dateRange;
     const url = `${API}/user/${userId}/transactions?i_date=${formatDateApi(
       dateRangeRequest[0]
     )}&f_date=${formatDateApi(dateRangeRequest[1])}`;
@@ -183,7 +183,7 @@ function useDashboard() {
     closeCalendar,
     onClickDate,
     openCalendar,
-    onReloadData,
+    onReloadData
   };
 }
 

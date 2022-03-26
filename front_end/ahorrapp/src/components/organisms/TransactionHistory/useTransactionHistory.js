@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowCircleUp,
-  faArrowCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+  faArrowCircleDown
+} from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import { API } from '../../../config';
 
-function useTransactionHistory({
+function useTransactionHistory ({
   transactionList,
   variantFilter,
   updateTransactionList,
-  categoriesList,
+  categoriesList
 }) {
   // icons
   const incomeIcon = <FontAwesomeIcon icon={faArrowCircleUp} />;
@@ -25,7 +25,7 @@ function useTransactionHistory({
   const [categoryList, setCategoryList] = useState([]);
 
   // state for variant formModal
-  const [variantForm, setVariantForm] = useState("");
+  const [variantForm, setVariantForm] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,14 +49,14 @@ function useTransactionHistory({
       .delete(deleteUrl)
       .then((response) => {
         const newListResponse = response.data;
-        updateTransactionList(newListResponse); //set the new transactionList
+        updateTransactionList(newListResponse); // set the new transactionList
         setIsConfirmationOpen(false);
         setTransactionId(null);
-        alert("Transaction successfully deleted");
+        alert('Transaction successfully deleted');
         setIsLoading(false);
       })
       .catch((error) => {
-        alert("The transaction could not be deleted");
+        alert('The transaction could not be deleted');
         console.log(error);
         setIsLoading(false);
         setIsConfirmationOpen(false);
@@ -66,7 +66,7 @@ function useTransactionHistory({
   // End here the Confirmation Modal utilites
 
   // Everything of FormModal
-  //state of the FormModal
+  // state of the FormModal
   const [isFormModalOpen, setIsFormModalOpen] = useState();
 
   const closeFormModal = () => {
@@ -85,7 +85,7 @@ function useTransactionHistory({
   // Everything of Edit Button
   const clickEdit = (transactionItem) => {
     const variant =
-      transactionItem.transaction_type_id === 2 ? "income" : "expense";
+      transactionItem.transaction_type_id === 2 ? 'income' : 'expense';
     setCategoryList(categoriesList[`${variant}s`]);
     setIsFormModalOpen(true);
     setVariantForm(variant);
@@ -108,7 +108,7 @@ function useTransactionHistory({
     clickEdit,
     openConfirmationModal,
     closeConfirmationModal,
-    YesButtonConfirmationModal,
+    YesButtonConfirmationModal
   };
 }
 

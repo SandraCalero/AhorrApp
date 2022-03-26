@@ -1,8 +1,8 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 
-function useCategoryModal({ isOpen }) {
-  const wrapperClass = classNames("glass", {
-    show: isOpen,
+function useCategoryModal ({ isOpen }) {
+  const wrapperClass = classNames('glass', {
+    show: isOpen
   });
   return { wrapperClass };
 }

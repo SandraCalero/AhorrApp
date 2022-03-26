@@ -1,14 +1,14 @@
-import React from "react";
-import ReactLoading from "react-loading";
-import { Input } from "../../molecules/Input/Input";
-import { TextArea } from "../../atoms/TextArea/TextArea";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { useForm } from "./useForm";
-import { CategoryModal } from "../CategoryModal/CategoryModal";
-import { DateModal } from "../../molecules/DateModal/DateModal";
-import "./Form.css";
+import React from 'react';
+import ReactLoading from 'react-loading';
+import { Input } from '../../molecules/Input/Input';
+import { TextArea } from '../../atoms/TextArea/TextArea';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import { useForm } from './useForm';
+import { CategoryModal } from '../CategoryModal/CategoryModal';
+import { DateModal } from '../../molecules/DateModal/DateModal';
+import './Form.css';
 
-function Form({
+function Form ({
   isOpenForm,
   categoryList,
   variant,
@@ -16,8 +16,8 @@ function Form({
   url,
   method,
   closeFormModal,
-  typeDivButtons = "action",
-  onReloadData,
+  typeDivButtons = 'action',
+  onReloadData
 }) {
   const {
     wrapperClass,
@@ -39,7 +39,7 @@ function Form({
     onClickDate,
     openCalendar,
     handleOnBlurTextArea,
-    handleSubmitForm,
+    handleSubmitForm
   } = useForm({
     isOpenForm,
     variant,
@@ -47,17 +47,17 @@ function Form({
     url,
     method,
     closeFormModal,
-    onReloadData,
+    onReloadData
   });
 
   if (isSubmitting) {
     return (
       <div className={wrapperClass}>
         <ReactLoading
-          type="bubbles"
-          color="#357EDD"
-          width={"100%"}
-          height={"100%"}
+          type='bubbles'
+          color='#357EDD'
+          width='100%'
+          height='100%'
         />
       </div>
     );
@@ -66,37 +66,37 @@ function Form({
   return (
     <form
       className={wrapperClass}
-      method="post"
+      method='post'
       onSubmitCapture={(value) => {
         console.log(value);
       }}
     >
       <Input
-        variant="input"
+        variant='input'
         icon={amountIcon}
         value={amountValue}
-        text="Amount"
-        name="amount"
+        text='Amount'
+        name='amount'
         onBlur={onValueChange}
       />
       <Input
-        variant="button"
+        variant='button'
         icon={categoryIcon}
-        text="Category"
-        name="category"
+        text='Category'
+        name='category'
         value={categorySelected}
-        placeholder="Select category"
+        placeholder='Select category'
         onClick={openModal}
       />
       <Input
-        variant="date"
+        variant='date'
         icon={dateIcon}
-        text="Date"
+        text='Date'
         value={dateToShow}
         onClick={openCalendar}
       />
       <TextArea
-        label="Description"
+        label='Description'
         value={textarea}
         handleOnBlurTextArea={handleOnBlurTextArea}
       />

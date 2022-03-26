@@ -1,29 +1,29 @@
-import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import classNames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMoneyBill,
   faCalendar,
-  faList,
-} from "@fortawesome/free-solid-svg-icons";
-import { useFormState } from "../../../utils/states/useFormState";
+  faList
+} from '@fortawesome/free-solid-svg-icons';
+import { useFormState } from '../../../utils/states/useFormState';
 
-function useForm({
+function useForm ({
   isOpenForm,
   variant,
   transactionInfo = null,
   url,
   method,
   closeFormModal,
-  onReloadData,
+  onReloadData
 }) {
-  const wrapperClass = classNames("form", {
+  const wrapperClass = classNames('form', {
     show: isOpenForm,
-    [variant]: true,
+    [variant]: true
   });
-  const [prevVariantForm, setPrevVariant] = useState("");
-  //icons
+  const [prevVariantForm, setPrevVariant] = useState('');
+  // icons
   const amountIcon = <FontAwesomeIcon icon={faMoneyBill} />;
   const categoryIcon = <FontAwesomeIcon icon={faList} />;
   const dateIcon = <FontAwesomeIcon icon={faCalendar} />;
@@ -39,7 +39,7 @@ function useForm({
     onAmoutChange,
     onTextAreaChange,
     onCategoryChange,
-    onClearData,
+    onClearData
   } = useFormState({ transactionInfo });
 
   // const navigate = useNavigate();
@@ -58,7 +58,7 @@ function useForm({
     }
   }, [variant, onClearData, prevVariantForm, transactionInfo]);
 
-  //functions
+  // functions
   const openModal = () => {
     setIsOpen(true);
   };
@@ -92,15 +92,15 @@ function useForm({
         value: amount,
         category_id: categorySelected.id,
         date: formatDateApi(date),
-        description: textarea,
-      },
+        description: textarea
+      }
     })
       .then((response) => {
-        if (method === "PUT") {
-          alert("Transaction updated");
+        if (method === 'PUT') {
+          alert('Transaction updated');
           isReloadDataRef.current = true;
         } else {
-          alert("Transaction added");
+          alert('Transaction added');
         }
         setIsSubmitting(false);
         closeFormModal && closeFormModal();
@@ -108,7 +108,7 @@ function useForm({
       })
       .catch((error) => {
         console.log(error);
-        alert("Failed to add transaction");
+        alert('Failed to add transaction');
         setIsSubmitting(false);
         closeFormModal && closeFormModal();
         onClearData();
@@ -132,7 +132,7 @@ function useForm({
     amountValue: amount,
     dateIcon,
     isOpen,
-    categorySelected: categorySelected ? categorySelected.name : "",
+    categorySelected: categorySelected ? categorySelected.name : '',
     dateToShow,
     isOpenCalendar,
     disabled,
@@ -144,7 +144,7 @@ function useForm({
     onClickDate,
     openCalendar,
     handleOnBlurTextArea: onTextAreaChange,
-    handleSubmitForm,
+    handleSubmitForm
   };
 }
 

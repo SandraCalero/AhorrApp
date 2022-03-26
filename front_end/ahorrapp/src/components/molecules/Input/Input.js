@@ -1,26 +1,26 @@
-import React from "react";
-import "./Input.css";
-import { InputText } from "../../atoms/InputText/InputText";
-import { Label } from "../../atoms/Label/Label";
+import React from 'react';
+import './Input.css';
+import { InputText } from '../../atoms/InputText/InputText';
+import { Label } from '../../atoms/Label/Label';
 
-function Input({ icon, text, variant, value, placeholder, onClick, onBlur }) {
+function Input ({ icon, text, variant, value, placeholder, onClick, onBlur }) {
   return (
-    <div className="input">
-      <div className="iconText">
-        {icon && <span className="iconInput">{icon}</span>}
-        <span className="textInput">{text}</span>
+    <div className='input'>
+      <div className='iconText'>
+        {icon && <span className='iconInput'>{icon}</span>}
+        <span className='textInput'>{text}</span>
       </div>
-      {variant === "input" && <InputText value={value} onBlur={onBlur} />}
-      {variant === "button" && (
+      {variant === 'input' && <InputText value={value} onBlur={onBlur} />}
+      {variant === 'button' && (
         <Label
-          variant="label"
+          variant='label'
           text={value}
           placeholder={placeholder}
           onClick={onClick}
         />
       )}
-      {variant === "date" && (
-        <Label variant="label date" text={value} onClick={onClick} />
+      {variant === 'date' && (
+        <Label variant='label date' text={value} onClick={onClick} />
       )}
     </div>
   );
