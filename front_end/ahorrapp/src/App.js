@@ -5,8 +5,10 @@ import { Login } from './components/templates/Login/Login';
 import { Dashboard } from './components/templates/Dashboard/Dashboard';
 import { AllTransactions } from './components/templates/AllTransactions/AllTransactions';
 import { Transaction } from './components/templates/Transaction/Transaction';
+import { API } from './config'
 
 function App() {
+  console.log("....", API);
   return (
     <BrowserRouter>
       <Routes>

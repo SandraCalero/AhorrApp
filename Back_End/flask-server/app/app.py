@@ -31,12 +31,12 @@ app.include_router(category)
 app.include_router(user)
 app.include_router(budget)
 # app.add_middleware(DebugToolbarMiddleware)
-print("estoy aqui.")
 
 
 @app.get('/')
 async def index():
-    return "Testing All datasfsf."
+    """Defines index route"""
+    return "<h1>Future landing page</h1>"
 
 if __name__ == '__main__':
     """ Main Function """

@@ -3,6 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWallet } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useEffect, useState } from "react";
+import { API } from '../../../config';
 
 function useBudgetModal({
   isFormModalOpen,
@@ -44,7 +45,7 @@ function useBudgetModal({
     setIsSubmitting(true);
     axios({
       method: "PUT",
-      url: "http://dreamteamsoutions.software:5000/budget-by-list",
+      url: `${API}/budget-by-list`,
       data: { budget: Object.values(objPost) },
     })
       .then((response) => {
