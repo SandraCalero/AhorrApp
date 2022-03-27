@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useDate } from "../formaters/useDate";
+import { useEffect, useState } from 'react';
+import { useDate } from '../formaters/useDate';
 
 export const useFormState = ({ transactionInfo }) => {
   const { formatDateApi, dateToString, currentDate, stringToDate } = useDate();
   // form values
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState('');
   const [categorySelected, setCategorySelected] = useState(null);
   const [date, setDate] = useState(currentDate());
-  const [textarea, setTextarea] = useState("");
+  const [textarea, setTextarea] = useState('');
 
   const onDateChange = (value) => {
     setDate(value);
@@ -25,10 +25,10 @@ export const useFormState = ({ transactionInfo }) => {
   };
 
   const onClearData = () => {
-    setAmount("");
+    setAmount('');
     setCategorySelected(null);
     setDate(currentDate());
-    setTextarea("");
+    setTextarea('');
   };
 
   const changeInitialData = ({ amount, category, dateDB, description }) => {
@@ -43,7 +43,7 @@ export const useFormState = ({ transactionInfo }) => {
       const amount = transactionInfo.value;
       const category = {
         id: transactionInfo.category_id,
-        name: transactionInfo.category_name,
+        name: transactionInfo.category_name
       };
       const dateDB = transactionInfo.date;
       const description = transactionInfo.description;
@@ -63,6 +63,6 @@ export const useFormState = ({ transactionInfo }) => {
     onAmoutChange,
     onTextAreaChange,
     onClearData,
-    onCategoryChange,
+    onCategoryChange
   };
 };
