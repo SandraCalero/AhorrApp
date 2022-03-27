@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useSession } from "../../../utils/session/useSession";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faWallet } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import { useState } from 'react';
+import { useSession } from '../../../utils/session/useSession';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import { API } from '../../../config';
 
-function useNavBar() {
+function useNavBar () {
   const { userInfo } = useSession();
   // get user id
   const userId = userInfo ? userInfo.id : null;
-  //icons
+  // icons
   const budgetIcon = <FontAwesomeIcon icon={faWallet} />;
   const userIcon = <FontAwesomeIcon icon={faUserCircle} />;
 
@@ -48,7 +48,7 @@ function useNavBar() {
     userIcon,
     isFormModalOpen,
     closeFormModal,
-    onClickBudget,
+    onClickBudget
   };
 }
 

@@ -1,16 +1,16 @@
-import React from "react";
-import ReactLoading from "react-loading";
-import { Navigate } from "react-router-dom";
-import { Title } from "../../atoms/Title/Title";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { NavBar } from "../../organisms/NavBar/NavBar";
-import { Footer } from "../../organisms/Footer/Footer";
-import { useAllTransactions } from "./useAllTransactions";
-import "./AllTransactions.css";
-import { TransactionHistory } from "../../organisms/TransactionHistory/TransactionHistory";
-import { Button } from "../../atoms/Button/Button";
+import React from 'react';
+import ReactLoading from 'react-loading';
+import { Navigate } from 'react-router-dom';
+import { Title } from '../../atoms/Title/Title';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import { NavBar } from '../../organisms/NavBar/NavBar';
+import { Footer } from '../../organisms/Footer/Footer';
+import { useAllTransactions } from './useAllTransactions';
+import './AllTransactions.css';
+import { TransactionHistory } from '../../organisms/TransactionHistory/TransactionHistory';
+import { Button } from '../../atoms/Button/Button';
 
-function AllTransactions() {
+function AllTransactions () {
   const {
     userLogged,
     isLoading,
@@ -22,41 +22,41 @@ function AllTransactions() {
     updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
-    onReloadData,
+    onReloadData
   } = useAllTransactions();
 
-  if (!userLogged) return <Navigate to="/" replace />;
+  if (!userLogged) return <Navigate to='/' replace />;
 
   if (isLoading) {
     return (
-      <div className="body">
+      <div className='body'>
         <ReactLoading
-          type="bubbles"
-          color="#357EDD"
-          width={"100%"}
-          height={"100%"}
+          type='bubbles'
+          color='#357EDD'
+          width='100%'
+          height='100%'
         />
       </div>
     );
   }
 
   return (
-    <div className="body">
+    <div className='body'>
       <NavBar />
-      <section className="container">
-        <Title text="Transactions" />
+      <section className='container'>
+        <Title text='Transactions' />
         <DivButtons
-          type="transaction"
+          type='transaction'
           onClickLeft={handleIncomeButton}
           onClickRight={handleExpenseButton}
         />
         <Button
           icon={cleanFilterIcon}
-          text="Clear filter"
-          variant="cleanFilter"
+          text='Clear filter'
+          variant='cleanFilter'
           onClickButton={onClearFilter}
         />
-        <article className="transactionsBox">
+        <article className='transactionsBox'>
           <TransactionHistory
             transactionList={transactionList}
             variantFilter={variantFilter}

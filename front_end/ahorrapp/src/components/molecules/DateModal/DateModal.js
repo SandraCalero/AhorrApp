@@ -1,16 +1,16 @@
-import React from "react";
-import "./DateModal.css";
-import { useDateModal } from "./useDateModal";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { Button } from "../../atoms/Button/Button";
+import React from 'react';
+import './DateModal.css';
+import { useDateModal } from './useDateModal';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { Button } from '../../atoms/Button/Button';
 
-function DateModal({
+function DateModal ({
   isOpenCalendar,
   onClickDate,
   selectRange,
   maxDate,
-  closeModal,
+  closeModal
 }) {
   const { wrapperClass } = useDateModal({ isOpenCalendar });
   return (
@@ -22,10 +22,10 @@ function DateModal({
       />
       {selectRange && (
         <Button
-          text="Cancel"
-          variant="btn Cancel"
+          text='Cancel'
+          variant='btn Cancel'
           onClickButton={closeModal}
-          type="button"
+          type='button'
         />
       )}
     </div>

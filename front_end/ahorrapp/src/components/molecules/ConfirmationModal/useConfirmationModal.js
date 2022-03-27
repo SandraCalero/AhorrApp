@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-function useConfirmationModal({ isConfirmationOpen }) {
+function useConfirmationModal ({ isConfirmationOpen }) {
   const wrapperClass = classNames('glass', {
-    show: isConfirmationOpen,
+    show: isConfirmationOpen
   });
   return { wrapperClass };
 }

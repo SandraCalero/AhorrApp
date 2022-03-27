@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useSession } from "../../../utils/session/useSession";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useSession } from '../../../utils/session/useSession';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import { API } from '../../../config';
 
-function useAllTransactions() {
+function useAllTransactions () {
   // Everything for transactionList
   // get info by session
   const { userInfo, userLogged, onSaveUserInfo } = useSession();
@@ -23,7 +23,7 @@ function useAllTransactions() {
   const [apiResponse, setApiResponse] = useState(null);
 
   const getTransactionList = (dataResponse) => {
-    const transactionList = dataResponse ? dataResponse : [];
+    const transactionList = dataResponse || [];
     return { transactionList };
   };
 
@@ -117,7 +117,7 @@ function useAllTransactions() {
     updateTransactionList,
     handleIncomeButton,
     handleExpenseButton,
-    onReloadData,
+    onReloadData
   };
 }
 

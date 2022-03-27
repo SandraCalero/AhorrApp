@@ -1,8 +1,8 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 
-function useDateModal({ isOpenCalendar }) {
-  const wrapperClass = classNames("glass", {
-    show: isOpenCalendar,
+function useDateModal ({ isOpenCalendar }) {
+  const wrapperClass = classNames('glass', {
+    show: isOpenCalendar
   });
   return { wrapperClass };
 }

@@ -1,35 +1,35 @@
-import React from "react";
-import { Form } from "../Form/Form";
-import { useFormModal } from "./useFormModal";
-import "./FormModal.css";
-import { Title } from "../../atoms/Title/Title";
+import React from 'react';
+import { Form } from '../Form/Form';
+import { useFormModal } from './useFormModal';
+import './FormModal.css';
+import { Title } from '../../atoms/Title/Title';
 
-function FormModal({
+function FormModal ({
   isFormModalOpen,
   transactionInfo,
   closeFormModal,
   variant,
   categoryList,
-  onReloadData,
+  onReloadData
 }) {
   const { wrapperClass, editIcon, url } = useFormModal({
     isFormModalOpen,
-    transactionInfo,
+    transactionInfo
   });
 
   return (
     <div className={wrapperClass}>
-      <div className="formContainer">
-        <Title text=" Edit Transaction" icon={editIcon} />
+      <div className='formContainer'>
+        <Title text=' Edit Transaction' icon={editIcon} />
         <Form
           isOpenForm
           categoryList={categoryList}
           variant={variant}
           transactionInfo={transactionInfo}
           closeFormModal={closeFormModal}
-          typeDivButtons="edit"
+          typeDivButtons='edit'
           url={url}
-          method="PUT"
+          method='PUT'
           onReloadData={onReloadData}
         />
       </div>

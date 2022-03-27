@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useCurrency } from "../../../utils/formaters/useCurrency";
-import { useDate } from "../../../utils/formaters/useDate";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useCurrency } from '../../../utils/formaters/useCurrency';
+import { useDate } from '../../../utils/formaters/useDate';
 
 const useTransactionCard = ({ amount, date }) => {
   const { formatCurrency } = useCurrency();

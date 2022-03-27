@@ -1,17 +1,17 @@
-import React from "react";
-import ReactLoading from "react-loading";
-import { Title } from "../../atoms/Title/Title";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { Input } from "../../molecules/Input/Input";
-import "./BudgetModal.css";
-import { useBudgetModal } from "./useBudgetModal";
+import React from 'react';
+import ReactLoading from 'react-loading';
+import { Title } from '../../atoms/Title/Title';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import { Input } from '../../molecules/Input/Input';
+import './BudgetModal.css';
+import { useBudgetModal } from './useBudgetModal';
 
-function BudgetModal({
+function BudgetModal ({
   isFormModalOpen,
   closeFormModal,
   isLoading,
   budgetUser,
-  onReloadData,
+  onReloadData
 }) {
   const {
     isSubmitting,
@@ -19,44 +19,44 @@ function BudgetModal({
     budgetIcon,
     objPost,
     onValueChange,
-    handleSubmitBudget,
+    handleSubmitBudget
   } = useBudgetModal({
     isFormModalOpen,
     budgetUser,
     closeFormModal,
-    onReloadData,
+    onReloadData
   });
   if (isLoading || isSubmitting) {
     return (
-      <div className="budgetForm">
+      <div className='budgetForm'>
         <ReactLoading
-          type="bubbles"
-          color="#357EDD"
-          width={"100%"}
-          height={"100%"}
+          type='bubbles'
+          color='#357EDD'
+          width='100%'
+          height='100%'
         />
       </div>
     );
   }
   return (
     <div className={wrapperClass}>
-      <div className="budgetModal">
-        <Title text=" Mar/22 Budget" icon={budgetIcon} />
+      <div className='budgetModal'>
+        <Title text=' Mar/22 Budget' icon={budgetIcon} />
         <form
-          className="budgetForm"
-          method="post"
+          className='budgetForm'
+          method='post'
           onSubmitCapture={(value) => {
             console.log(value);
           }}
         >
           {budgetUser && (
-            <ul className="budgetInputs">
+            <ul className='budgetInputs'>
               {budgetUser.map((budgerItem) => (
                 <li key={budgerItem.id}>
                   <Input
-                    variant="input"
+                    variant='input'
                     text={budgerItem.category_name}
-                    name="amount"
+                    name='amount'
                     value={objPost && objPost[budgerItem.category_name].value}
                     onBlur={(values) => {
                       onValueChange(
@@ -72,7 +72,7 @@ function BudgetModal({
           )}
 
           <DivButtons
-            type="edit"
+            type='edit'
             // disabledSubmit={disabled}
             handleSubmitForm={handleSubmitBudget}
             onCancelClick={closeFormModal}

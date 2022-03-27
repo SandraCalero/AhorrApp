@@ -1,15 +1,15 @@
-import React from "react";
-import ReactLoading from "react-loading";
-import { Navigate } from "react-router-dom";
-import { Title } from "../../atoms/Title/Title";
-import { NavBar } from "../../organisms/NavBar/NavBar";
-import { DivButtons } from "../../molecules/DivButtons/DivButtons";
-import { Form } from "../../organisms/Form/Form";
-import { Footer } from "../../organisms/Footer/Footer";
-import { useTransaction } from "./useTransaction";
+import React from 'react';
+import ReactLoading from 'react-loading';
+import { Navigate } from 'react-router-dom';
+import { Title } from '../../atoms/Title/Title';
+import { NavBar } from '../../organisms/NavBar/NavBar';
+import { DivButtons } from '../../molecules/DivButtons/DivButtons';
+import { Form } from '../../organisms/Form/Form';
+import { Footer } from '../../organisms/Footer/Footer';
+import { useTransaction } from './useTransaction';
 import { API } from '../../../config';
 
-function Transaction() {
+function Transaction () {
   const {
     userLogged,
     categoryList,
@@ -17,32 +17,32 @@ function Transaction() {
     isLoading,
     variant,
     handleExpenseButton,
-    handleIncomeButton,
+    handleIncomeButton
   } = useTransaction();
 
   const routeApi = `${API}/transactions`;
-  if (!userLogged) return <Navigate to="/" replace />;
+  if (!userLogged) return <Navigate to='/' replace />;
 
   if (isLoading) {
     return (
-      <div className="body">
+      <div className='body'>
         <ReactLoading
-          type="bubbles"
-          color="#357EDD"
-          width={"100%"}
-          height={"100%"}
+          type='bubbles'
+          color='#357EDD'
+          width='100%'
+          height='100%'
         />
       </div>
     );
   }
 
   return (
-    <div className="body">
+    <div className='body'>
       <NavBar />
-      <section className="container">
-        <Title text="Add transaction" />
+      <section className='container'>
+        <Title text='Add transaction' />
         <DivButtons
-          type="transaction"
+          type='transaction'
           onClickLeft={handleIncomeButton}
           onClickRight={handleExpenseButton}
         />
@@ -51,7 +51,7 @@ function Transaction() {
           categoryList={categoryList}
           variant={variant}
           url={routeApi}
-          method="POST"
+          method='POST'
         />
       </section>
       <Footer />
