@@ -1,4 +1,4 @@
-import { useStorage } from "../storage/useStorage";
+import { useStorage } from '../storage/useStorage';
 
 const useSession = () => {
   const { userInfo, onSaveUserInfo } = useStorage();

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import axios from "axios";
-import { useStorage } from "../storage/useStorage";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
+import { useStorage } from '../storage/useStorage';
+import { useNavigate } from 'react-router-dom';
 import { API } from '../../config';
 
-function useLoginStates() {
+function useLoginStates () {
   const { userInfo, onSaveUserInfo, onCleanStorage } = useStorage();
   const userLogged = !!userInfo;
 
-  //states
+  // states
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -22,20 +22,20 @@ function useLoginStates() {
   const handleSuccess = (responseGoogle) => {
     setIsLoading(true);
     axios({
-      method: "POST",
+      method: 'POST',
       url: `${API}/user`,
       data: {
         first_name: responseGoogle.profileObj.givenName,
         last_name: responseGoogle.profileObj.familyName,
         email: responseGoogle.profileObj.email,
-        h_password: "string",
-      },
+        h_password: 'string'
+      }
     })
       .then((response) => {
         const userResponse = response;
         setIsLoading(false);
         onSaveUserInfo(userResponse.data);
-        navigate("/Dashboard", { replace: true });
+        navigate('/Dashboard', { replace: true });
       })
       .catch((error) => {
         setIsLoading(false);
@@ -48,7 +48,7 @@ function useLoginStates() {
   // logout
   const handleLogOut = () => {
     onCleanStorage();
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   };
 
   return {
@@ -56,7 +56,7 @@ function useLoginStates() {
     isLoading,
     responseGoogleFailure,
     handleSuccess,
-    handleLogOut,
+    handleLogOut
   };
 }
 
