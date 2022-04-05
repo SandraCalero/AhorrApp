@@ -1,18 +1,14 @@
-version: "3.8"
+version: '3.8'
 services:
-
   mysql:
     image: mysql:8.0
     restart: always
     ports:
       - 33307:3306
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    env_file:
+      - ./.env
     volumes:
-      - ./Back_End/mysql-db:/var/lib/mysql      
+      - ./Back_End/mysql-db:/var/lib/mysql
 
   flask-server:
     build:
@@ -22,11 +18,8 @@ services:
       - '5000:5000'
     volumes:
       - ./Back_End/flask-server:/code
-    environment:
-      - BACKEND_MYSQL_USER=${BACKEND_MYSQL_USER}
-      - BACKEND_MYSQL_PWD=${BACKEND_MYSQL_PWD}
-      - BACKEND_MYSQL_HOST=${BACKEND_MYSQL_HOST}
-      - BACKEND_MYSQL_DB=${BACKEND_MYSQL_DB}
+    env_file:
+      - ./.env
     # command: bash -c "while true; do sleep 2s; done"
     command: bash -c "uvicorn app.app:app --host 0.0.0.0 --port 5000"
     depends_on:
@@ -35,17 +28,16 @@ services:
   react-app:
     stdin_open: true
     tty: true
-    build: 
+    build:
       context: ./front_end/ahorrapp
       dockerfile: Dockerfile.dev
     env_file:
-      - ./front_end/ahorrapp/.env
-
+      - ./.env
 
     # environment:
-      # - TEST=testing environment
+    # - TEST=testing environment
     # env_file:
-      # - ./.env
+    # - ./.env
   # nginx:
   #   image: nginx
   #   ports:
