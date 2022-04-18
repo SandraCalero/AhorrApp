@@ -1,5 +1,14 @@
 # AhorrApp
 
+# Demo
+
+https://user-images.githubusercontent.com/85451781/163855781-c881dae5-0eec-48d4-888f-a6fb3565c5c7.mp4
+
+# Architecture
+
+![AhorrApp presentation](https://user-images.githubusercontent.com/85451781/163856249-d1c5e7d4-1e39-4f52-b3f7-3c47a860d430.jpg)
+
+
 # ENVIRONMENT VARIABLES
 
 
